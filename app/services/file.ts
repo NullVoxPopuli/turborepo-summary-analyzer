@@ -3,12 +3,16 @@ import { tracked } from '@glimmer/tracking';
 import type { SummaryFile } from 'turborepo-summary-analyzer/types';
 import { readFileToJSON } from 'turborepo-summary-analyzer/utils';
 
+import { openDB, deleteDB, wrap, unwrap, type IDBPDatabase } from 'idb';
+
 export const STORAGE_KEY_DATA = `last-turbo-file-data`;
 export const STORAGE_KEY_NAME = `last-turbo-file-name`;
 
 export default class FileService extends Service {
   @tracked current: SummaryFile | undefined;
   @tracked fileName: string | undefined;
+
+  #db: IDBPDatabase | undefined;
 
   async handleDroppedFile(file: FileList[0]) {
     const result = await readFileToJSON(file);
@@ -27,6 +31,19 @@ export default class FileService extends Service {
   async tryLoadFromStorage() {
     await this.#tryLoadData();
     await this.#tryLoadName();
+  }
+
+  async #openDatabase() {
+    if (this.#db) return;
+
+    const db = await openDB(`summary-file-db`, 1, {
+      upgrade() {},
+      blocked() {},
+      blocking() {},
+      terminated() {},
+    });
+
+    this.#db = db;
   }
 
   async #tryLoadName() {

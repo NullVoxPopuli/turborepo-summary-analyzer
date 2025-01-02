@@ -11,6 +11,9 @@ importers:
       '@ember/test-waiters':
         specifier: ^4.0.0
         version: 4.0.0(@glint/template@1.4.1-unstable.34c4510)
+      idb:
+        specifier: ^8.0.1
+        version: 8.0.1
     devDependencies:
       '@babel/core':
         specifier: ^7.26.0
@@ -3963,6 +3966,9 @@ packages:
     engines: {node: ^10 || ^12 || >= 14}
     peerDependencies:
       postcss: ^8.1.0
+
+  idb@8.0.1:
+    resolution: {integrity: sha512-EkBCzUZSdhJV8PxMSbeEV//xguVKZu9hZZulM+2gHXI0t2hGVU3eYE6/XnH77DS6FM2FY8wl17aDcu9vXpvLWQ==}
 
   ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
@@ -11281,6 +11287,8 @@ snapshots:
   icss-utils@5.1.0(postcss@8.4.49):
     dependencies:
       postcss: 8.4.49
+
+  idb@8.0.1: {}
 
   ieee754@1.2.1: {}
 
