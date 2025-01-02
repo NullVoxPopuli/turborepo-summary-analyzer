@@ -10,6 +10,7 @@
     ]
   },
   "compilerOptions": {
+    "target": "esnext",
     "allowJs": true,
     /**
       https://www.typescriptlang.org/tsconfig#noEmitOnError

@@ -1,15 +1,12 @@
 import Route from 'ember-route-template';
 import { pageTitle } from 'ember-page-title';
-import { WelcomePage } from 'ember-welcome-page';
 
 export default Route(
   <template>
-    {{pageTitle "TurborepoSummaryAnalyzer"}}
+    {{pageTitle "Analyze Turbo Summary Files"}}
+
+    <h1>Analayze Turbo Summary Files</h1>
 
     {{outlet}}
-
-    {{! The following component displays Ember's default welcome message. }}
-    <WelcomePage />
-    {{! Feel free to remove this! }}
   </template>
 );

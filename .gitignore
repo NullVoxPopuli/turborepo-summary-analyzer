@@ -1,11 +1,14 @@
 # compiled output
 /dist/
 /declarations/
+/sample-files/*.json
+/tmp/
 
 # dependencies
 /node_modules/
 
 # misc
+.DS_Store
 /.env*
 /.pnp*
 /.eslintcache

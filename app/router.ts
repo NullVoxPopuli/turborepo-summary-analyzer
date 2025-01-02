@@ -7,5 +7,6 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  // Add route declarations here
+  this.route('import');
+  this.route('view');
 });
