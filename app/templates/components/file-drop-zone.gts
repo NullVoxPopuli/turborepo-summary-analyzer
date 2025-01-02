@@ -3,6 +3,7 @@ import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { modifier } from 'ember-modifier';
 import type FileService from 'turborepo-summary-analyzer/services/file';
+import type RouterService from '@ember/routing/router-service';
 import { assert } from '@ember/debug';
 
 function preventDefaults(e: Event) {
@@ -20,6 +21,8 @@ const dropArea = modifier((element, [handleDrop]: [(event: Event) => void]) => {
 
 export class FileDropZone extends Component {
   @service declare file: FileService;
+  @service declare router: RouterService;
+
   @tracked error: string | undefined;
 
   handleDrop = async (dropEvent: Event) => {
@@ -56,11 +59,11 @@ export class FileDropZone extends Component {
       return;
     }
 
-    let fileData = dropEvent.dataTransfer.files[0];
+    const fileData = dropEvent.dataTransfer.files[0];
 
     await this.file.handleDroppedFile(fileData);
 
-    console.log(this.file.current);
+    this.router.transitionTo('view');
   };
 
   <template>
