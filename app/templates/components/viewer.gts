@@ -31,6 +31,13 @@ export class Viewer extends Component {
     });
   }
 
+  @cached
+  get slowestFive() {
+    let length = this.tasksByDuration.length;
+
+    return this.tasksByDuration.slice(length - 5, length).reverse();
+  }
+
   get numTasks() {
     console.log(this.file.current);
 
@@ -49,13 +56,35 @@ export class Viewer extends Component {
       {{this.execution.cached}}
     </pre>
 
-    {{#each this.tasksByDuration as |task|}}
-      {{taskDuration task}}
-      -
-      {{task.command}}
-      <br />
-    {{/each}}
+    <table><thead><tr>
+          <th>Duration</th>
+          <th>Cache</th>
+          <th>Package</th>
+          <th>Command</th>
+        </tr></thead>
+      <tbody>
+
+        {{#each this.slowestFive as |task|}}
+          <tr>
+            <td>{{formattedDuration task}}</td>
+
+            <td>{{cacheStatus task}}</td>
+            <td>{{task.package}}</td>
+            <td>{{task.command}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
   </template>
+}
+
+function cacheStatus(task: SummaryTask) {
+  if (task.cache.status === 'MISS') return 'MISS';
+
+  if (task.cache.local) return 'Local';
+  if (task.cache.remote) return 'Remote';
+
+  return task.cache.status;
 }
 
 function taskDuration(task: SummaryTask) {
@@ -64,4 +93,33 @@ function taskDuration(task: SummaryTask) {
 
 function duration(startTime: number, endTime: number) {
   return endTime - startTime;
+}
+
+const durationFormatter = new Intl.DurationFormat('en', { style: 'narrow' });
+
+function formattedDuration(task: SummaryTask) {
+  let durationMs = taskDuration(task);
+
+  let duration = msToDuration(durationMs);
+
+  return durationFormatter.format(duration);
+}
+
+const msInSecond = 1000;
+const msInMinute = msInSecond * 60;
+const msInHour = msInMinute * 60;
+
+function msToDuration(ms: number) {
+  const hours = Math.floor(ms / msInHour);
+  ms %= msInHour;
+
+  const minutes = Math.floor(ms / msInMinute);
+  ms %= msInMinute;
+
+  const seconds = Math.floor(ms / msInSecond);
+  ms %= msInSecond;
+
+  const milliseconds = ms;
+
+  return { hours, minutes, seconds, milliseconds };
 }
