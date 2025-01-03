@@ -4,9 +4,12 @@ import type { SummaryFile } from 'turborepo-summary-analyzer/types';
 import { readFileToJSON } from 'turborepo-summary-analyzer/utils';
 
 import { openDB, deleteDB, wrap, unwrap, type IDBPDatabase } from 'idb';
+import { assert } from '@ember/debug';
 
-export const STORAGE_KEY_DATA = `last-turbo-file-data`;
-export const STORAGE_KEY_NAME = `last-turbo-file-name`;
+const DATA_KEY = `file-data`;
+const NAME_KEY = `file-name`;
+
+const STORE_NAME = 'last-file';
 
 export default class FileService extends Service {
   @tracked current: SummaryFile | undefined;
@@ -20,8 +23,10 @@ export default class FileService extends Service {
     this.current = result.json;
     this.fileName = result.name.replaceAll('"', '');
 
-    localStorage.setItem(STORAGE_KEY_DATA, JSON.stringify(result.json));
-    localStorage.setItem(STORAGE_KEY_NAME, JSON.stringify(result.name));
+    await this.#ensureStore();
+
+    await this.#storage.put(STORE_NAME, DATA_KEY, JSON.stringify(result.json));
+    await this.#storage.put(STORE_NAME, NAME_KEY, JSON.stringify(result.name));
   }
 
   get hasFile() {
@@ -29,15 +34,24 @@ export default class FileService extends Service {
   }
 
   async tryLoadFromStorage() {
+    await this.#ensureStore();
     await this.#tryLoadData();
     await this.#tryLoadName();
   }
 
-  async #openDatabase() {
+  get #storage() {
+    assert('#ensureStore must be called, db is not initialized', this.#db);
+
+    return this.#db;
+  }
+
+  async #ensureStore() {
     if (this.#db) return;
 
-    const db = await openDB(`summary-file-db`, 1, {
-      upgrade() {},
+    const db = await openDB(`turborepo-summary-analyzer`, 1, {
+      upgrade(db) {
+        db.createObjectStore(STORE_NAME);
+      },
       blocked() {},
       blocking() {},
       terminated() {},
@@ -47,7 +61,7 @@ export default class FileService extends Service {
   }
 
   async #tryLoadName() {
-    const existing = localStorage.getItem(STORAGE_KEY_NAME);
+    const existing = await this.#storage.get(STORE_NAME, NAME_KEY);
 
     if (!existing) return;
 
@@ -55,7 +69,7 @@ export default class FileService extends Service {
   }
 
   async #tryLoadData() {
-    const existing = localStorage.getItem(STORAGE_KEY_DATA);
+    const existing = await this.#storage.get(STORE_NAME, DATA_KEY);
 
     if (!existing) return;
 

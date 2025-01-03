@@ -1,0 +1,1059 @@
+{
+  "id": "2r65ODd00jj96j1JImH5ghscgJq",
+  "version": "1",
+  "turboVersion": "2.1.3",
+  "monorepo": true,
+  "globalCacheInputs": {
+    "rootKey": "I can’t see ya, but I know you’re here",
+    "files": {
+      ".npmrc": "907db23aa33309719478eeea9c0fb49e42d7a646",
+      ".prettierignore": "34961cc27850591dd4b871b72c6af7b963d8a976",
+      ".prettierrc.cjs": "1ee45a09f0cc8d06913c3962121d54ee2a0a0e30",
+      "pnpm-lock.yaml": "a8ea6c27568e8c791e8fb934c7a43f36d62c9bff"
+    },
+    "hashOfExternalDependencies": "67b88a9621dcde61",
+    "hashOfInternalDependencies": "978d863fd8e39940",
+    "environmentVariables": {
+      "specified": {
+        "env": [],
+        "passThroughEnv": null
+      },
+      "configured": [],
+      "inferred": [],
+      "passthrough": null
+    },
+    "engines": {
+      "node": ">= 16"
+    }
+  },
+  "execution": {
+    "command": "turbo run build --filter=limber^... --filter=tutorial^...",
+    "repoPath": "",
+    "success": 10,
+    "failed": 0,
+    "cached": 0,
+    "attempted": 10,
+    "startTime": 1735866641168,
+    "endTime": 1735866649232,
+    "exitCode": 0
+  },
+  "packages": [
+    "@glimdown/lezer-glimmer-expression",
+    "@glimdown/lezer-infra",
+    "@nullvoxpopuli/horizon-theme",
+    "@nullvoxpopuli/limber-codemirror",
+    "@nullvoxpopuli/limber-styles",
+    "@nullvoxpopuli/limber-transpilation",
+    "@nullvoxpopuli/limber-untyped",
+    "codemirror-lang-glimdown",
+    "codemirror-lang-glimmer",
+    "codemirror-lang-glimmer-js",
+    "dev-tools",
+    "ember-repl",
+    "lezer-glimmer",
+    "limber-ui"
+  ],
+  "envMode": "strict",
+  "frameworkInference": true,
+  "tasks": [
+    {
+      "taskId": "@glimdown/lezer-glimmer-expression#build",
+      "task": "build",
+      "package": "@glimdown/lezer-glimmer-expression",
+      "hash": "8616055a0fdd858a",
+      "inputs": {
+        ".eslintignore": "914e420a80bde33871f3457e2288ba53de89836f",
+        ".eslintrc.cjs": "2559f1395116b6f2504818571bc5d76ba7ad8d07",
+        ".gitignore": "e924059f6c9033d39c8860e2f53e0dc224c0f161",
+        ".prettierignore": "539a789f4bc8a24b232576f9912156a33e8fa2dc",
+        ".prettierrc.cjs": "0d25168e7ec25495fb8b0d26248d36d01a61ebb1",
+        "CHANGELOG.md": "89a7d2f49ab79fdf07a6a5279b2fa01bfde50c2e",
+        "package.json": "c3424d6eaadee710842ac81ecaccb676a4116239",
+        "rollup.config.js": "01c111df06c418fdf5ae3cbda29df6decd98e4db",
+        "src/glimmer-expression.grammar": "4be4e0236b690c1a6bdded20089b080150b76635",
+        "src/highlight.js": "28965247f6ef1317d8c84b60867aa09cadad1271",
+        "src/tokens.js": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "test/package.json": "b8e2512a42013be4d95a19eff7ea8ba30c05aa73",
+        "test/tests/argument-test.ts": "95e96d9de4ae826dd3174184bc1b521e88290cc3",
+        "test/tests/function-test.ts": "c1f03cd2db0d27e5c3d93391497f91a99f6b2f8c",
+        "test/tests/util.ts": "c91dcbc1ff4325abc66ce14766441f73c0825f29",
+        "test/vitest.config.ts": "c16222efb586e626c18ac1c1d5321b37b4a4fb3a"
+      },
+      "hashOfExternalDependencies": "3c40d646457679fa",
+      "cache": {
+        "local": false,
+        "remote": false,
+        "status": "MISS",
+        "timeSaved": 0
+      },
+      "command": "lezer-generator src/glimmer-expression.grammar -o src/parser && rollup -c",
+      "cliArguments": [],
+      "outputs": [
+        "declarations/**",
+        "dist/**"
+      ],
+      "excludedOutputs": null,
+      "logFile": "packages/syntax/glimmer-s-expression/lezer/.turbo/turbo-build.log",
+      "directory": "packages/syntax/glimmer-s-expression/lezer",
+      "dependencies": [
+        "@glimdown/lezer-infra#build"
+      ],
+      "dependents": [
+        "codemirror-lang-glimmer#build",
+        "lezer-glimmer#build"
+      ],
+      "resolvedTaskDefinition": {
+        "outputs": [
+          "declarations/**",
+          "dist/**"
+        ],
+        "cache": true,
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [],
+        "outputLogs": "full",
+        "persistent": false,
+        "env": [],
+        "passThroughEnv": null,
+        "interactive": false
+      },
+      "expandedOutputs": [
+        "packages/syntax/glimmer-s-expression/lezer/.turbo/turbo-build.log",
+        "packages/syntax/glimmer-s-expression/lezer/dist",
+        "packages/syntax/glimmer-s-expression/lezer/dist/index.cjs",
+        "packages/syntax/glimmer-s-expression/lezer/dist/index.es.js"
+      ],
+      "framework": "",
+      "envMode": "strict",
+      "environmentVariables": {
+        "specified": {
+          "env": [],
+          "passThroughEnv": null
+        },
+        "configured": [],
+        "inferred": [],
+        "passthrough": null
+      },
+      "execution": {
+        "startTime": 1735866641381,
+        "endTime": 1735866642200,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "@nullvoxpopuli/horizon-theme#build",
+      "task": "build",
+      "package": "@nullvoxpopuli/horizon-theme",
+      "hash": "7a2f4b3f08e8d94a",
+      "inputs": {
+        ".eslintignore": "86039baf54380c5b64668e526ca56433a01c98ea",
+        ".eslintrc.cjs": "dba2f3b5ce60ad5c4e38a436ecf5ec9ee9f78631",
+        ".prettierignore": "6b4a30a2c060e9a5f803780deaf30ca53cd136a2",
+        ".prettierrc.cjs": "b3f8f24ec1afeb9633f3023997f92559d236570d",
+        "CHANGELOG.md": "e7dca2c3eb1496b3752ccff8faa397a47b254ed1",
+        "index.ts": "9b732318830be7e00610b5d2732442c7d09421a5",
+        "package.json": "c74eb4b59c3c6ea4418ca92b83f34925ec5a8e9d",
+        "tsconfig.json": "84dcdb7f9e884461ad3db280a6ec5a8afed6abcb"
+      },
+      "hashOfExternalDependencies": "dfd8b856640fcbf4",
+      "cache": {
+        "local": false,
+        "remote": false,
+        "status": "MISS",
+        "timeSaved": 0
+      },
+      "command": "tsc",
+      "cliArguments": [],
+      "outputs": [
+        "declarations/**",
+        "dist/**"
+      ],
+      "excludedOutputs": null,
+      "logFile": "packages/horizon-theme/.turbo/turbo-build.log",
+      "directory": "packages/horizon-theme",
+      "dependencies": [],
+      "dependents": [
+        "@nullvoxpopuli/limber-codemirror#build"
+      ],
+      "resolvedTaskDefinition": {
+        "outputs": [
+          "declarations/**",
+          "dist/**"
+        ],
+        "cache": true,
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [],
+        "outputLogs": "full",
+        "persistent": false,
+        "env": [],
+        "passThroughEnv": null,
+        "interactive": false
+      },
+      "expandedOutputs": [
+        "packages/horizon-theme/.turbo/turbo-build.log",
+        "packages/horizon-theme/dist",
+        "packages/horizon-theme/dist/index.d.ts",
+        "packages/horizon-theme/dist/index.js"
+      ],
+      "framework": "",
+      "envMode": "strict",
+      "environmentVariables": {
+        "specified": {
+          "env": [],
+          "passThroughEnv": null
+        },
+        "configured": [],
+        "inferred": [],
+        "passthrough": null
+      },
+      "execution": {
+        "startTime": 1735866641372,
+        "endTime": 1735866643023,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "@nullvoxpopuli/limber-codemirror#build",
+      "task": "build",
+      "package": "@nullvoxpopuli/limber-codemirror",
+      "hash": "57b9d473c86ab2d3",
+      "inputs": {
+        ".eslintignore": "23ecdcc59afda209fb048cdf085bd074dd35ccda",
+        ".eslintrc.cjs": "28b774c8b654a82c029f6370a410c9ab4724fa72",
+        ".prettierignore": "40e03dbee172dbf9b9a9d542707e3ee06588763d",
+        ".prettierrc.cjs": "74616d70b8ec0b2d1eab6e75fc922d273da26738",
+        "CHANGELOG.md": "ee6dcf8cb3a32d545bc8036bec1dae38eff42784",
+        "README.md": "d0a350eb7d196ab22fb60642d6c338dc59e3a6f0",
+        "broccoli-funnel.cjs": "df8112d2ac2068992c6f628e7d28e39a40026deb",
+        "build.cjs": "ff50221b909507652c5d714721bac8443c3454bd",
+        "link-glimdown.sh": "8ddb538836e2326553f6d609fa9235a3176eb2c1",
+        "package.json": "baf78c5e0d176105019c1c8747d5c560d13e4c03",
+        "preconfigured/horizon-syntax-theme.ts": "4dc479587a8db6413c35caef6580fbbc418ba422",
+        "preconfigured/horizon-ui-theme.ts": "826dc4ccc50f9197f8ebd459662f9e578bf52a9f",
+        "preconfigured/index.ts": "8af2e7a9d8e68cd0a1328fd7d5d08b8d66b9fa59",
+        "tsconfig.json": "8464aa8fbabdedf4b1aa5355fa2e350d4d337944"
+      },
+      "hashOfExternalDependencies": "6b59057bd21552f2",
+      "cache": {
+        "local": false,
+        "remote": false,
+        "status": "MISS",
+        "timeSaved": 0
+      },
+      "command": "node build.cjs",
+      "cliArguments": [],
+      "outputs": [
+        "declarations/**",
+        "dist/**"
+      ],
+      "excludedOutputs": null,
+      "logFile": "packages/app-support/codemirror/.turbo/turbo-build.log",
+      "directory": "packages/app-support/codemirror",
+      "dependencies": [
+        "@nullvoxpopuli/horizon-theme#build",
+        "codemirror-lang-glimdown#build",
+        "codemirror-lang-glimmer#build",
+        "codemirror-lang-glimmer-js#build"
+      ],
+      "dependents": [],
+      "resolvedTaskDefinition": {
+        "outputs": [
+          "declarations/**",
+          "dist/**"
+        ],
+        "cache": true,
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [],
+        "outputLogs": "full",
+        "persistent": false,
+        "env": [],
+        "passThroughEnv": null,
+        "interactive": false
+      },
+      "expandedOutputs": [
+        "packages/app-support/codemirror/.turbo/turbo-build.log",
+        "packages/app-support/codemirror/dist",
+        "packages/app-support/codemirror/dist/preconfigured.js"
+      ],
+      "framework": "",
+      "envMode": "strict",
+      "environmentVariables": {
+        "specified": {
+          "env": [],
+          "passThroughEnv": null
+        },
+        "configured": [],
+        "inferred": [],
+        "passthrough": null
+      },
+      "execution": {
+        "startTime": 1735866648738,
+        "endTime": 1735866649232,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "@nullvoxpopuli/limber-styles#build",
+      "task": "build",
+      "package": "@nullvoxpopuli/limber-styles",
+      "hash": "afbae162fc5182dc",
+      "inputs": {
+        ".eslintignore": "23ecdcc59afda209fb048cdf085bd074dd35ccda",
+        ".eslintrc.cjs": "dba2f3b5ce60ad5c4e38a436ecf5ec9ee9f78631",
+        ".prettierignore": "40e03dbee172dbf9b9a9d542707e3ee06588763d",
+        ".prettierrc.cjs": "74616d70b8ec0b2d1eab6e75fc922d273da26738",
+        "CHANGELOG.md": "ff06767708a60f72a386908f6fa60cf22cce3a2a",
+        "broccoli-funnel.js": "7a8db5af8743befe1c4c02bdacfc393f36d4d01d",
+        "package.json": "26a44a0d499a26dac2f43087cb497bc219a8339b",
+        "tailwind-styles.css": "b5c61c956711f981a41e95f7fcf0038436cfbb22",
+        "tailwind.config.js": "7f98456d1d900e044e33eb5757ff3723f7018897",
+        "turbo.json": "20b11c593823253a6284181de75b5b6f8e1a267a"
+      },
+      "hashOfExternalDependencies": "9d4821d7340498cb",
+      "cache": {
+        "local": false,
+        "remote": false,
+        "status": "MISS",
+        "timeSaved": 0
+      },
+      "command": "tailwindcss -o dist/tailwind.css",
+      "cliArguments": [],
+      "outputs": [
+        "declarations/**",
+        "dist/**"
+      ],
+      "excludedOutputs": null,
+      "logFile": "packages/app-support/styles/.turbo/turbo-build.log",
+      "directory": "packages/app-support/styles",
+      "dependencies": [],
+      "dependents": [],
+      "resolvedTaskDefinition": {
+        "outputs": [
+          "declarations/**",
+          "dist/**"
+        ],
+        "cache": false,
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [],
+        "outputLogs": "full",
+        "persistent": false,
+        "env": [],
+        "passThroughEnv": null,
+        "interactive": false
+      },
+      "expandedOutputs": [],
+      "framework": "",
+      "envMode": "strict",
+      "environmentVariables": {
+        "specified": {
+          "env": [],
+          "passThroughEnv": null
+        },
+        "configured": [],
+        "inferred": [],
+        "passthrough": null
+      },
+      "execution": {
+        "startTime": 1735866641374,
+        "endTime": 1735866642484,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "codemirror-lang-glimdown#build",
+      "task": "build",
+      "package": "codemirror-lang-glimdown",
+      "hash": "bfe256260cc1394f",
+      "inputs": {
+        ".eslintignore": "cdc70e957efc34f646be730cb79c44782d7c4b16",
+        ".eslintrc.cjs": "2559f1395116b6f2504818571bc5d76ba7ad8d07",
+        ".gitignore": "a1593dfc37914b19ca6874c6082cc2313774aff2",
+        ".prettierignore": "ba436216bbef589fc3e41760e9975379746a2096",
+        ".prettierrc.cjs": "0d25168e7ec25495fb8b0d26248d36d01a61ebb1",
+        "CHANGELOG.md": "0c81aff0f079ed049d12198fb95f969b6f198a10",
+        "README.md": "f17f9af723b32c773b580f37d3e40ddca03d4f62",
+        "dev/.eslintignore": "6ea9bce2c9f4278deed299645e91cfca547745b4",
+        "dev/.eslintrc.cjs": "2559f1395116b6f2504818571bc5d76ba7ad8d07",
+        "dev/.prettierignore": "5b6e2058c5cfe270a4423117f530bef830152132",
+        "dev/.prettierrc.cjs": "740452aaad1eb080f6eecdb6d806954b43f49c0b",
+        "dev/CHANGELOG.md": "6f5d1b7b59722011b4b6807fc6e2eb1b9979276a",
+        "dev/index.html": "4383d505e8a6c1d76febb88a9e9a302d738775d3",
+        "dev/index.ts": "ab0295b6cc554a9bcd63638fc30168143b1837ee",
+        "dev/package.json": "75ef8a29599c1a7df414e3976b9606f04ecbe4db",
+        "dev/vite.config.js": "ebe76c2a30bdbb98aac82ccf9ba450ad740640a9",
+        "dev/watch.cjs": "648f4575824891ea0030376863ddba4fa2f3af5b",
+        "package.json": "e9ab260de2c0887102d7812566bee3e97fd116a8",
+        "rollup.config.mjs": "b1ac036f74204535d420bb64464bba58d0a071af",
+        "src/index.ts": "162b104ab7958bcf7be2ebc96d4ef78c25b7881b",
+        "tests/.eslintignore": "6ea9bce2c9f4278deed299645e91cfca547745b4",
+        "tests/.eslintrc.cjs": "2559f1395116b6f2504818571bc5d76ba7ad8d07",
+        "tests/.prettierignore": "5b6e2058c5cfe270a4423117f530bef830152132",
+        "tests/.prettierrc.cjs": "740452aaad1eb080f6eecdb6d806954b43f49c0b",
+        "tests/CHANGELOG.md": "411746b74aafca5b54fb79a367d18380f95bf091",
+        "tests/comments.txt": "296743219aa91b61fa0ed057fc27ba8421d3ce6a",
+        "tests/complex.txt": "f823e700791ea0cdf41cda464d281b11001b8075",
+        "tests/expression.txt": "a78c904a5fc8b8fa25e53344f52814e6827cfeae",
+        "tests/literals.txt": "3ba6c72d91bd2fc91dec6d70241aa5ff36911dfd",
+        "tests/numbers.txt": "9fcff8cfcfe861e8a3c5eb514f8552fe6cc403cf",
+        "tests/package.json": "64e5f1453a1015b3862d26770c50bcbda31bfddb",
+        "tests/property-paths.txt": "7ba7a2fca57f0e8feff4feec8123ec0b0e424031",
+        "tests/strings.txt": "f953c75374ef1bd2ddec6c5eab5637cc25a24c8f",
+        "tsconfig.json": "97c17feab2faa8b90ef367e41b0edf46b6973344"
+      },
+      "hashOfExternalDependencies": "6d0a9c8a5ef7871c",
+      "cache": {
+        "local": false,
+        "remote": false,
+        "status": "MISS",
+        "timeSaved": 0
+      },
+      "command": "rollup -c",
+      "cliArguments": [],
+      "outputs": [
+        "declarations/**",
+        "dist/**"
+      ],
+      "excludedOutputs": null,
+      "logFile": "packages/syntax/glimdown/codemirror/.turbo/turbo-build.log",
+      "directory": "packages/syntax/glimdown/codemirror",
+      "dependencies": [
+        "codemirror-lang-glimmer#build",
+        "codemirror-lang-glimmer-js#build"
+      ],
+      "dependents": [
+        "@nullvoxpopuli/limber-codemirror#build"
+      ],
+      "resolvedTaskDefinition": {
+        "outputs": [
+          "declarations/**",
+          "dist/**"
+        ],
+        "cache": true,
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [],
+        "outputLogs": "full",
+        "persistent": false,
+        "env": [],
+        "passThroughEnv": null,
+        "interactive": false
+      },
+      "expandedOutputs": [
+        "packages/syntax/glimdown/codemirror/.turbo/turbo-build.log",
+        "packages/syntax/glimdown/codemirror/dist",
+        "packages/syntax/glimdown/codemirror/dist/index.cjs",
+        "packages/syntax/glimdown/codemirror/dist/index.d.cts",
+        "packages/syntax/glimdown/codemirror/dist/index.d.cts.map",
+        "packages/syntax/glimdown/codemirror/dist/index.d.ts",
+        "packages/syntax/glimdown/codemirror/dist/index.d.ts.map",
+        "packages/syntax/glimdown/codemirror/dist/index.js"
+      ],
+      "framework": "",
+      "envMode": "strict",
+      "environmentVariables": {
+        "specified": {
+          "env": [],
+          "passThroughEnv": null
+        },
+        "configured": [],
+        "inferred": [],
+        "passthrough": null
+      },
+      "execution": {
+        "startTime": 1735866647257,
+        "endTime": 1735866648737,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "codemirror-lang-glimmer#build",
+      "task": "build",
+      "package": "codemirror-lang-glimmer",
+      "hash": "1ef3093f7dcdd381",
+      "inputs": {
+        ".eslintignore": "cdc70e957efc34f646be730cb79c44782d7c4b16",
+        ".eslintrc.cjs": "2559f1395116b6f2504818571bc5d76ba7ad8d07",
+        ".gitignore": "a1593dfc37914b19ca6874c6082cc2313774aff2",
+        ".prettierignore": "ba436216bbef589fc3e41760e9975379746a2096",
+        ".prettierrc.cjs": "0d25168e7ec25495fb8b0d26248d36d01a61ebb1",
+        "CHANGELOG.md": "f14b9761872ecdbb860d4ec566294818bc0ba232",
+        "README.md": "219d02ff0453255b8b8543ebc8a13006703f658f",
+        "dev/.eslintignore": "6ea9bce2c9f4278deed299645e91cfca547745b4",
+        "dev/.eslintrc.cjs": "2559f1395116b6f2504818571bc5d76ba7ad8d07",
+        "dev/.prettierignore": "5b6e2058c5cfe270a4423117f530bef830152132",
+        "dev/.prettierrc.cjs": "740452aaad1eb080f6eecdb6d806954b43f49c0b",
+        "dev/CHANGELOG.md": "06a6f4adb85485f2c74f83730d2a75e9814024b3",
+        "dev/index.html": "2588cb4e203c5a23a0c8b1e6c40d4b6205f206a6",
+        "dev/index.ts": "1dc1d1a715ca4f0f3b7c9f5a6f36ad7e19e3965f",
+        "dev/package.json": "545a191333babe0f876aaf87fedfad5348986886",
+        "dev/vite.config.js": "ebe76c2a30bdbb98aac82ccf9ba450ad740640a9",
+        "dev/watch.cjs": "648f4575824891ea0030376863ddba4fa2f3af5b",
+        "package.json": "e8d83a12e7dc72115c92cf6b43ecaf785afd93f6",
+        "rollup.config.mjs": "b1ac036f74204535d420bb64464bba58d0a071af",
+        "src/auto-close.ts": "a6ccfdf73693e371c96a3b971c94d782f39b2c05",
+        "src/glimmer.ts": "92a2585f65295da48f67e41c52604fbcc80e4cd6",
+        "src/index.ts": "dda5068ab91752d4ffba35f159ccb47472be26af",
+        "src/language.ts": "10cec2b06ba55373680923a3b90028e575a31b95",
+        "src/snippets.ts": "7ed1c378a471be50a4e9a4d312dd398953c245ec",
+        "tsconfig.json": "c3a159f01c3e8261b5d478b8ca03ff225eb6ca18"
+      },
+      "hashOfExternalDependencies": "e2a7c2bdab39bb9d",
+      "cache": {
+        "local": false,
+        "remote": false,
+        "status": "MISS",
+        "timeSaved": 0
+      },
+      "command": "cm-buildhelper src/index.ts",
+      "cliArguments": [],
+      "outputs": [
+        "declarations/**",
+        "dist/**"
+      ],
+      "excludedOutputs": null,
+      "logFile": "packages/syntax/glimmer/codemirror/.turbo/turbo-build.log",
+      "directory": "packages/syntax/glimmer/codemirror",
+      "dependencies": [
+        "@glimdown/lezer-glimmer-expression#build",
+        "lezer-glimmer#build"
+      ],
+      "dependents": [
+        "@nullvoxpopuli/limber-codemirror#build",
+        "codemirror-lang-glimdown#build",
+        "codemirror-lang-glimmer-js#build"
+      ],
+      "resolvedTaskDefinition": {
+        "outputs": [
+          "declarations/**",
+          "dist/**"
+        ],
+        "cache": true,
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [],
+        "outputLogs": "full",
+        "persistent": false,
+        "env": [],
+        "passThroughEnv": null,
+        "interactive": false
+      },
+      "expandedOutputs": [
+        "packages/syntax/glimmer/codemirror/.turbo/turbo-build.log",
+        "packages/syntax/glimmer/codemirror/dist",
+        "packages/syntax/glimmer/codemirror/dist/index.cjs",
+        "packages/syntax/glimmer/codemirror/dist/index.d.cts",
+        "packages/syntax/glimmer/codemirror/dist/index.d.ts",
+        "packages/syntax/glimmer/codemirror/dist/index.js"
+      ],
+      "framework": "",
+      "envMode": "strict",
+      "environmentVariables": {
+        "specified": {
+          "env": [],
+          "passThroughEnv": null
+        },
+        "configured": [],
+        "inferred": [],
+        "passthrough": null
+      },
+      "execution": {
+        "startTime": 1735866644153,
+        "endTime": 1735866645622,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "codemirror-lang-glimmer-js#build",
+      "task": "build",
+      "package": "codemirror-lang-glimmer-js",
+      "hash": "dc9f2a17cc073161",
+      "inputs": {
+        ".eslintignore": "cdc70e957efc34f646be730cb79c44782d7c4b16",
+        ".eslintrc.cjs": "6ab545d79254a8b962ff783ff5350b0162428b05",
+        ".gitignore": "a1593dfc37914b19ca6874c6082cc2313774aff2",
+        ".prettierignore": "ba436216bbef589fc3e41760e9975379746a2096",
+        ".prettierrc.cjs": "0d25168e7ec25495fb8b0d26248d36d01a61ebb1",
+        "CHANGELOG.md": "254ee1cc47673dbebece36ec5581f07b7fc02447",
+        "README.md": "219d02ff0453255b8b8543ebc8a13006703f658f",
+        "dev/.eslintignore": "6ea9bce2c9f4278deed299645e91cfca547745b4",
+        "dev/.eslintrc.cjs": "2559f1395116b6f2504818571bc5d76ba7ad8d07",
+        "dev/.prettierignore": "5b6e2058c5cfe270a4423117f530bef830152132",
+        "dev/.prettierrc.cjs": "740452aaad1eb080f6eecdb6d806954b43f49c0b",
+        "dev/CHANGELOG.md": "c12e143e9da48f268b9efae7e6147fdb911cf477",
+        "dev/index.html": "fe4077d6fb1b06e987677e2de9abd1acb9c54503",
+        "dev/package.json": "68038c1c07cdbbdc3c67fe3f022c56459e8f7302",
+        "dev/preview.ts": "107f4e7908d7be74d0c6e78e098836805a3d7226",
+        "dev/vite.config.ts": "c372e8113f7b621c13b43748ead538aec48b935f",
+        "package.json": "a438b5317d1ef678fe7a0475be22ff63e0b582e4",
+        "rollup.config.mjs": "b1ac036f74204535d420bb64464bba58d0a071af",
+        "src/highlight.ts": "127b3a1f9a7c13c03a21eb405f860ce592604a58",
+        "src/index.ts": "c6978dbd9ae5611f567aa5f068c3c0a2a5955556",
+        "src/syntax.grammar": "548503e1748796cf7334bcbc1a1a8eae0bbd317a",
+        "src/syntax.grammar.d.ts": "748d451bdc22f2ccf522feb75244c6c7487c9f2d",
+        "src/syntax.grammar.terms.d.ts": "15d251c96fac309bda7efea893be2ee3ead88cfc",
+        "src/tokens.ts": "51d9088554af6ba2fbbc3afefe2234a17c130a8e",
+        "test/comments.txt": "296743219aa91b61fa0ed057fc27ba8421d3ce6a",
+        "test/complex.txt": "f823e700791ea0cdf41cda464d281b11001b8075",
+        "test/expression.txt": "a78c904a5fc8b8fa25e53344f52814e6827cfeae",
+        "test/literals.txt": "3ba6c72d91bd2fc91dec6d70241aa5ff36911dfd",
+        "test/numbers.txt": "9fcff8cfcfe861e8a3c5eb514f8552fe6cc403cf",
+        "test/property-paths.txt": "7ba7a2fca57f0e8feff4feec8123ec0b0e424031",
+        "test/strings.txt": "f953c75374ef1bd2ddec6c5eab5637cc25a24c8f",
+        "tsconfig.json": "97c17feab2faa8b90ef367e41b0edf46b6973344"
+      },
+      "hashOfExternalDependencies": "e2a7c2bdab39bb9d",
+      "cache": {
+        "local": false,
+        "remote": false,
+        "status": "MISS",
+        "timeSaved": 0
+      },
+      "command": "rollup -c",
+      "cliArguments": [],
+      "outputs": [
+        "declarations/**",
+        "dist/**"
+      ],
+      "excludedOutputs": null,
+      "logFile": "packages/syntax/glimmer-js/codemirror/.turbo/turbo-build.log",
+      "directory": "packages/syntax/glimmer-js/codemirror",
+      "dependencies": [
+        "@glimdown/lezer-infra#build",
+        "codemirror-lang-glimmer#build"
+      ],
+      "dependents": [
+        "@nullvoxpopuli/limber-codemirror#build",
+        "codemirror-lang-glimdown#build"
+      ],
+      "resolvedTaskDefinition": {
+        "outputs": [
+          "declarations/**",
+          "dist/**"
+        ],
+        "cache": true,
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [],
+        "outputLogs": "full",
+        "persistent": false,
+        "env": [],
+        "passThroughEnv": null,
+        "interactive": false
+      },
+      "expandedOutputs": [
+        "packages/syntax/glimmer-js/codemirror/.turbo/turbo-build.log",
+        "packages/syntax/glimmer-js/codemirror/dist",
+        "packages/syntax/glimmer-js/codemirror/dist/index.cjs",
+        "packages/syntax/glimmer-js/codemirror/dist/index.d.cts",
+        "packages/syntax/glimmer-js/codemirror/dist/index.d.cts.map",
+        "packages/syntax/glimmer-js/codemirror/dist/index.d.ts",
+        "packages/syntax/glimmer-js/codemirror/dist/index.d.ts.map",
+        "packages/syntax/glimmer-js/codemirror/dist/index.js"
+      ],
+      "framework": "",
+      "envMode": "strict",
+      "environmentVariables": {
+        "specified": {
+          "env": [],
+          "passThroughEnv": null
+        },
+        "configured": [],
+        "inferred": [],
+        "passthrough": null
+      },
+      "execution": {
+        "startTime": 1735866645624,
+        "endTime": 1735866647256,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "ember-repl#build",
+      "task": "build",
+      "package": "ember-repl",
+      "hash": "ef14445efdfac8ed",
+      "inputs": {
+        ".editorconfig": "c35a002406b9754b2edf73ebc6dd326b2a3b970b",
+        ".eslintignore": "23ecdcc59afda209fb048cdf085bd074dd35ccda",
+        ".eslintrc.js": "7ec10581cab300709e440e1f9764c96146d44fa7",
+        ".gitignore": "d9047181d1a39919a2c280cb404b5e37d18ec395",
+        ".prettierignore": "40e03dbee172dbf9b9a9d542707e3ee06588763d",
+        ".prettierrc.cjs": "74616d70b8ec0b2d1eab6e75fc922d273da26738",
+        ".template-lintrc.js": "f35f61c7b3ac724f45f394dd2a95d2bc83dde660",
+        "CHANGELOG.md": "b20fc19cc0fff4c3fc35a02a4439fc37c4be77ee",
+        "LICENSE.md": "3d90f3a61299f0cac6c8f929609f0d5ef0f50913",
+        "README.md": "da07d1bac0befbfff78c6d4ff3afcb34cfad3e0c",
+        "addon-main.cjs": "d36b0c86dac6790915b78b156856e8d564bfb914",
+        "babel.config.json": "59520271278ddc3192b03eef19699d9f02efa47a",
+        "package.json": "225d949659a57900e0a0d19a8370139274e2dcde",
+        "rollup.config.mjs": "d5485af322db7af7debd5be49b049f83c9882a26",
+        "src/__PRIVATE__.ts": "91f5800b308b927526ad0d5546da6779748f6d62",
+        "src/compile/formats.ts": "e148335a8dda7b0b1b86b56d4580536391c8802f",
+        "src/compile/formats/gjs/babel.ts": "f0106e6458111dd83e34b832a681d89fa4f7d731",
+        "src/compile/formats/gjs/eval.ts": "767d4630d81091f3f682cb3f679e5fbef074b846",
+        "src/compile/formats/gjs/index.ts": "3ef8474bb659f73ae09f5e898afdc123c653478d",
+        "src/compile/formats/gjs/known-modules.ts": "9aa55fe4f75be22e747ab11d33359f225a385ad1",
+        "src/compile/formats/hbs.ts": "eb9f6b30d2c35ce58f161434244513d23f312137",
+        "src/compile/formats/markdown.ts": "14c3217997476794c9b0bd0b760b9dbb7e83c277",
+        "src/compile/index.ts": "5f146fea58ad7ef2e83031638786711ba7e53176",
+        "src/compile/types.ts": "afbccc790f16c771701281764f378eac842e2afc",
+        "src/compile/utils.ts": "296e2b8f7067413f45a9df32fae166af6da9f7c1",
+        "src/index.ts": "bc08b8c588194aac342fb3aab5ad3cbb3287a790",
+        "src/test-support/index.ts": "37a91721e0be4e81ea1c81b74ed697be22ecdd26",
+        "tsconfig.json": "89ecc5d57b06434e66a4d0467ed46c37b6ebb68b",
+        "unpublished-development-types/index.d.ts": "2109bac67a20e7dd3eddd8c26f1ed32418101bab"
+      },
+      "hashOfExternalDependencies": "702495fe961c7a75",
+      "cache": {
+        "local": false,
+        "remote": false,
+        "status": "MISS",
+        "timeSaved": 0
+      },
+      "command": "rollup --config",
+      "cliArguments": [],
+      "outputs": [
+        "declarations/**",
+        "dist/**"
+      ],
+      "excludedOutputs": null,
+      "logFile": "packages/ember-repl/addon/.turbo/turbo-build.log",
+      "directory": "packages/ember-repl/addon",
+      "dependencies": [
+        "@nullvoxpopuli/limber-untyped#build"
+      ],
+      "dependents": [],
+      "resolvedTaskDefinition": {
+        "outputs": [
+          "declarations/**",
+          "dist/**"
+        ],
+        "cache": true,
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [],
+        "outputLogs": "full",
+        "persistent": false,
+        "env": [],
+        "passThroughEnv": null,
+        "interactive": false
+      },
+      "expandedOutputs": [
+        "packages/ember-repl/addon/.turbo/turbo-build.log",
+        "packages/ember-repl/addon/declarations",
+        "packages/ember-repl/addon/declarations/__PRIVATE__.d.ts",
+        "packages/ember-repl/addon/declarations/__PRIVATE__.d.ts.map",
+        "packages/ember-repl/addon/declarations/compile",
+        "packages/ember-repl/addon/declarations/compile/formats",
+        "packages/ember-repl/addon/declarations/compile/formats/gjs",
+        "packages/ember-repl/addon/declarations/compile/formats/gjs/babel.d.ts",
+        "packages/ember-repl/addon/declarations/compile/formats/gjs/babel.d.ts.map",
+        "packages/ember-repl/addon/declarations/compile/formats/gjs/eval.d.ts",
+        "packages/ember-repl/addon/declarations/compile/formats/gjs/eval.d.ts.map",
+        "packages/ember-repl/addon/declarations/compile/formats/gjs/index.d.ts",
+        "packages/ember-repl/addon/declarations/compile/formats/gjs/index.d.ts.map",
+        "packages/ember-repl/addon/declarations/compile/formats/gjs/known-modules.d.ts",
+        "packages/ember-repl/addon/declarations/compile/formats/gjs/known-modules.d.ts.map",
+        "packages/ember-repl/addon/declarations/compile/formats/hbs.d.ts",
+        "packages/ember-repl/addon/declarations/compile/formats/hbs.d.ts.map",
+        "packages/ember-repl/addon/declarations/compile/formats/markdown.d.ts",
+        "packages/ember-repl/addon/declarations/compile/formats/markdown.d.ts.map",
+        "packages/ember-repl/addon/declarations/compile/formats.d.ts",
+        "packages/ember-repl/addon/declarations/compile/formats.d.ts.map",
+        "packages/ember-repl/addon/declarations/compile/index.d.ts",
+        "packages/ember-repl/addon/declarations/compile/index.d.ts.map",
+        "packages/ember-repl/addon/declarations/compile/types.d.ts",
+        "packages/ember-repl/addon/declarations/compile/types.d.ts.map",
+        "packages/ember-repl/addon/declarations/compile/utils.d.ts",
+        "packages/ember-repl/addon/declarations/compile/utils.d.ts.map",
+        "packages/ember-repl/addon/declarations/index.d.ts",
+        "packages/ember-repl/addon/declarations/index.d.ts.map",
+        "packages/ember-repl/addon/declarations/test-support",
+        "packages/ember-repl/addon/declarations/test-support/index.d.ts",
+        "packages/ember-repl/addon/declarations/test-support/index.d.ts.map",
+        "packages/ember-repl/addon/dist",
+        "packages/ember-repl/addon/dist/__PRIVATE__.js",
+        "packages/ember-repl/addon/dist/__PRIVATE__.js.map",
+        "packages/ember-repl/addon/dist/compile",
+        "packages/ember-repl/addon/dist/compile/formats",
+        "packages/ember-repl/addon/dist/compile/formats/gjs",
+        "packages/ember-repl/addon/dist/compile/formats/gjs/babel.js",
+        "packages/ember-repl/addon/dist/compile/formats/gjs/babel.js.map",
+        "packages/ember-repl/addon/dist/compile/formats/gjs/eval.js",
+        "packages/ember-repl/addon/dist/compile/formats/gjs/eval.js.map",
+        "packages/ember-repl/addon/dist/compile/formats/gjs/index.js",
+        "packages/ember-repl/addon/dist/compile/formats/gjs/index.js.map",
+        "packages/ember-repl/addon/dist/compile/formats/gjs/known-modules.js",
+        "packages/ember-repl/addon/dist/compile/formats/gjs/known-modules.js.map",
+        "packages/ember-repl/addon/dist/compile/formats/hbs.js",
+        "packages/ember-repl/addon/dist/compile/formats/hbs.js.map",
+        "packages/ember-repl/addon/dist/compile/formats/markdown.js",
+        "packages/ember-repl/addon/dist/compile/formats/markdown.js.map",
+        "packages/ember-repl/addon/dist/compile/formats.js",
+        "packages/ember-repl/addon/dist/compile/formats.js.map",
+        "packages/ember-repl/addon/dist/compile/index.js",
+        "packages/ember-repl/addon/dist/compile/index.js.map",
+        "packages/ember-repl/addon/dist/compile/types.js",
+        "packages/ember-repl/addon/dist/compile/types.js.map",
+        "packages/ember-repl/addon/dist/compile/utils.js",
+        "packages/ember-repl/addon/dist/compile/utils.js.map",
+        "packages/ember-repl/addon/dist/index.js",
+        "packages/ember-repl/addon/dist/index.js.map",
+        "packages/ember-repl/addon/dist/test-support",
+        "packages/ember-repl/addon/dist/test-support/index.js",
+        "packages/ember-repl/addon/dist/test-support/index.js.map"
+      ],
+      "framework": "",
+      "envMode": "strict",
+      "environmentVariables": {
+        "specified": {
+          "env": [],
+          "passThroughEnv": null
+        },
+        "configured": [],
+        "inferred": [],
+        "passthrough": null
+      },
+      "execution": {
+        "startTime": 1735866641383,
+        "endTime": 1735866644399,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "lezer-glimmer#build",
+      "task": "build",
+      "package": "lezer-glimmer",
+      "hash": "060325a154de70fd",
+      "inputs": {
+        ".eslintignore": "e99befd1319cd4a2ff51278acf867f48d55718b1",
+        ".eslintrc.cjs": "2559f1395116b6f2504818571bc5d76ba7ad8d07",
+        ".gitignore": "a1593dfc37914b19ca6874c6082cc2313774aff2",
+        ".prettierignore": "2c2166f4b41dc442fc7245cf452d7266339f1c36",
+        ".prettierrc.cjs": "4a70f19811a1c7dc9fc061007440c32e54b2949c",
+        "CHANGELOG.md": "75305e39bf888cf90c10903d07f96b6f3bb45f45",
+        "package.json": "a917b67c81c684c8dd8a5ce1bf82c01b29549c26",
+        "rollup.config.mjs": "b1ac036f74204535d420bb64464bba58d0a071af",
+        "src/content.ts": "e10f25b4c8b6fef851f5315607ac25a665f32b7c",
+        "src/highlight.ts": "c09590e01814f5527d3ac26e66f1cb54d59e7e2d",
+        "src/html-tokens.js": "ad5bc8cc1d3ab98b16a3eef21377ccdb6f473cfc",
+        "src/index.ts": "44b16166c0feb9c594d173b9edf90cd3ad49e933",
+        "src/syntax.grammar": "147ddd81ba227938087c1275723df94798cbda6f",
+        "src/syntax.grammar.d.ts": "73cbbb0f2d5943a4d7671334d1f451ef2de1d454",
+        "src/syntax.grammar.terms.d.ts": "dc14d5b5e567b738ad95e229bc24c6fc2256a6d7",
+        "src/tokens.ts": "6d226f6c7228a48ca0e3ed3a0612210ef2200a26",
+        "tests/.eslintignore": "6ea9bce2c9f4278deed299645e91cfca547745b4",
+        "tests/.eslintrc.cjs": "2559f1395116b6f2504818571bc5d76ba7ad8d07",
+        "tests/.prettierignore": "5b6e2058c5cfe270a4423117f530bef830152132",
+        "tests/.prettierrc.cjs": "740452aaad1eb080f6eecdb6d806954b43f49c0b",
+        "tests/CHANGELOG.md": "9f488393aca11852c9bc8fdcb3e67e8120cca202",
+        "tests/comments.txt": "296743219aa91b61fa0ed057fc27ba8421d3ce6a",
+        "tests/complex.txt": "f823e700791ea0cdf41cda464d281b11001b8075",
+        "tests/expression.txt": "a78c904a5fc8b8fa25e53344f52814e6827cfeae",
+        "tests/literals.txt": "3ba6c72d91bd2fc91dec6d70241aa5ff36911dfd",
+        "tests/numbers.txt": "9fcff8cfcfe861e8a3c5eb514f8552fe6cc403cf",
+        "tests/package.json": "d442820d66e3852c48f1b789faa0d08a783622a8",
+        "tests/property-paths.txt": "7ba7a2fca57f0e8feff4feec8123ec0b0e424031",
+        "tests/strings.txt": "f953c75374ef1bd2ddec6c5eab5637cc25a24c8f",
+        "tsconfig.json": "c3a159f01c3e8261b5d478b8ca03ff225eb6ca18"
+      },
+      "hashOfExternalDependencies": "27cbd714e64ed68c",
+      "cache": {
+        "local": false,
+        "remote": false,
+        "status": "MISS",
+        "timeSaved": 0
+      },
+      "command": "cm-buildhelper src/index.ts",
+      "cliArguments": [],
+      "outputs": [
+        "declarations/**",
+        "dist/**"
+      ],
+      "excludedOutputs": null,
+      "logFile": "packages/syntax/glimmer/lezer/.turbo/turbo-build.log",
+      "directory": "packages/syntax/glimmer/lezer",
+      "dependencies": [
+        "@glimdown/lezer-glimmer-expression#build"
+      ],
+      "dependents": [
+        "codemirror-lang-glimmer#build"
+      ],
+      "resolvedTaskDefinition": {
+        "outputs": [
+          "declarations/**",
+          "dist/**"
+        ],
+        "cache": true,
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [],
+        "outputLogs": "full",
+        "persistent": false,
+        "env": [],
+        "passThroughEnv": null,
+        "interactive": false
+      },
+      "expandedOutputs": [
+        "packages/syntax/glimmer/lezer/.turbo/turbo-build.log",
+        "packages/syntax/glimmer/lezer/dist",
+        "packages/syntax/glimmer/lezer/dist/index.cjs",
+        "packages/syntax/glimmer/lezer/dist/index.d.cts",
+        "packages/syntax/glimmer/lezer/dist/index.d.ts",
+        "packages/syntax/glimmer/lezer/dist/index.js"
+      ],
+      "framework": "",
+      "envMode": "strict",
+      "environmentVariables": {
+        "specified": {
+          "env": [],
+          "passThroughEnv": null
+        },
+        "configured": [],
+        "inferred": [],
+        "passthrough": null
+      },
+      "execution": {
+        "startTime": 1735866642202,
+        "endTime": 1735866644151,
+        "exitCode": 0
+      }
+    },
+    {
+      "taskId": "limber-ui#build",
+      "task": "build",
+      "package": "limber-ui",
+      "hash": "a109ee3df1bf6f7c",
+      "inputs": {
+        ".eslintignore": "cdc70e957efc34f646be730cb79c44782d7c4b16",
+        ".eslintrc.cjs": "af3c1545622a7278ff7147765845378379bc7d45",
+        ".prettierignore": "ba436216bbef589fc3e41760e9975379746a2096",
+        ".prettierrc.cjs": "0d25168e7ec25495fb8b0d26248d36d01a61ebb1",
+        ".template-lintrc.js": "8bf671af801d9a448808d5d8d519d32544e1efd8",
+        "CHANGELOG.md": "70717142e63ccb737bd4bf24951918a70af83ade",
+        "addon-main.cjs": "d36b0c86dac6790915b78b156856e8d564bfb914",
+        "babel.config.json": "43c39394ecb7507b08a5103e9ca563a424d52649",
+        "package.json": "5e5d11cc3bd896ffd890ae4ab812f1e1d624967a",
+        "rollup.config.mjs": "726a64b7728e25d2e82ba99309a5e7670eca45af",
+        "src/components/button.gts": "a5c621478245ecea58df76e10733cd4140b40d63",
+        "src/components/code.gts": "9e70007a50604723b9b95c8c9a0589dcb0a4e739",
+        "src/components/external-link.gts": "881fbbc470c939e362abd45a9f9caba7a669cf0c",
+        "src/components/frame-messaging.ts": "93d635d72ade7a5a88f75c87f223f9350a1c4610",
+        "src/components/link.gts": "6268f1051afd678cdb6df05896c3df0716156b2e",
+        "src/helpers/service.ts": "baac32d75cdca6aa98a7f943701ab4e764ae22f2",
+        "src/index.ts": "e3a6c9970bdeaa1b172e2b977c811ae9c7ea52eb",
+        "src/theme.css": "918eb4281ee9deb6ff7ad46db16c80d19f57751d",
+        "tsconfig.json": "a215b2eef4b361c1e932c4700007da2d34aa9a91",
+        "unpublished-development-types/index.d.ts": "64f16380747c36259cbc72ef51fbe42028df74ef"
+      },
+      "hashOfExternalDependencies": "b4795c6f7b1ef8a0",
+      "cache": {
+        "local": false,
+        "remote": false,
+        "status": "MISS",
+        "timeSaved": 0
+      },
+      "command": "rollup --config",
+      "cliArguments": [],
+      "outputs": [
+        "declarations/**",
+        "dist/**"
+      ],
+      "excludedOutputs": null,
+      "logFile": "packages/app-support/limber-ui/addon/.turbo/turbo-build.log",
+      "directory": "packages/app-support/limber-ui/addon",
+      "dependencies": [
+        "@nullvoxpopuli/limber-untyped#build"
+      ],
+      "dependents": [],
+      "resolvedTaskDefinition": {
+        "outputs": [
+          "declarations/**",
+          "dist/**"
+        ],
+        "cache": true,
+        "dependsOn": [
+          "^build"
+        ],
+        "inputs": [],
+        "outputLogs": "full",
+        "persistent": false,
+        "env": [],
+        "passThroughEnv": null,
+        "interactive": false
+      },
+      "expandedOutputs": [
+        "packages/app-support/limber-ui/addon/.turbo/turbo-build.log",
+        "packages/app-support/limber-ui/addon/declarations",
+        "packages/app-support/limber-ui/addon/declarations/components",
+        "packages/app-support/limber-ui/addon/declarations/components/button.gts.d.ts",
+        "packages/app-support/limber-ui/addon/declarations/components/button.gts.d.ts.map",
+        "packages/app-support/limber-ui/addon/declarations/components/code.gts.d.ts",
+        "packages/app-support/limber-ui/addon/declarations/components/code.gts.d.ts.map",
+        "packages/app-support/limber-ui/addon/declarations/components/external-link.gts.d.ts",
+        "packages/app-support/limber-ui/addon/declarations/components/external-link.gts.d.ts.map",
+        "packages/app-support/limber-ui/addon/declarations/components/frame-messaging.d.ts",
+        "packages/app-support/limber-ui/addon/declarations/components/frame-messaging.d.ts.map",
+        "packages/app-support/limber-ui/addon/declarations/components/link.gts.d.ts",
+        "packages/app-support/limber-ui/addon/declarations/components/link.gts.d.ts.map",
+        "packages/app-support/limber-ui/addon/declarations/helpers",
+        "packages/app-support/limber-ui/addon/declarations/helpers/service.d.ts",
+        "packages/app-support/limber-ui/addon/declarations/helpers/service.d.ts.map",
+        "packages/app-support/limber-ui/addon/declarations/index.d.ts",
+        "packages/app-support/limber-ui/addon/declarations/index.d.ts.map",
+        "packages/app-support/limber-ui/addon/dist",
+        "packages/app-support/limber-ui/addon/dist/components",
+        "packages/app-support/limber-ui/addon/dist/components/button.js",
+        "packages/app-support/limber-ui/addon/dist/components/button.js.map",
+        "packages/app-support/limber-ui/addon/dist/components/code.js",
+        "packages/app-support/limber-ui/addon/dist/components/code.js.map",
+        "packages/app-support/limber-ui/addon/dist/components/external-link.js",
+        "packages/app-support/limber-ui/addon/dist/components/external-link.js.map",
+        "packages/app-support/limber-ui/addon/dist/components/frame-messaging.js",
+        "packages/app-support/limber-ui/addon/dist/components/frame-messaging.js.map",
+        "packages/app-support/limber-ui/addon/dist/components/link.js",
+        "packages/app-support/limber-ui/addon/dist/components/link.js.map",
+        "packages/app-support/limber-ui/addon/dist/helpers",
+        "packages/app-support/limber-ui/addon/dist/helpers/service.js",
+        "packages/app-support/limber-ui/addon/dist/helpers/service.js.map",
+        "packages/app-support/limber-ui/addon/dist/index.js",
+        "packages/app-support/limber-ui/addon/dist/index.js.map",
+        "packages/app-support/limber-ui/addon/dist/theme.css"
+      ],
+      "framework": "",
+      "envMode": "strict",
+      "environmentVariables": {
+        "specified": {
+          "env": [],
+          "passThroughEnv": null
+        },
+        "configured": [],
+        "inferred": [],
+        "passthrough": null
+      },
+      "execution": {
+        "startTime": 1735866641384,
+        "endTime": 1735866645019,
+        "exitCode": 0
+      }
+    }
+  ],
+  "user": "",
+  "scm": {
+    "type": "git",
+    "sha": "e29955893c91d13eeaf761967cf20f177f9c0238",
+    "branch": "main"
+  }
+}
