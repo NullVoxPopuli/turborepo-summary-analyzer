@@ -33,7 +33,7 @@ export class Viewer extends Component {
 
   @cached
   get slowestFive() {
-    let length = this.tasksByDuration.length;
+    const length = this.tasksByDuration.length;
 
     return this.tasksByDuration.slice(length - 5, length).reverse();
   }
@@ -95,13 +95,19 @@ function duration(startTime: number, endTime: number) {
   return endTime - startTime;
 }
 
+// See: https://github.com/microsoft/TypeScript/issues/60608
+//
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
 const durationFormatter = new Intl.DurationFormat('en', { style: 'narrow' });
 
 function formattedDuration(task: SummaryTask) {
-  let durationMs = taskDuration(task);
+  const durationMs = taskDuration(task);
 
-  let duration = msToDuration(durationMs);
+  const duration = msToDuration(durationMs);
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   return durationFormatter.format(duration);
 }
 

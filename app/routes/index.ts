@@ -10,7 +10,7 @@ export default class IndexRoute extends Route {
   /**
    * Application route tries to load the file, because we _always_ need to do so
    */
-  async beforeModel() {
+  beforeModel() {
     if (this.file.hasFile) {
       this.router.replaceWith(`view`);
       return;

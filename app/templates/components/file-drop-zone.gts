@@ -49,7 +49,9 @@ export class FileDropZone extends Component {
     }
 
     if (!dropEvent.dataTransfer.files[0].name.endsWith('.json')) {
-      const ext = dropEvent.dataTransfer.files[0].name.split('.').at(-1);
+      const ext =
+        dropEvent.dataTransfer.files[0].name.split('.').at(-1) ??
+        '< no extension >';
       this.error = `file extension must be .json, received: ${ext}`;
       return;
     }
@@ -71,7 +73,7 @@ export class FileDropZone extends Component {
       {{#if this.error}}
         <p class="error">{{this.error}}</p>
       {{/if}}
-      <input name="dropped-file" type="file" hidden />
+      {{!<input name="dropped-file" type="file" hidden />}}
       <div class="drop-zone" {{dropArea this.handleDrop}}>
         Drop the Summary JSON file here
 

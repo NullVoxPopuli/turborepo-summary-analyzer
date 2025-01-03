@@ -12,17 +12,19 @@ export async function readFileToJSON(
     reader.onloadend = (e: ProgressEvent<FileReader>) => {
       assert(`File reading did not correctly finish`, e.target?.result);
 
-      let data = e.target.result;
+      const data = e.target.result;
 
       assert(`Expected file to be read as string`, typeof data === 'string');
 
-      let parsed = JSON.parse(data);
+      // SAFETY: this could be dangerous in the future, or lead to runtime errors
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const parsed: SummaryFile = JSON.parse(data);
 
       resolve(parsed);
     };
   });
 
-  let json = await waitForPromise(promise);
+  const json = await waitForPromise(promise);
 
   return {
     json,

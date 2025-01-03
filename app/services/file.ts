@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import type { SummaryFile } from 'turborepo-summary-analyzer/types';
 import { readFileToJSON } from 'turborepo-summary-analyzer/utils';
 
-import { openDB, deleteDB, wrap, unwrap, type IDBPDatabase } from 'idb';
+import { openDB, type IDBPDatabase } from 'idb';
 import { assert } from '@ember/debug';
 
 const DATA_KEY = `file-data`;
@@ -75,12 +75,15 @@ export default class FileService extends Service {
     // SAFETY: this could lead to problems in the future.
     // TODO: fix
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const existing = await this.#storage.get(STORE_NAME, DATA_KEY);
+    const existing: string = await this.#storage.get(STORE_NAME, DATA_KEY);
 
     if (!existing) return;
 
     try {
-      const parsed = JSON.parse(existing);
+      // SAFETY: this could lead to problems in the future.
+      // TODO: fix
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const parsed: SummaryFile = JSON.parse(existing);
 
       this.current = parsed;
     } catch (e) {
