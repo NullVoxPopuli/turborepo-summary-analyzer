@@ -83,6 +83,11 @@ export default ts.config(
       ...emberRecommended,
       ...gtsRecommended,
     ],
+    rules: {
+      // Don't trust
+      // See: event listeners -- return value doesn't matter
+      '@typescript-eslint/no-misused-promises': 'off',
+    },
   },
   {
     files: ['tests/**/*-test.{js,gjs}'],

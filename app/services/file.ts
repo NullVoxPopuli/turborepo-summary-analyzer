@@ -21,10 +21,11 @@ export default class FileService extends Service {
     const result = await readFileToJSON(file);
 
     this.current = result.json;
-    this.fileName = result.name.replaceAll('"', '');
+    this.fileName = result.name.replaceAll(/["']/g, '');
 
     await this.#ensureStore();
 
+    console.log(this.fileName);
     await this.#storage.put(STORE_NAME, JSON.stringify(result.json), DATA_KEY);
     await this.#storage.put(STORE_NAME, JSON.stringify(result.name), NAME_KEY);
   }

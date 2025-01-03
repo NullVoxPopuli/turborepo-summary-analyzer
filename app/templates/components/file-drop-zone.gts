@@ -4,12 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { modifier } from 'ember-modifier';
 import type FileService from 'turborepo-summary-analyzer/services/file';
 import type RouterService from '@ember/routing/router-service';
-import { assert } from '@ember/debug';
-
-function preventDefaults(e: Event) {
-  e.preventDefault();
-  e.stopPropagation();
-}
+import { handleDrop, preventDefaults } from './drop-utils';
 
 const dropArea = modifier((element, [handleDrop]: [(event: Event) => void]) => {
   element.addEventListener('dragover', preventDefaults);
@@ -26,42 +21,12 @@ export class FileDropZone extends Component {
   @tracked error: string | undefined;
 
   handleDrop = async (dropEvent: Event) => {
-    dropEvent.preventDefault();
+    const fileData = handleDrop(
+      { onError: (e) => (this.error = e) },
+      dropEvent
+    );
 
-    assert(`Expected event to be a DragEvent`, dropEvent instanceof DragEvent);
-
-    if (!dropEvent.dataTransfer) {
-      this.error = `Expected a dataTransfer object on the drag-drop Event`;
-      return;
-    }
-
-    if (dropEvent.dataTransfer.files.length > 1) {
-      const count = String(dropEvent.dataTransfer.files.length);
-
-      this.error = `Please only dorp one file. Received: ${count} files.`;
-
-      return;
-    }
-
-    if (!dropEvent.dataTransfer.files[0]) {
-      this.error = `Please place a file in the drop zone.`;
-      return;
-    }
-
-    if (!dropEvent.dataTransfer.files[0].name.endsWith('.json')) {
-      const ext =
-        dropEvent.dataTransfer.files[0].name.split('.').at(-1) ??
-        '< no extension >';
-      this.error = `file extension must be .json, received: ${ext}`;
-      return;
-    }
-
-    if (dropEvent.dataTransfer.files[0].type !== 'application/json') {
-      this.error = `Unexpected mimetype! Expected application/json, but received ${dropEvent.dataTransfer.files[0].type}`;
-      return;
-    }
-
-    const fileData = dropEvent.dataTransfer.files[0];
+    if (!fileData) return;
 
     await this.file.handleDroppedFile(fileData);
 

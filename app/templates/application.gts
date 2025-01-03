@@ -5,8 +5,6 @@ export default Route(
   <template>
     {{pageTitle "Analyze Turbo Summary Files"}}
 
-    <h1>Analayze Turbo Summary Files</h1>
-
     {{outlet}}
   </template>
 );
