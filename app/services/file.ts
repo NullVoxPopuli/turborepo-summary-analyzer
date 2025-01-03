@@ -25,8 +25,8 @@ export default class FileService extends Service {
 
     await this.#ensureStore();
 
-    await this.#storage.put(STORE_NAME, DATA_KEY, JSON.stringify(result.json));
-    await this.#storage.put(STORE_NAME, NAME_KEY, JSON.stringify(result.name));
+    await this.#storage.put(STORE_NAME, JSON.stringify(result.json), DATA_KEY);
+    await this.#storage.put(STORE_NAME, JSON.stringify(result.name), NAME_KEY);
   }
 
   get hasFile() {
@@ -61,7 +61,10 @@ export default class FileService extends Service {
   }
 
   async #tryLoadName() {
-    const existing = await this.#storage.get(STORE_NAME, NAME_KEY);
+    // SAFETY: this could lead to problems in the future.
+    // TODO: fix
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const existing: string = await this.#storage.get(STORE_NAME, NAME_KEY);
 
     if (!existing) return;
 
@@ -69,6 +72,9 @@ export default class FileService extends Service {
   }
 
   async #tryLoadData() {
+    // SAFETY: this could lead to problems in the future.
+    // TODO: fix
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const existing = await this.#storage.get(STORE_NAME, DATA_KEY);
 
     if (!existing) return;

@@ -7,7 +7,7 @@ export default class ViewRoute extends Route {
   @service declare file: FileService;
   @service declare router: RouterService;
 
-  async beforeModel() {
+  beforeModel() {
     if (!this.file.hasFile) {
       this.router.replaceWith(`import`);
       return;
