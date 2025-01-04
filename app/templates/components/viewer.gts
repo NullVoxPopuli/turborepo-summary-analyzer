@@ -4,6 +4,7 @@ import type FileService from 'turborepo-summary-analyzer/services/file';
 import { assert } from '@ember/debug';
 import { cached } from '@glimmer/tracking';
 import type { SummaryTask } from 'turborepo-summary-analyzer/types';
+import { Timeline } from './timeline';
 
 export class Viewer extends Component {
   @service declare file: FileService;
@@ -38,12 +39,6 @@ export class Viewer extends Component {
     return this.tasksByDuration.slice(length - 5, length).reverse();
   }
 
-  get numTasks() {
-    console.log(this.file.current);
-
-    return 0;
-  }
-
   <template>
     <h2>{{this.file.fileName}}</h2>
 
@@ -55,6 +50,8 @@ export class Viewer extends Component {
       Cached:
       {{this.execution.cached}}
     </pre>
+
+    <Timeline @tasks={{this.tasks}} />
 
     <table><thead><tr>
           <th>Duration</th>

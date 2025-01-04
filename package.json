@@ -47,6 +47,7 @@
     "@glint/template": "1.4.1-unstable.34c4510",
     "@rollup/plugin-babel": "^6.0.4",
     "@tsconfig/ember": "^3.0.8",
+    "@types/d3": "^7.4.3",
     "@types/eslint__js": "^8.42.3",
     "@types/qunit": "^2.19.12",
     "@types/rsvp": "^4.0.9",
