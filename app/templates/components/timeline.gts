@@ -92,6 +92,6 @@ export class Timeline extends Component<{
 
   <template>
     {{log @tasks}}
-    <div style="width: 100%; height: 50dvh;" {{this.chart}}></div>
+    <div style="width: 100%; height: 75dvh;" {{this.chart}}></div>
   </template>
 }
