@@ -6,16 +6,6 @@ import * as d3 from 'd3';
 import { modifier } from 'ember-modifier';
 import { taskDuration } from 'turborepo-summary-analyzer/utils';
 
-// https://d3js.org/d3-time-format
-const parser = d3.utcParse('%Q');
-const settings = {
-  barRoundness: 0,
-  panelBorder: 'hide',
-  barHeight: 12,
-  textPosition: 0,
-  fontSize: 14,
-};
-
 /**
  * https://observablehq.com/@observablehq/build-your-own-gantt-chart
  */
