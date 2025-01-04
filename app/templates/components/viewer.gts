@@ -2,8 +2,9 @@ import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import type FileService from 'turborepo-summary-analyzer/services/file';
 import { assert } from '@ember/debug';
-import { cached } from '@glimmer/tracking';
-import type { SummaryTask } from 'turborepo-summary-analyzer/types';
+import { Timeline } from './timeline';
+import { OverallSummary } from './overall-summary';
+import { Table } from './table';
 
 export class Viewer extends Component {
   @service declare file: FileService;
@@ -24,108 +25,13 @@ export class Viewer extends Component {
     return this.current.tasks;
   }
 
-  @cached
-  get tasksByDuration() {
-    return this.tasks.toSorted((a, b) => {
-      return taskDuration(a) - taskDuration(b);
-    });
-  }
-
-  @cached
-  get slowestFive() {
-    const length = this.tasksByDuration.length;
-
-    return this.tasksByDuration.slice(length - 5, length).reverse();
-  }
-
-  get numTasks() {
-    console.log(this.file.current);
-
-    return 0;
-  }
-
   <template>
     <h2>{{this.file.fileName}}</h2>
 
-    <pre>
-      {{this.execution.command}}
-      {{duration this.execution.startTime this.execution.endTime}}
-      Tasks:
-      {{this.execution.attempted}}
-      Cached:
-      {{this.execution.cached}}
-    </pre>
+    <OverallSummary @execution={{this.execution}} @tasks={{this.tasks}} />
+    <Timeline @tasks={{this.tasks}} />
+    <br />
 
-    <table><thead><tr>
-          <th>Duration</th>
-          <th>Cache</th>
-          <th>Package</th>
-          <th>Command</th>
-        </tr></thead>
-      <tbody>
-
-        {{#each this.slowestFive as |task|}}
-          <tr>
-            <td>{{formattedDuration task}}</td>
-
-            <td>{{cacheStatus task}}</td>
-            <td>{{task.package}}</td>
-            <td>{{task.command}}</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+    <Table class="centered" @tasks={{this.tasks}} />
   </template>
-}
-
-function cacheStatus(task: SummaryTask) {
-  if (task.cache.status === 'MISS') return 'MISS';
-
-  if (task.cache.local) return 'Local';
-  if (task.cache.remote) return 'Remote';
-
-  return task.cache.status;
-}
-
-function taskDuration(task: SummaryTask) {
-  return duration(task.execution.startTime, task.execution.endTime);
-}
-
-function duration(startTime: number, endTime: number) {
-  return endTime - startTime;
-}
-
-// See: https://github.com/microsoft/TypeScript/issues/60608
-//
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-const durationFormatter = new Intl.DurationFormat('en', { style: 'narrow' });
-
-function formattedDuration(task: SummaryTask) {
-  const durationMs = taskDuration(task);
-
-  const duration = msToDuration(durationMs);
-
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-  return durationFormatter.format(duration);
-}
-
-const msInSecond = 1000;
-const msInMinute = msInSecond * 60;
-const msInHour = msInMinute * 60;
-
-function msToDuration(ms: number) {
-  const hours = Math.floor(ms / msInHour);
-  ms %= msInHour;
-
-  const minutes = Math.floor(ms / msInMinute);
-  ms %= msInMinute;
-
-  const seconds = Math.floor(ms / msInSecond);
-  ms %= msInSecond;
-
-  const milliseconds = ms;
-
-  return { hours, minutes, seconds, milliseconds };
 }

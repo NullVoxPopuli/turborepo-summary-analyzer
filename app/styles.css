@@ -1,0 +1,125 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --ember-brand: #e04e39;
+  --ember-black: #212121;
+  --ember-burnt-ember: #9b2918;
+  --ember-gray: #817f7f;
+  --ember-blue: #1e719b;
+  --ember-faint-gray: #efebea;
+  --ember-light-blue: #74b0ce;
+  --ember-linen: #fdf7f6;
+  --ember-yellow: #fbc840;
+  --ember-white: #fdfdfd;
+
+  /* "Dark" */
+  --horizon-lavender: #b877db;
+  --horizon-turquoise: #25b2bc;
+  --horizon-cranberry: #e95678;
+  --horizon-apricot: #f09383;
+  --horizon-rosebud: #fab795;
+  --horizon-tacao: #fac29a;
+
+  /* "Light" */
+  --horizon-amethyst: #8931b9;
+  --horizon-elm: #1d8991;
+  --horizon-crimson: #da103f;
+  --horizon-thunderbird: #dc3318;
+  --horizon-tango: #f6661e;
+  --horizon-jaffa: #f77d26;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --page-bg: var(--ember-black);
+    --page-font: var(--ember-white);
+    --link-font: var(--horizon-lavender);
+    --github-bg: var(--ember-faint-gray);
+    --github-border: var(--ember-light-blue);
+    --github-font: white;
+    --github-hover: var(--ember-gray);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition-duration: 0.001s !important;
+  }
+}
+
+body {
+  --page-bg: var(--ember-faint-gray);
+  --page-font: var(--ember-black);
+  --link-font: var(--ember-blue);
+  --link-hover: var(--ember-light-blue);
+  --github-bg: var(--ember-black);
+  --github-border: var(--ember-black);
+  --github-font: white;
+  --github-hover: var(--ember-gray);
+
+  font-family: Helvetica, Arial, sans-serif;
+  background: var(--page-bg);
+  color: var(--page-font);
+  overflow: hidden;
+}
+
+.theme-light {
+  --page-bg: var(--ember-faint-gray);
+  --page-font: var(--ember-black);
+  --link-font: var(--ember-blue);
+  --link-hover: var(--ember-light-blue);
+  --github-bg: var(--ember-black);
+  --github-border: var(--ember-gray);
+  --github-font: white;
+  --github-hover: var(--ember-gray);
+}
+
+.theme-dark {
+  --page-bg: var(--ember-black);
+  --page-font: var(--ember-white);
+  --link-font: var(--horizon-lavender);
+  --github-bg: var(--ember-faint-gray);
+  --github-border: var(--ember-light-blue);
+  --github-font: white;
+  --github-hover: var(--ember-gray);
+}
+
+.preem__site-theme-toggle:has(input:focus-visible) label .ball,
+.fun-switch > span:has(input:focus-visible) label::after,
+*:focus-visible,
+*:focus {
+  --tw-ring-inset: ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 50%);
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+    calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+
+  box-shadow:
+    var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+    var(--tw-shadow, 0 0 #0000);
+  outline: none;
+  outline-offset: 2px;
+}
+
+.fun-switch > span:has(input:focus-visible) label::after,
+.preem__site-theme-toggle:has(input:focus-visible) label .ball {
+  --tw-ring-color: rgb(59 130 246 / 90%);
+}
+
+main {
+  padding: 1rem;
+}
+
+.centered {
+  margin: 0 auto;
+}
