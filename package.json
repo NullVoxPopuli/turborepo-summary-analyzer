@@ -79,7 +79,7 @@
     "eslint-plugin-qunit": "^8.1.2",
     "globals": "^15.14.0",
     "loader.js": "^4.7.0",
-    "prettier": "^3.4.2",
+    "prettier": "github:prettier/prettier",
     "prettier-plugin-ember-template-tag": "^2.0.4",
     "qunit": "^2.23.1",
     "qunit-dom": "^3.4.0",
@@ -109,6 +109,7 @@
     "@ember/test-waiters": "^4.0.0",
     "@observablehq/plot": "^0.6.16",
     "d3": "^7.9.0",
+    "ember-primitives": "^0.27.2",
     "idb": "^8.0.1"
   }
 }

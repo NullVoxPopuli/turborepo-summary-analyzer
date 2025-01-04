@@ -24,36 +24,20 @@ export class Timeline extends Component<{
   };
 }> {
   @cached
-  get timelineData() {
-    return this.args.tasks.map((task) => {
-      return {
-        task: task.taskId,
-        // group: task.task,
-        group: task.package,
-        startDate: task.execution.startTime,
-        endDate: task.execution.endTime,
-        description: task.package,
-      };
-    });
+  get byId() {
+    return d3.index(this.args.tasks, (d) => d.taskId);
   }
 
   @cached
   get groups() {
-    return [...new Set([...this.timelineData.map((x) => x.group)])];
+    return [...new Set([...this.args.tasks.map((x) => x.package)])];
   }
 
   @cached
   get byDate() {
-    return this.timelineData.sort((a, b) =>
-      d3.ascending(a.startDate, b.startDate)
+    return this.args.tasks.sort((a, b) =>
+      d3.ascending(a.execution.startTime, b.execution.startTime)
     );
-  }
-
-  @cached
-  get byGroup() {
-    return d3
-      .groups(this.timelineData, (d) => d.group)
-      .sort((a, b) => d3.ascending(a[1].startDate, b[1].startDate));
   }
 
   @cached
@@ -67,60 +51,47 @@ export class Timeline extends Component<{
   }
 
   chart = modifier((element) => {
-    let box = element.getBoundingClientRect();
+    const box = element.getBoundingClientRect();
     const plot = Plot.plot({
-      marks: [
-        Plot.frame({ stroke: settings.panelBorder == 'show' ? '#aaa' : null }),
-        Plot.barX(this.timelineData, {
-          y: 'task',
-          x1: (d) => parser(d.startDate),
-          x2: (d) => parser(d.endDate),
-          fill: 'group',
-          rx: settings.barRoundness,
-          insetTop: settings.barHeight,
-          insetBottom: settings.barHeight,
-        }),
-        Plot.text(this.timelineData, {
-          y: 'task',
-          x: (d) => parser(d.startDate),
-          text: (d) => d.task,
-          textAnchor: 'start',
-          dy: settings.textPosition,
-          fontSize: settings.fontSize,
-          stroke: 'white',
-          fill: 'dimgray',
-          fontWeight: 500,
-        }),
-        Plot.tip(
-          this.timelineData,
-          Plot.pointerY({
-            y: 'task',
-            x1: (d) => parser(d.startDate),
-            x2: (d) => parser(d.endDate),
-            title: (d) =>
-              `Team: ${d.group}\nTask: ${d.task}\nDescription: ${d.description}\nStart: ${d.startDate}\nEnd: ${d.endDate}`,
-          })
-        ),
-      ],
       height: box.height,
       width: box.width,
+      color: {
+        type: 'linear',
+        range: ['blue', 'orange'],
+        interpolate: 'hcl',
+      },
       x: {
         grid: true,
+        type: 'utc',
+        ticks: 20,
       },
       y: {
-        domain: this.byDate,
-        label: null,
-        tickFormat: null,
         grid: false,
+        // tickFormat: (t) => this.byId.get(t)?.taskId,
+        tickFormat: null,
+        axis: 'left',
+        label: null,
       },
-      color: { domain: this.byGroup, range: this.colors, legend: false },
+      // color: { domain: this.byGroup, range: this.colors, legend: false },
+      marks: [
+        Plot.barX(this.args.tasks, {
+          fill: (d) => this.groups.indexOf(d.package),
+          stroke: (d) => this.groups.indexOf(d.package),
+          fillOpacity: 0.6,
+          // strokeOpacity: 0.7,
+          x1: (d) => d.execution.startTime,
+          x2: (d) => d.execution.endTime,
+          y: (d) => d.taskId,
+          title: (d) => `${d.package} >> ${d.task}`,
+        }),
+      ],
     });
 
     element.append(plot);
   });
 
   <template>
-    {{log this.timelineData}}
-    <div style="width: 100%; height: 200px;" {{this.chart}}></div>
+    {{log @tasks}}
+    <div style="width: 100%; height: 50dvh;" {{this.chart}}></div>
   </template>
 }

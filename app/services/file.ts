@@ -26,7 +26,7 @@ export default class FileService extends Service {
     await this.#ensureStore();
 
     await this.#storage.put(STORE_NAME, JSON.stringify(result.json), DATA_KEY);
-    await this.#storage.put(STORE_NAME, JSON.stringify(result.name), NAME_KEY);
+    await this.#storage.put(STORE_NAME, this.fileName, NAME_KEY);
   }
 
   get hasFile() {
