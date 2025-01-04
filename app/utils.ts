@@ -64,7 +64,7 @@ export function overallDuration(execution: {
   return durationFormatter.format(duration);
 }
 
-function durationOfTask(task: SummaryTask) {
+export function durationOfTask(task: SummaryTask) {
   return duration(task.execution.startTime, task.execution.endTime);
 }
 

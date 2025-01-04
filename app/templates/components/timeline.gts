@@ -122,7 +122,7 @@ export class Timeline extends Component<{
     this.#frame = requestAnimationFrame(() => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      const target = entries.find((x) => x.target)?.target;
+      const target = entries.find((x) => x.target).target;
       this.renderInto(target as HTMLElement);
     });
   };

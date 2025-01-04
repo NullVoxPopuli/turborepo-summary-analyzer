@@ -87,6 +87,8 @@ export default ts.config(
       // Don't trust
       // See: event listeners -- return value doesn't matter
       '@typescript-eslint/no-misused-promises': 'off',
+      // buggy
+      '@typescript-eslint/no-unnecessary-condition': 'off',
     },
   },
   {

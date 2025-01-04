@@ -1,10 +1,10 @@
 import type { TOC } from '@ember/component/template-only';
 import type { SummaryTask } from 'turborepo-summary-analyzer/types';
-import { taskDuration } from 'turborepo-summary-analyzer/utils';
+import { taskDuration, durationOfTask } from 'turborepo-summary-analyzer/utils';
 
 function byDuration(tasks: SummaryTask[]) {
   return tasks.toSorted((a, b) => {
-    return taskDuration(a) - taskDuration(b);
+    return durationOfTask(a) - durationOfTask(b);
   });
 }
 
