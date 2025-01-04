@@ -23,6 +23,7 @@ function totalDurations(tasks: SummaryTask[]) {
 function totalCPU(tasks: SummaryTask[]) {
   const ms = totalDurations(tasks);
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   return durationFormatter.format(msToDuration(ms));
 }
 
@@ -31,6 +32,7 @@ function timeSaved(overall: SummaryFile['execution'], tasks: SummaryTask[]) {
   const perceived = overall.endTime - overall.startTime;
 
   const diff = cpu - perceived;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   return durationFormatter.format(msToDuration(diff));
 }
 

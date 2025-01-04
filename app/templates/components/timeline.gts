@@ -82,13 +82,13 @@ export class Timeline extends Component<{
           // fill: (d) => getColor(d.package),
           // stroke: (d) => getColor(d.package),
           fillOpacity: 0.6,
-          x1: (d) => d.execution.startTime,
-          x2: (d) => d.execution.endTime,
-          y: (d) => d.taskId,
-          title: (d) => {
+          x1: (d: SummaryTask) => d.execution.startTime,
+          x2: (d: SummaryTask) => d.execution.endTime,
+          y: (d: SummaryTask) => d.taskId,
+          title: (d: SummaryTask) => {
             let title = `${d.package} >> ${d.task}\n ${taskDuration(d)}\n`;
 
-            if (d.dependencies?.length) {
+            if (d.dependencies.length) {
               title += '\n';
               title += `Dependencies: \n${d.dependencies.join('\n')}`;
             }
@@ -97,9 +97,9 @@ export class Timeline extends Component<{
           },
         }),
         Plot.text(this.args.tasks, {
-          x: (d) => d.execution.startTime,
-          y: (d) => d.taskId,
-          text: (d) => taskDuration(d),
+          x: (d: SummaryTask) => d.execution.startTime,
+          y: (d: SummaryTask) => d.taskId,
+          text: (d: SummaryTask) => taskDuration(d),
           textAnchor: 'start',
           dy: 0,
           dx: 6,
@@ -120,8 +120,9 @@ export class Timeline extends Component<{
   handleResize = (entries: ResizeObserverEntry[]) => {
     cancelAnimationFrame(this.#frame);
     this.#frame = requestAnimationFrame(() => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       const target = entries.find((x) => x.target)?.target;
-      if (!target) return;
       this.renderInto(target as HTMLElement);
     });
   };

@@ -44,7 +44,7 @@ export const durationFormatter = new Intl.DurationFormat('en', {
   style: 'narrow',
 });
 
-export function taskDuration(task: SummaryTask) {
+export function taskDuration(task: SummaryTask): string {
   const durationMs = durationOfTask(task);
 
   const duration = msToDuration(durationMs);

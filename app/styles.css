@@ -45,7 +45,6 @@ body {
   }
 }
 
-
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
@@ -89,7 +88,6 @@ body {
   --github-font: white;
   --github-hover: var(--ember-gray);
 }
-
 
 .preem__site-theme-toggle:has(input:focus-visible) label .ball,
 .fun-switch > span:has(input:focus-visible) label::after,
