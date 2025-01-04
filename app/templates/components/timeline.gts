@@ -122,7 +122,7 @@ export class Timeline extends Component<{
   handleResize = (entries: ResizeObserverEntry[]) => {
     cancelAnimationFrame(this.#frame);
     this.#frame = requestAnimationFrame(() => {
-      let target = entries.find((x) => x.target)?.target;
+      const target = entries.find((x) => x.target)?.target;
       if (!target) return;
       this.renderInto(target as HTMLElement);
     });

@@ -12,7 +12,7 @@ import {
 
 function totalDurations(tasks: SummaryTask[]) {
   let ms = 0;
-  let durations = tasks.map(
+  const durations = tasks.map(
     (task) => task.execution.endTime - task.execution.startTime
   );
 
@@ -21,16 +21,16 @@ function totalDurations(tasks: SummaryTask[]) {
 }
 
 function totalCPU(tasks: SummaryTask[]) {
-  let ms = totalDurations(tasks);
+  const ms = totalDurations(tasks);
 
   return durationFormatter.format(msToDuration(ms));
 }
 
 function timeSaved(overall: SummaryFile['execution'], tasks: SummaryTask[]) {
-  let cpu = totalDurations(tasks);
-  let perceived = overall.endTime - overall.startTime;
+  const cpu = totalDurations(tasks);
+  const perceived = overall.endTime - overall.startTime;
 
-  let diff = cpu - perceived;
+  const diff = cpu - perceived;
   return durationFormatter.format(msToDuration(diff));
 }
 

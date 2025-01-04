@@ -33,7 +33,6 @@ body {
   --horizon-jaffa: #f77d26;
 }
 
-
 body {
   --page-bg: var(--ember-faint-gray);
   --page-font: var(--ember-black);
@@ -92,15 +91,18 @@ body {
   --tw-ring-color: rgb(59 130 246 / 50%);
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width))
-    var(--tw-ring-color);
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width)
-    var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+    calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
 
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  box-shadow:
+    var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+    var(--tw-shadow, 0 0 #0000);
   outline: none;
   outline-offset: 2px;
 }
+
 .fun-switch > span:has(input:focus-visible) label::after,
 .preem__site-theme-toggle:has(input:focus-visible) label .ball {
   --tw-ring-color: rgb(59 130 246 / 90%);
@@ -113,5 +115,3 @@ main {
 .centered {
   margin: 0 auto;
 }
-
-
