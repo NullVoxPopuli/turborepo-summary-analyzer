@@ -50,3 +50,51 @@ export function handleDrop(
 
   return fileData;
 }
+
+export function handleFileChoose(
+  events: { onError: (msg: string) => void },
+  changeEvent: Event
+) {
+  changeEvent.preventDefault();
+
+  assert(
+    `Expected event from an input`,
+    changeEvent.target instanceof HTMLInputElement
+  );
+
+  if (!changeEvent.target.files) {
+    events.onError(`Expected a files object on the change Event`);
+    return;
+  }
+
+  if (changeEvent.target.files.length > 1) {
+    const count = String(changeEvent.target.files.length);
+
+    events.onError(`Please only dorp one file. Received: ${count} files.`);
+
+    return;
+  }
+
+  if (!changeEvent.target.files[0]) {
+    events.onError(`Please place a file in the drop zone.`);
+    return;
+  }
+
+  if (!changeEvent.target.files[0].name.endsWith('.json')) {
+    const ext =
+      changeEvent.target.files[0].name.split('.').at(-1) ?? '< no extension >';
+    events.onError(`file extension must be .json, received: ${ext}`);
+    return;
+  }
+
+  if (changeEvent.target.files[0].type !== 'application/json') {
+    events.onError(
+      `Unexpected mimetype! Expected application/json, but received ${changeEvent.target.files[0].type}`
+    );
+    return;
+  }
+
+  const fileData = changeEvent.target.files[0];
+
+  return fileData;
+}

@@ -2,9 +2,10 @@ import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { modifier } from 'ember-modifier';
+import { on } from '@ember/modifier';
 import type FileService from 'turborepo-summary-analyzer/services/file';
 import type RouterService from '@ember/routing/router-service';
-import { handleDrop, preventDefaults } from './drop-utils';
+import { handleDrop, handleFileChoose, preventDefaults } from './drop-utils';
 
 const dropArea = modifier((element, [handleDrop]: [(event: Event) => void]) => {
   element.addEventListener('dragover', preventDefaults);
@@ -33,12 +34,32 @@ export class FileDropZone extends Component {
     this.router.transitionTo('view');
   };
 
+  handleFileSelect = async (changeEvent: Event) => {
+    console.log({ changeEvent });
+
+    const fileData = handleFileChoose(
+      { onError: (e) => (this.error = e) },
+      changeEvent
+    );
+
+    if (!fileData) return;
+
+    await this.file.handleDroppedFile(fileData);
+
+    this.router.transitionTo('view');
+  };
+
   <template>
-    <div class="drop-container">
+    <label class="drop-container">
       {{#if this.error}}
         <p class="error">{{this.error}}</p>
       {{/if}}
-      {{!<input name="dropped-file" type="file" hidden />}}
+      <input
+        name="dropped-file"
+        type="file"
+        hidden
+        {{on "change" this.handleFileSelect}}
+      />
       <div class="drop-zone" {{dropArea this.handleDrop}}>
         Drop the Summary JSON file here
 
@@ -49,12 +70,13 @@ export class FileDropZone extends Component {
 
       </div>
 
-    </div>
+    </label>
     {{! prettier-ignore }}
     <style>
       .drop-container {
         border: 2px dashed;
         border-radius: 1rem;
+        display: block;
 
         .drop-zone {
           padding: 3rem;

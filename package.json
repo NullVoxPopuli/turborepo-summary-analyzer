@@ -106,6 +106,8 @@
   },
   "dependencies": {
     "@ember/test-waiters": "^4.0.0",
+    "@observablehq/plot": "^0.6.16",
+    "d3": "^7.9.0",
     "idb": "^8.0.1"
   }
 }
