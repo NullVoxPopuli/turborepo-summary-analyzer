@@ -1,0 +1,18 @@
+.dark {
+  --bg: #222;
+  --fg: #eee;
+}
+
+.light {
+  --bg: #eee;
+  --fg: #222;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.centered {
+  margin: 0 auto;
+}

@@ -57,7 +57,7 @@ export class Timeline extends Component<{
       width: box.width,
       color: {
         type: 'linear',
-        range: ['blue', 'orange'],
+        range: ['lightblue', 'magenta'],
         interpolate: 'hcl',
       },
       x: {
