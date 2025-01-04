@@ -5,7 +5,6 @@ import { colorScheme } from 'ember-primitives/color-scheme';
 import { Header } from './components/header';
 
 function syncColorScheme() {
-  console.log({ theme: colorScheme.current });
   if (colorScheme.current === 'dark') {
     document.body.classList.remove('theme-light');
     document.body.classList.add('theme-dark');

@@ -5,6 +5,11 @@ import * as Plot from '@observablehq/plot';
 import * as d3 from 'd3';
 import { modifier } from 'ember-modifier';
 import { taskDuration } from 'turborepo-summary-analyzer/utils';
+import { colorScheme } from 'ember-primitives/color-scheme';
+
+function isDark() {
+  return colorScheme.current === 'dark';
+}
 
 /**
  * https://observablehq.com/@observablehq/build-your-own-gantt-chart
@@ -37,9 +42,11 @@ export class Timeline extends Component<{
    */
   renderInto(element: HTMLElement) {
     const box = element.getBoundingClientRect();
-    // Light Theme
-    // const colorSpace = d3.interpolateHclLong('magenta', 'brown');
-    const colorSpace = d3.interpolateHclLong('magenta', 'orange');
+
+    const colorSpace = isDark()
+      ? d3.interpolateHcl('#ff0000', '#ff00ff')
+      : d3.interpolateHclLong('magenta', 'orange');
+
     const getColor = (group: string) => {
       const idx = this.groups.indexOf(group);
       const select = this.groups.length / (idx + 1);
@@ -97,8 +104,9 @@ export class Timeline extends Component<{
           dy: 0,
           dx: 6,
           fontSize: 12,
-          stroke: 'white',
-          fill: 'dimgray',
+          stroke: isDark() ? 'black' : 'white',
+          strokeWidth: 1,
+          fill: isDark() ? 'white' : 'dimgray',
           fontWeight: 500,
         }),
       ],

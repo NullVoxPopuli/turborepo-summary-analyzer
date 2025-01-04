@@ -36,6 +36,7 @@
     "@embroider/compat": "3.7.1-unstable.b470496",
     "@embroider/config-meta-loader": "0.0.1-unstable.b470496",
     "@embroider/core": "3.4.20-unstable.b470496",
+    "@embroider/macros": "1.16.10-unstable.c3af848",
     "@embroider/test-setup": "4.0.1-unstable.b470496",
     "@embroider/vite": "0.2.2-unstable.b470496",
     "@eslint/js": "^9.17.0",

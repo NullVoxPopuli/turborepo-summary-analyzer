@@ -33,6 +33,26 @@ body {
   --horizon-jaffa: #f77d26;
 }
 
+@media (prefers-color-scheme: dark) {
+  body {
+    --page-bg: var(--ember-black);
+    --page-font: var(--ember-white);
+    --link-font: var(--horizon-lavender);
+    --github-bg: var(--ember-faint-gray);
+    --github-border: var(--ember-light-blue);
+    --github-font: white;
+    --github-hover: var(--ember-gray);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition-duration: 0.001s !important;
+  }
+}
+
 body {
   --page-bg: var(--ember-faint-gray);
   --page-font: var(--ember-black);
@@ -46,18 +66,7 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   background: var(--page-bg);
   color: var(--page-font);
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    --page-bg: var(--ember-black);
-    --page-font: var(--ember-white);
-    --link-font: var(--horizon-lavender);
-    --github-bg: var(--ember-faint-gray);
-    --github-border: var(--ember-light-blue);
-    --github-font: white;
-    --github-hover: var(--ember-gray);
-  }
+  overflow: hidden;
 }
 
 .theme-light {
@@ -80,6 +89,7 @@ body {
   --github-font: white;
   --github-hover: var(--ember-gray);
 }
+
 
 .preem__site-theme-toggle:has(input:focus-visible) label .ball,
 .fun-switch > span:has(input:focus-visible) label::after,
