@@ -65,7 +65,6 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   background: var(--page-bg);
   color: var(--page-font);
-  overflow: hidden;
 }
 
 .theme-light {
