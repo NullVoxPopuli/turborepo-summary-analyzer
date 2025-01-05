@@ -31,8 +31,7 @@ function timeSaved(overall: SummaryFile['execution'], tasks: SummaryTask[]) {
   const perceived = overall.endTime - overall.startTime;
 
   const diff = cpu - perceived;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-  return durationFormatter.format(msToDuration(diff));
+  return formatDuration(msToDuration(diff));
 }
 
 export const OverallSummary = <template>
