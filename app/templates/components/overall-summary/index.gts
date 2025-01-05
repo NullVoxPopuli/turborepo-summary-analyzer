@@ -6,7 +6,7 @@ import type {
 import { Prompt } from './prompt';
 import {
   overallDuration,
-  durationFormatter,
+  formatDuration,
   msToDuration,
 } from 'turborepo-summary-analyzer/utils';
 
@@ -23,8 +23,7 @@ function totalDurations(tasks: SummaryTask[]) {
 function totalCPU(tasks: SummaryTask[]) {
   const ms = totalDurations(tasks);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-  return durationFormatter.format(msToDuration(ms));
+  return formatDuration(msToDuration(ms));
 }
 
 function timeSaved(overall: SummaryFile['execution'], tasks: SummaryTask[]) {

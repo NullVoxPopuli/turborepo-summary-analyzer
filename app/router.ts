@@ -11,4 +11,5 @@ export default class Router extends EmberRouter {
 Router.map(function () {
   this.route('import');
   this.route('view');
+  this.route('missing-features');
 });
