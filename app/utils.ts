@@ -35,22 +35,30 @@ export async function readFileToJSON(
   };
 }
 
-// See: https://github.com/microsoft/TypeScript/issues/60608
-//
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-export const durationFormatter = new Intl.DurationFormat('en', {
-  style: 'narrow',
-});
+export function formatDuration(
+  duration: ReturnType<typeof msToDuration>
+): string {
+  // See: https://github.com/microsoft/TypeScript/issues/60608
+  //
+  // This has to be a run-time accessed API because not all browsers support it
+  //
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  const durationFormatter = new Intl.DurationFormat('en', {
+    style: 'narrow',
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  return durationFormatter.format(duration);
+}
 
 export function taskDuration(task: SummaryTask): string {
   const durationMs = durationOfTask(task);
 
   const duration = msToDuration(durationMs);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-  return durationFormatter.format(duration);
+  return formatDuration(duration);
 }
 
 export function overallDuration(execution: {
@@ -60,8 +68,7 @@ export function overallDuration(execution: {
   const durationMs = execution.endTime - execution.startTime;
   const duration = msToDuration(durationMs);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-  return durationFormatter.format(duration);
+  return formatDuration(duration);
 }
 
 export function durationOfTask(task: SummaryTask) {
