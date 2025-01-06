@@ -7,8 +7,6 @@ import type FileService from 'turborepo-summary-analyzer/services/file';
 import { handleDrop, preventDefaults } from './drop-utils';
 import { assert } from '@ember/debug';
 
-import { cell } from 'ember-resources';
-
 export class DocumentDrop extends Component {
   @service declare file: FileService;
 

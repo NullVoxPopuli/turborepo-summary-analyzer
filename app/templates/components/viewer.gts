@@ -28,7 +28,6 @@ export class Viewer extends Component {
   <template>
     <h2>{{this.file.fileName}}</h2>
 
-    {{log this.file.current}}
     <OverallSummary @execution={{this.execution}} @tasks={{this.tasks}} />
     <Timeline @tasks={{this.tasks}} />
     <br />

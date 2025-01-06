@@ -1,5 +1,4 @@
 import Service from '@ember/service';
-import { tracked } from '@glimmer/tracking';
 import type { SummaryFile } from 'turborepo-summary-analyzer/types';
 import { readFileToJSON } from 'turborepo-summary-analyzer/utils';
 
