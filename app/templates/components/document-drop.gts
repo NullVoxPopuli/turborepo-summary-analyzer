@@ -25,6 +25,8 @@ export class DocumentDrop extends Component {
       this.isDropping = true;
     };
     const cancel = (event: Event) => {
+      preventDefaults(event);
+
       if (event.target === html) {
         this.isDropping = false;
       }
@@ -57,8 +59,6 @@ export class DocumentDrop extends Component {
       dropEvent
     );
 
-    console.log({ fileData });
-
     this.isDropping = false;
     if (!fileData) return;
 
@@ -68,20 +68,26 @@ export class DocumentDrop extends Component {
   <template>
     {{#if this.isDropping}}
       <div class="drop-on-document">
-        Drop files here to analyze
+        <p>
+          Drop files here to analyze
+        </p>
       </div>
     {{/if}}
 
-    {{! prettier-ignore }}
     <style>
       .drop-on-document {
         user-select: none;
         position: fixed;
         z-index: 10000;
         inset: 0.5rem;
-        border: 2px dashed;
+        border: 4px dashed;
         border-radius: 2rem;
-        background: rgba(255, 255, 255, 0.9);
+        background: var(--page-bg);
+        opacity: 0.95;
+        font-size: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     </style>
   </template>

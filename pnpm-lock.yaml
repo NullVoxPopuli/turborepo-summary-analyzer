@@ -23,6 +23,9 @@ importers:
       ember-primitives:
         specifier: ^0.27.2
         version: 0.27.2(lstug7dopfbhfp5vmr5xpimwcm)
+      ember-resources:
+        specifier: ^7.0.3
+        version: 7.0.3(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glimmer/tracking@1.1.2)(@glint/template@1.4.1-unstable.34c4510)(ember-source@6.1.0(@glimmer/component@1.1.2(@babel/core@7.26.0))(@glint/template@1.4.1-unstable.34c4510)(rsvp@4.8.5)(webpack@5.97.1))
       idb:
         specifier: ^8.0.1
         version: 8.0.1

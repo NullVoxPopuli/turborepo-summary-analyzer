@@ -89,7 +89,7 @@ export class FileDropZone extends Component {
           padding: 3rem;
 
           &.drag-over {
-            background: #eee;
+            background: var(--page-bg);
           }
         }
       }
