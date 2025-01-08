@@ -1,7 +1,8 @@
 # turborepo-summary-analyzer
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+a turborepo summary visualizer and analyzer
+
+all ideas welcome!
 
 ## Prerequisites
 
