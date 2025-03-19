@@ -1,14 +1,10 @@
 {
   "extends": "@tsconfig/ember/tsconfig.json",
-  "include": [
-    "app", "tests", "types"
+  "plugins": [
+    {
+      "name": "@glint/tsserver-plugin"
+    }
   ],
-  "glint": {
-    "environment": [
-      "ember-loose",
-      "ember-template-imports"
-    ]
-  },
   "compilerOptions": {
     "target": "esnext",
     "allowJs": true,
@@ -28,6 +24,8 @@
       can do the proper transformations on those files.
     */
     "allowImportingTsExtensions": true,
+
+
     "paths": {
       "turborepo-summary-analyzer/tests/*": [
         "./tests/*"
@@ -40,7 +38,9 @@
       ]
     },
     "types": [
-      "ember-source/types"
+      "vite/client",
+      "ember-source/types",
+      "@embroider/core/virtual"
     ]
   },
 }
