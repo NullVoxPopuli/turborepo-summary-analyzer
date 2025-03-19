@@ -1,10 +1,8 @@
 {
   "extends": "@tsconfig/ember/tsconfig.json",
-  "plugins": [
-    {
-      "name": "@glint/tsserver-plugin"
-    }
-  ],
+  "glint": {
+    "environment": ["ember-template-imports"]
+  },
   "compilerOptions": {
     "target": "esnext",
     "allowJs": true,
