@@ -1426,7 +1426,7 @@ packages:
       typescript: '>=4.8.0'
 
   '@glint/core@file:../../OpenSource/glint/dist/glint-core-1.4.0.tgz':
-    resolution: {integrity: sha512-oYIvMQJEv6WazHFc2sQBvKHdkyZ5uuyug0jlD4EUx+zBNxQenE92JwkmEKNti3xGIwNCcJA2/zAK43JGczrNYg==, tarball: file:../../OpenSource/glint/dist/glint-core-1.4.0.tgz}
+    resolution: {integrity: sha512-lPdyKdgErU9RO+bgIP5AkM2X2HuSzb/iV+IkSfQZMlsxBfsCbzL00+SKldaqFJvU6gqHnla+N2X4XpYsbf5jFQ==, tarball: file:../../OpenSource/glint/dist/glint-core-1.4.0.tgz}
     version: 1.4.0
     hasBin: true
     peerDependencies:
@@ -1461,7 +1461,7 @@ packages:
         optional: true
 
   '@glint/environment-ember-template-imports@file:../../OpenSource/glint/dist/glint-environment-ember-template-imports-1.4.0.tgz':
-    resolution: {integrity: sha512-c7HP5kylwfyszlK777XKXN5iRhP96pslOdyvoeclb+e94XGLFMBgccaqTKzuRgVqrJxpq0+E/APg7p49Vrmgsg==, tarball: file:../../OpenSource/glint/dist/glint-environment-ember-template-imports-1.4.0.tgz}
+    resolution: {integrity: sha512-rnqtC1PvGh5ics/NlTybHto4Kums58ZSIQQ/G/9GT9QZ13ZMBAuD9/E4q3hYcVC07JOy+5SaLt1380pBGqVwrA==, tarball: file:../../OpenSource/glint/dist/glint-environment-ember-template-imports-1.4.0.tgz}
     version: 1.4.0
     peerDependencies:
       '@glint/core': '*'
@@ -1472,7 +1472,7 @@ packages:
     resolution: {integrity: sha512-fA9FoHCmWsWkoOKWshsOQlS0WCAM7NwwoaeSTHuz5yHvBZmmtkgx3t2SPOTJs85/hWTNVzYC/Gthw7xDUR3BlQ==}
 
   '@glint/tsserver-plugin@file:../../OpenSource/glint/dist/glint-tsserver-plugin-1.4.0.tgz':
-    resolution: {integrity: sha512-jCW7q48lkXkIIIQHgQ8cuS7PZpGAG+/xbTZWhuv7nxFChZtV3PPhcSBgxXZI2dFi6SU90VxL6NN2P68bPxYIJA==, tarball: file:../../OpenSource/glint/dist/glint-tsserver-plugin-1.4.0.tgz}
+    resolution: {integrity: sha512-Ohkt6YMQ6juUr7fbhHlikSShFobbpoyYlHKXvw09CAnHWGq1SuBgZ+u9RCU16BImAiD98kapJB1TQq5zW0IyiQ==, tarball: file:../../OpenSource/glint/dist/glint-tsserver-plugin-1.4.0.tgz}
     version: 1.4.0
 
   '@handlebars/parser@2.0.0':
@@ -12044,7 +12044,7 @@ snapshots:
   eslint-compat-utils@0.5.1(eslint@9.22.0(jiti@2.4.2)):
     dependencies:
       eslint: 9.22.0(jiti@2.4.2)
-      semver: 7.6.3
+      semver: 7.7.1
 
   eslint-config-prettier@9.1.0(eslint@9.22.0(jiti@2.4.2)):
     dependencies:

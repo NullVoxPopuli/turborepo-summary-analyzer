@@ -109,5 +109,8 @@
     "ember-primitives": "^0.28.1",
     "ember-resources": "^7.0.3",
     "idb": "^8.0.1"
+  },
+  "pnpm": {
+    "overrides": {}
   }
 }
