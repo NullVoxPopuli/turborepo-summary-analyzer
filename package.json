@@ -65,6 +65,7 @@
     "typescript": "~5.8.2",
     "vite": "^6.2.4"
   },
+  "packageManager": "pnpm@10.6.1",
   "engines": {
     "node": ">= 20"
   },
