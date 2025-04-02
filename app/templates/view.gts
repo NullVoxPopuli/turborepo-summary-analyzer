@@ -4,5 +4,7 @@ import { DocumentDrop } from './components/document-drop';
 
 <template>
   <Viewer />
+
+  hello
   <DocumentDrop />
 </template>

@@ -88,7 +88,9 @@
     "ember-element-helper": "^0.8.6",
     "ember-primitives": "^0.29.0",
     "ember-resources": "^7.0.3",
-    "idb": "^8.0.1"
+    "idb": "^8.0.1",
+    "vite-plugin-buildtime": "link:../vite-plugin-buildtime",
+    "vite-plugin-inspect": "^11.0.0"
   },
   "pnpm": {
     "overrides": {
@@ -96,7 +98,8 @@
       "ember-source": "^6.3.0",
       "@glint/core": "$@glint/core",
       "@glint/template": "$@glint/template",
-      "@glint/environment-ember-template-imports": "$@glint/environment-ember-template-imports"
+      "@glint/environment-ember-template-imports": "$@glint/environment-ember-template-imports",
+      "vite-plugin-buildtime": "link:../vite-plugin-buildtime"
     },
     "peerDependencyRules": {
       "ignoreMissing": [

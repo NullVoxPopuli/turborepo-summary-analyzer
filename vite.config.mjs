@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite';
-import { extensions, classicEmberSupport, ember } from '@embroider/vite';
+import { extensions, ember } from '@embroider/vite';
 import { babel } from '@rollup/plugin-babel';
+import { buildTime } from 'vite-plugin-buildtime';
+
+import Inspect from 'vite-plugin-inspect';
 
 const load = Date.now();
 function time() {
@@ -38,6 +41,13 @@ function time() {
 const tracking = `${process.cwd()}/node_modules/ember-source/dist/packages/@glimmer/tracking/index.js`;
 const cache = `${process.cwd()}/node_modules/ember-source/dist/packages/@glimmer/tracking/primitives/cache.js`;
 
+const data = new WeakMap();
+const sets = new Set();
+
+let lastStart;
+let finishedBoot = false;
+let lastUpdate;
+
 export default defineConfig({
   resolve: {
     alias: {
@@ -49,49 +59,12 @@ export default defineConfig({
     },
   },
   plugins: [
+    // _inspect
+    Inspect(),
+    buildTime((data) => {
+      console.log(data);
+    }),
     ember(),
-    {
-      name: 'build-time-reporter',
-      // 1. start
-      configResolved() {
-        console.log('configResolved', time());
-      },
-      // 2. start
-      options() {
-        console.log('options', time());
-      },
-      // 3. start
-      configureServer() {
-        console.log('configureServer', time());
-      },
-      // 4. start
-      buildStart() {
-        console.log('buildStart', time());
-      },
-      // 5. post-start, after prebuild finishes
-      //   -> waiting for browser access
-      handleHotUpdate() {
-        console.log('handleHotUpdate', time());
-      },
-      buildEnd() {
-        console.log('buildEnd', time());
-      },
-      closeBundle() {
-        console.log('closeBundle', time());
-      },
-      generateBundle() {
-        console.log('generateBundle', time());
-      },
-      // On page load: twice
-      // - on file change, this also prints twice
-      transformIndexHtml() {
-        console.log('transformIndexHtml', time());
-      },
-      configurePreviewServer() {
-        console.log('configurePreviewServer', time());
-      },
-    },
-    // extra plugins here
     babel({
       babelHelpers: 'runtime',
       extensions,
