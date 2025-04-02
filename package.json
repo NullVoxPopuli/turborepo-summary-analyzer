@@ -38,7 +38,7 @@
     "@glimmer/component": "^2.0.0",
     "@glint/core": "file:../../OpenSource/glint/dist/glint-core-1.4.0.tgz",
     "@glint/environment-ember-template-imports": "file:../../OpenSource/glint/dist/glint-environment-ember-template-imports-1.4.0.tgz",
-    "@glint/template": "1.5.2",
+    "@glint/template": "file:../../OpenSource/glint/dist/glint-template-1.4.0.tgz",
     "@glint/tsserver-plugin": "file:../../OpenSource/glint/dist/glint-tsserver-plugin-1.4.0.tgz",
     "@rollup/plugin-babel": "^6.0.4",
     "@tsconfig/ember": "^3.0.10",
@@ -92,7 +92,10 @@
   "pnpm": {
     "overrides": {
       "@glimmer/component": "^2.0.0",
-      "ember-source": "^6.3.0"
+      "ember-source": "^6.3.0",
+      "@glint/core": "$@glint/core",
+      "@glint/template": "$@glint/template",
+      "@glint/environment-ember-template-imports": "$@glint/environment-ember-template-imports"
     },
     "peerDependencyRules": {
       "ignoreMissing": [
