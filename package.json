@@ -37,6 +37,7 @@
     "@embroider/vite": "alpha",
     "@glimmer/component": "^2.0.0",
     "@glint/core": "file:../../OpenSource/glint/dist/glint-core-1.4.0.tgz",
+    "@glint/environment-ember-loose": "file:../../OpenSource/glint/dist/glint-environment-ember-loose-1.4.0.tgz",
     "@glint/environment-ember-template-imports": "file:../../OpenSource/glint/dist/glint-environment-ember-template-imports-1.4.0.tgz",
     "@glint/template": "file:../../OpenSource/glint/dist/glint-template-1.4.0.tgz",
     "@glint/tsserver-plugin": "file:../../OpenSource/glint/dist/glint-tsserver-plugin-1.4.0.tgz",
@@ -98,6 +99,7 @@
       "ember-source": "^6.3.0",
       "@glint/core": "$@glint/core",
       "@glint/template": "$@glint/template",
+      "@glint/environment-ember-loose": "$@glint/environment-ember-loose",
       "@glint/environment-ember-template-imports": "$@glint/environment-ember-template-imports",
       "vite-plugin-buildtime": "link:../vite-plugin-buildtime"
     },
