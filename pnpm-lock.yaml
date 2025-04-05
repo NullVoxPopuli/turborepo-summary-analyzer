@@ -1214,14 +1214,14 @@ packages:
     resolution: {integrity: sha512-A+Cp5m6vZMAEu0Kg/YwU2dJZXyYxVJs2zI57d3CP6NctmX7FsT8WjViiRUmt5abVmMmRH5b8BUovqY6GSMAdrw==}
 
   '@glint/core@file:../../OpenSource/glint/dist/glint-core-1.4.0.tgz':
-    resolution: {integrity: sha512-4iE2Kuzj5v8gJZFTHyAac5uKvYWugX47YWYqKvKxaKxQaEwICIIG2kgT2dhAra6Tihyj1df4r+84N7KoLfV5eg==, tarball: file:../../OpenSource/glint/dist/glint-core-1.4.0.tgz}
+    resolution: {integrity: sha512-p9ssHacCpjWApXbxJBVPxsiAK3pEI6FKNrQl8U2IWh4o8t75lYaikn96oVlrahgSCK0mY5xIyIGfEuR9D0RYuA==, tarball: file:../../OpenSource/glint/dist/glint-core-1.4.0.tgz}
     version: 1.4.0
     hasBin: true
     peerDependencies:
       typescript: '>=5.6.0'
 
   '@glint/environment-ember-loose@file:../../OpenSource/glint/dist/glint-environment-ember-loose-1.4.0.tgz':
-    resolution: {integrity: sha512-JtQYBYkNSsUdoAodZLn+J5q2lQM5N/DGDrtLUOQMAvjdxfkfeS54+f+bw868Us8txTeQjvVdvijf44a8vbAv9A==, tarball: file:../../OpenSource/glint/dist/glint-environment-ember-loose-1.4.0.tgz}
+    resolution: {integrity: sha512-T9252Xysj9p8jUVj1qKAR/J6vc+WoKGmDhwTYxZbTB8RVrHSfGjB9/o5zw7vLI0R42UQuhyP2uq6+OkzQpZ3rQ==, tarball: file:../../OpenSource/glint/dist/glint-environment-ember-loose-1.4.0.tgz}
     version: 1.4.0
     peerDependencies:
       '@glimmer/component': ^2.0.0
@@ -1236,7 +1236,7 @@ packages:
         optional: true
 
   '@glint/environment-ember-template-imports@file:../../OpenSource/glint/dist/glint-environment-ember-template-imports-1.4.0.tgz':
-    resolution: {integrity: sha512-rnqtC1PvGh5ics/NlTybHto4Kums58ZSIQQ/G/9GT9QZ13ZMBAuD9/E4q3hYcVC07JOy+5SaLt1380pBGqVwrA==, tarball: file:../../OpenSource/glint/dist/glint-environment-ember-template-imports-1.4.0.tgz}
+    resolution: {integrity: sha512-IiNBV1itai1Sry3Dj+dbz+pDSLmQ93UM30rgpJ2c0pOzTrkLijFpTtWGQ8tKvJphF0FxH9K5IET3jF4aJB2ngw==, tarball: file:../../OpenSource/glint/dist/glint-environment-ember-template-imports-1.4.0.tgz}
     version: 1.4.0
     peerDependencies:
       '@glint/core': '*'
@@ -1244,11 +1244,11 @@ packages:
       '@glint/template': '*'
 
   '@glint/template@file:../../OpenSource/glint/dist/glint-template-1.4.0.tgz':
-    resolution: {integrity: sha512-OJy6boZZ5aUT5Ahf7S3zjsfFQ410fXljpf2C85xYg6ALyYWOa28pgYFiiNYkS1r0PJDY5f8vQ/qlzIZmqDz2Uw==, tarball: file:../../OpenSource/glint/dist/glint-template-1.4.0.tgz}
+    resolution: {integrity: sha512-WqJ6b6ckyIkrNri6yVnCKpEwdiu5vSs+r7wJ0pxEyJZ8b0sTnvDoaU6OSjpQ9i8olePRoFWrH51W0jqDshuCng==, tarball: file:../../OpenSource/glint/dist/glint-template-1.4.0.tgz}
     version: 1.4.0
 
   '@glint/tsserver-plugin@file:../../OpenSource/glint/dist/glint-tsserver-plugin-1.4.0.tgz':
-    resolution: {integrity: sha512-Qvp8q95my/BD1aiO69MGUVEC3ohVwLnFssGoRRE9lfdp26s7W+VZ0itKmnHqdCPWaQuugtw/7zgsfbisyY/HSw==, tarball: file:../../OpenSource/glint/dist/glint-tsserver-plugin-1.4.0.tgz}
+    resolution: {integrity: sha512-FNXuX327pqEqos3Spmb4ow1w25V9rNERvJ8J4Cj7BWBIsIyG3jYELvQmR6VjJuNZqnjNN0DTx6sHZKn4jZlhHQ==, tarball: file:../../OpenSource/glint/dist/glint-tsserver-plugin-1.4.0.tgz}
     version: 1.4.0
 
   '@handlebars/parser@2.0.0':
