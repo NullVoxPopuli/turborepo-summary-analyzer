@@ -1,14 +1,14 @@
 import { defineConfig } from 'vite';
 import { extensions, ember } from '@embroider/vite';
 import { babel } from '@rollup/plugin-babel';
-import { buildTime } from 'vite-plugin-buildtime';
+// import { buildTime } from 'vite-plugin-buildtime';
 
-import Inspect from 'vite-plugin-inspect';
+// import Inspect from 'vite-plugin-inspect';
 
-const load = Date.now();
-function time() {
-  return Date.now() - load;
-}
+// const load = Date.now();
+// function time() {
+//   return Date.now() - load;
+// }
 
 /**
  * On boot
@@ -41,12 +41,12 @@ function time() {
 const tracking = `${process.cwd()}/node_modules/ember-source/dist/packages/@glimmer/tracking/index.js`;
 const cache = `${process.cwd()}/node_modules/ember-source/dist/packages/@glimmer/tracking/primitives/cache.js`;
 
-const data = new WeakMap();
-const sets = new Set();
+// const data = new WeakMap();
+// const sets = new Set();
 
-let lastStart;
-let finishedBoot = false;
-let lastUpdate;
+// let lastStart;
+// let finishedBoot = false;
+// let lastUpdate;
 
 export default defineConfig({
   resolve: {
@@ -60,10 +60,10 @@ export default defineConfig({
   },
   plugins: [
     // _inspect
-    Inspect(),
-    buildTime((data) => {
-      console.log(data);
-    }),
+    // Inspect(),
+    // buildTime((data) => {
+    //   console.log(data);
+    // }),
     ember(),
     babel({
       babelHelpers: 'runtime',
