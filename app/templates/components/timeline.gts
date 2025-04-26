@@ -99,11 +99,11 @@ export class Timeline extends Component<{
           y: (d: SummaryTask) => d.taskId,
           tip: true,
           title: (d: SummaryTask) => {
-            let title = `${d.package} >> ${d.task}\n ${taskDuration(d)}\n`;
+            let title = `${d.package} >> ${d.task}\n\n${taskDuration(d)}`;
 
             if (d.dependencies.length) {
-              title += '\n';
-              title += `Dependencies: \n${d.dependencies.join('\n')}`;
+              title += '\n\n';
+              title += `Dependencies: \n${d.dependencies.map(x => '\t' + x).join('\n')}`;
             }
 
             return title;
