@@ -53,15 +53,26 @@ export class Timeline extends Component<{
       return colorSpace(select);
     };
 
+      const longestLabel = this.args.tasks
+    .map((task) => {
+      const info = this.byId.get(task.taskId);
+      return info ? `${info.package} >> ${info.task}` : task.taskId;
+    })
+    .reduce((longest, label) => (label.length > longest.length ? label : longest), '');
+
+  const leftMargin =(longestLabel.length * 5) + 20;
+
     const plot = Plot.plot({
       height: box.height,
       width: box.width,
+      marginLeft: leftMargin,
+
       color: {
-        // type: 'linear',
         range: this.groups.map((group) => getColor(group)),
         interpolate: 'hcl',
-        // domain: this.groups,
-        legend: true,
+        // we use y-axis labels instead of a legend, for clarity,
+        // (since there can be many many tasks)
+        legend: false,
       },
       x: {
         grid: true,
@@ -69,8 +80,11 @@ export class Timeline extends Component<{
       },
       y: {
         grid: false,
-        // tickFormat: (t) => this.byId.get(t)?.taskId,
-        tickFormat: null,
+        tickFormat: (taskId: string) => {
+          const info = this.byId.get(taskId);
+
+          return info ? `${info.package} >> ${info.task}` : taskId;
+        },
         axis: 'left',
         label: null,
       },
@@ -79,8 +93,6 @@ export class Timeline extends Component<{
         Plot.barX(this.args.tasks, {
           fill: 'package',
           stroke: 'package',
-          // fill: (d) => getColor(d.package),
-          // stroke: (d) => getColor(d.package),
           fillOpacity: 0.6,
           x1: (d: SummaryTask) => d.execution.startTime,
           x2: (d: SummaryTask) => d.execution.endTime,
