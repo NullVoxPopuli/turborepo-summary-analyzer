@@ -62,8 +62,14 @@ export class Timeline extends Component<{
 
   const leftMargin =(longestLabel.length * 5) + 20;
 
+
+  // Calculate dynamic height based on the number of tasks
+  const rowHeight = 24; // Height per row in pixels
+  const dynamicHeight = Math.max(75 * window.innerHeight / 100, this.args.tasks.length * rowHeight);
+
+
     const plot = Plot.plot({
-      height: box.height,
+      height: dynamicHeight,
       width: box.width,
       marginLeft: leftMargin,
 
@@ -148,6 +154,6 @@ export class Timeline extends Component<{
 
   <template>
     {{! template-lint-disable no-inline-styles }}
-    <div style="width: 100%; height: 75dvh;" {{this.chart}}></div>
+    <div style="width: 100%; min-height: 75dvh;" {{this.chart}}></div>
   </template>
 }
