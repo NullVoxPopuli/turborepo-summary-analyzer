@@ -147,6 +147,7 @@ export class Timeline extends Component<{
   });
 
   <template>
+    {{! template-lint-disable no-inline-styles }}
     <div style="width: 100%; height: 75dvh;" {{this.chart}}></div>
   </template>
 }

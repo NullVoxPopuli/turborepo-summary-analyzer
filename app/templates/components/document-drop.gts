@@ -36,6 +36,7 @@ export class DocumentDrop extends Component {
     html.addEventListener('dropenter', preventDefaults);
     html.addEventListener('dragleave', cancel);
     html.addEventListener('dragend', cancel);
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     html.addEventListener('drop', this.handleDrop);
 
     registerDestructor(this, () => {
@@ -43,6 +44,7 @@ export class DocumentDrop extends Component {
       html.removeEventListener('dragover', start);
       html.removeEventListener('dragleave', cancel);
       html.removeEventListener('dragend', cancel);
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       html.removeEventListener('drop', this.handleDrop);
     });
   }
