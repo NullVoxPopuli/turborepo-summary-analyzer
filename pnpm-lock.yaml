@@ -42,9 +42,6 @@ importers:
       idb:
         specifier: ^8.0.1
         version: 8.0.2
-      vite-plugin-buildtime:
-        specifier: link:../vite-plugin-buildtime
-        version: link:../vite-plugin-buildtime
       vite-plugin-inspect:
         specifier: ^11.0.0
         version: 11.0.0(4af791565b6bbfbb594af7de6d13ad7a)
@@ -89,19 +86,19 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@glint/core':
-        specifier: unstable
+        specifier: 1.4.1-unstable.d17c1f1
         version: 1.4.1-unstable.d17c1f1(typescript@5.8.2)
       '@glint/environment-ember-loose':
-        specifier: unstable
+        specifier: 1.4.1-unstable.d17c1f1
         version: 1.4.1-unstable.d17c1f1(63f6e3b52ab8f9e16cfb641dfccbaeaa)
       '@glint/environment-ember-template-imports':
-        specifier: unstable
+        specifier: 1.4.1-unstable.d17c1f1
         version: 1.4.1-unstable.d17c1f1(b46cc844a453734ec57082e26b07a77e)
       '@glint/template':
-        specifier: unstable
+        specifier: 1.4.1-unstable.d17c1f1
         version: 1.4.1-unstable.d17c1f1
       '@glint/tsserver-plugin':
-        specifier: unstable
+        specifier: 1.4.1-unstable.d17c1f1
         version: 1.4.1-unstable.d17c1f1
       '@rollup/plugin-babel':
         specifier: ^6.0.4
@@ -6210,8 +6207,8 @@ packages:
       '@volar/language-service':
         optional: true
 
-  vscode-html-languageservice@5.3.3:
-    resolution: {integrity: sha512-AK/jJM0VIWRrlfqkDBMZxNMnxYT5I2uoMVRoNJ5ePSplnSaT9mbYjqJlxxeLvUrOW7MEH0vVIDzU48u44QZE0w==}
+  vscode-html-languageservice@5.4.0:
+    resolution: {integrity: sha512-9/cbc90BSYCghmHI7/VbWettHZdC7WYpz2g5gBK6UDUI1MkZbM773Q12uAYJx9jzAiNHPpyo6KzcwmcnugncAQ==}
 
   vscode-jsonrpc@8.2.0:
     resolution: {integrity: sha512-C+r0eKJUIfiDIfwJhria30+TYWPtuHJXHtI7J0YlOmKAo7ogxP20T0zxB7HZQIFhIyvoBPwWskjxrvAtfjyZfA==}
@@ -13847,7 +13844,7 @@ snapshots:
 
   volar-service-html@0.0.64(@volar/language-service@2.4.12):
     dependencies:
-      vscode-html-languageservice: 5.3.3
+      vscode-html-languageservice: 5.4.0
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
     optionalDependencies:
@@ -13864,7 +13861,7 @@ snapshots:
     optionalDependencies:
       '@volar/language-service': 2.4.12
 
-  vscode-html-languageservice@5.3.3:
+  vscode-html-languageservice@5.4.0:
     dependencies:
       '@vscode/l10n': 0.0.18
       vscode-languageserver-textdocument: 1.0.12
