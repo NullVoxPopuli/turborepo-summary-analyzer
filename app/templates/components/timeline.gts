@@ -97,6 +97,7 @@ export class Timeline extends Component<{
           x1: (d: SummaryTask) => d.execution.startTime,
           x2: (d: SummaryTask) => d.execution.endTime,
           y: (d: SummaryTask) => d.taskId,
+          tip: true,
           title: (d: SummaryTask) => {
             let title = `${d.package} >> ${d.task}\n ${taskDuration(d)}\n`;
 

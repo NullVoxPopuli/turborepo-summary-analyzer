@@ -122,3 +122,8 @@ main {
 .centered {
   margin: 0 auto;
 }
+
+g[aria-label="tip"] {
+  fill: var(--page-bg);
+  color: var(--page-font);
+}
