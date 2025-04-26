@@ -1,4 +1,3 @@
-import Route from 'ember-route-template';
 import { pageTitle } from 'ember-page-title';
 import { colorScheme } from 'ember-primitives/color-scheme';
 
@@ -14,19 +13,17 @@ function syncColorScheme() {
   }
 }
 
-export default Route(
-  <template>
-    {{pageTitle "Analyze Turbo Summary Files"}}
-    {{(syncColorScheme)}}
+<template>
+  {{pageTitle "Analyze Turbo Summary Files"}}
+  {{(syncColorScheme)}}
 
-    <div class="layout">
-      <Header />
+  <div class="layout">
+    <Header />
 
-      <main>
+    <main>
 
-        {{outlet}}
+      {{outlet}}
 
-      </main>
-    </div>
-  </template>
-);
+    </main>
+  </div>
+</template>

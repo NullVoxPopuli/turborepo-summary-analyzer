@@ -53,15 +53,32 @@ export class Timeline extends Component<{
       return colorSpace(select);
     };
 
+      const longestLabel = this.args.tasks
+    .map((task) => {
+      const info = this.byId.get(task.taskId);
+      return info ? `${info.package} >> ${info.task}` : task.taskId;
+    })
+    .reduce((longest, label) => (label.length > longest.length ? label : longest), '');
+
+  const leftMargin =(longestLabel.length * 5) + 20;
+
+
+  // Calculate dynamic height based on the number of tasks
+  const rowHeight = 24; // Height per row in pixels
+  const dynamicHeight = Math.max(75 * window.innerHeight / 100, this.args.tasks.length * rowHeight);
+
+
     const plot = Plot.plot({
-      height: box.height,
+      height: dynamicHeight,
       width: box.width,
+      marginLeft: leftMargin,
+
       color: {
-        // type: 'linear',
         range: this.groups.map((group) => getColor(group)),
         interpolate: 'hcl',
-        // domain: this.groups,
-        legend: true,
+        // we use y-axis labels instead of a legend, for clarity,
+        // (since there can be many many tasks)
+        legend: false,
       },
       x: {
         grid: true,
@@ -69,8 +86,11 @@ export class Timeline extends Component<{
       },
       y: {
         grid: false,
-        // tickFormat: (t) => this.byId.get(t)?.taskId,
-        tickFormat: null,
+        tickFormat: (taskId: string) => {
+          const info = this.byId.get(taskId);
+
+          return info ? `${info.package} >> ${info.task}` : taskId;
+        },
         axis: 'left',
         label: null,
       },
@@ -79,18 +99,17 @@ export class Timeline extends Component<{
         Plot.barX(this.args.tasks, {
           fill: 'package',
           stroke: 'package',
-          // fill: (d) => getColor(d.package),
-          // stroke: (d) => getColor(d.package),
           fillOpacity: 0.6,
           x1: (d: SummaryTask) => d.execution.startTime,
           x2: (d: SummaryTask) => d.execution.endTime,
           y: (d: SummaryTask) => d.taskId,
+          tip: true,
           title: (d: SummaryTask) => {
-            let title = `${d.package} >> ${d.task}\n ${taskDuration(d)}\n`;
+            let title = `${d.package} >> ${d.task}\n\n${taskDuration(d)}`;
 
             if (d.dependencies.length) {
-              title += '\n';
-              title += `Dependencies: \n${d.dependencies.join('\n')}`;
+              title += '\n\n';
+              title += `Dependencies: \n${d.dependencies.map(x => '\t' + x).join('\n')}`;
             }
 
             return title;
@@ -134,6 +153,7 @@ export class Timeline extends Component<{
   });
 
   <template>
-    <div style="width: 100%; height: 75dvh;" {{this.chart}}></div>
+    {{! template-lint-disable no-inline-styles }}
+    <div style="width: 100%; min-height: 75dvh;" {{this.chart}}></div>
   </template>
 }

@@ -1,10 +1,8 @@
-import Route from 'ember-route-template';
-import { Viewer } from './components/viewer';
+import { Viewer } from './components/viewer.gts';
+
 import { DocumentDrop } from './components/document-drop';
 
-export default Route(
-  <template>
-    <Viewer />
-    <DocumentDrop />
-  </template>
-);
+<template>
+  <Viewer />
+  <DocumentDrop />
+</template>
