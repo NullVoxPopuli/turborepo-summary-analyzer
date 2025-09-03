@@ -15,7 +15,8 @@ export const Header = <template>
         GitHub
         <Arrow />
       </ExternalLink>
-      <a href="/import">Load Summary File</a>
+      <a href="/import">Analyze Summary File</a>
+      <a href="/compare">Compare Summaries</a>
     </div>
 
     <div>
