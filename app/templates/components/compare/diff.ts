@@ -9,6 +9,7 @@ export interface DiffEntry {
   left: unknown;
   right: unknown;
   kind: DiffKind;
+  children?: DiffEntry[];
 }
 
 interface DiffOptions {
@@ -23,26 +24,21 @@ export function diffJSON(
   right: unknown,
   { maxDepth = 8 }: DiffOptions = {}
 ): DiffEntry[] {
-  const results: DiffEntry[] = [];
-
-  function walk(l: unknown, r: unknown, path: string, depth: number) {
+  function walk(l: unknown, r: unknown, path: string, depth: number): DiffEntry {
     if (depth > maxDepth) {
-      // treat as changed when exceeding depth to avoid large output
-      if (l !== r) {
-        results.push({ path, left: l, right: r, kind: 'changed' });
-      } else {
-        results.push({ path, left: l, right: r, kind: 'same' });
-      }
-      return;
+      return {
+        path,
+        left: l,
+        right: r,
+        kind: l === r ? 'same' : 'changed',
+      };
     }
 
     if (l === undefined && r !== undefined) {
-      results.push({ path, left: undefined, right: r, kind: 'added' });
-      return;
+      return { path, left: undefined, right: r, kind: 'added' };
     }
     if (l !== undefined && r === undefined) {
-      results.push({ path, left: l, right: undefined, kind: 'removed' });
-      return;
+      return { path, left: l, right: undefined, kind: 'removed' };
     }
 
     // primitives
@@ -50,56 +46,77 @@ export function diffJSON(
       typeof l !== 'object' || l === null ||
       typeof r !== 'object' || r === null
     ) {
-      results.push({ path, left: l, right: r, kind: l === r ? 'same' : 'changed' });
-      return;
+      return { path, left: l, right: r, kind: l === r ? 'same' : 'changed' };
     }
 
     // arrays
     if (Array.isArray(l) && Array.isArray(r)) {
       const max = Math.max(l.length, r.length);
+      const children: DiffEntry[] = [];
       for (let i = 0; i < max; i++) {
-        walk(l[i], r[i], `${path}[${i}]`, depth + 1);
+        children.push(walk(l[i], r[i], `${path}[${i}]`, depth + 1));
       }
-      return;
+      return {
+        path,
+        left: l,
+        right: r,
+        kind: 'same', // parent node, children will show diffs
+        children,
+      };
     }
     if (Array.isArray(l) && !Array.isArray(r)) {
-      results.push({ path, left: l, right: r, kind: 'changed' });
-      return;
+      return { path, left: l, right: r, kind: 'changed' };
     }
     if (!Array.isArray(l) && Array.isArray(r)) {
-      results.push({ path, left: l, right: r, kind: 'changed' });
-      return;
+      return { path, left: l, right: r, kind: 'changed' };
     }
 
     // objects
     if (isObject(l) && isObject(r)) {
       const keys = new Set([...Object.keys(l), ...Object.keys(r)]);
+      const children: DiffEntry[] = [];
       for (const key of keys) {
         // Indexing with key yields unknown; acceptable for recursive diff.
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
         const lVal: unknown = (l as any)[key];
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
         const rVal: unknown = (r as any)[key];
-        walk(lVal, rVal, path ? `${path}.${key}` : key, depth + 1);
+        children.push(walk(lVal, rVal, path ? `${path}.${key}` : key, depth + 1));
       }
-      return;
+      return {
+        path,
+        left: l,
+        right: r,
+        kind: 'same', // parent node, children will show diffs
+        children,
+      };
     }
 
     // fallback
-    results.push({ path, left: l, right: r, kind: l === r ? 'same' : 'changed' });
+    return { path, left: l, right: r, kind: l === r ? 'same' : 'changed' };
   }
 
-  walk(left, right, '', 0);
-
-  return results;
+  // Recursively flatten all diff entries for summary and rendering
+  function flatten(entry: DiffEntry): DiffEntry[] {
+    if (!entry.children || entry.children.length === 0) {
+      return [entry];
+    }
+    // Include parent node only if it's not 'same' or if it has no children
+    const childEntries = entry.children.flatMap(flatten);
+    if (entry.kind !== 'same') {
+      return [entry, ...childEntries];
+    }
+    return childEntries;
+  }
+  const root = walk(left, right, '', 0);
+  return flatten(root);
 }
 
 export function summarizeDiff(entries: DiffEntry[]) {
-  return entries.reduce(
-    (acc, e) => {
-      acc[e.kind]++;
-      return acc;
-    },
-    { added: 0, removed: 0, changed: 0, same: 0 }
-  );
+  // Summarize all entries, including children
+  const summary = { added: 0, removed: 0, changed: 0, same: 0 };
+  for (const e of entries) {
+    summary[e.kind]++;
+  }
+  return summary;
 }

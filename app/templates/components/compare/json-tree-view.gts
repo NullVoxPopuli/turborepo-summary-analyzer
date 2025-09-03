@@ -1,5 +1,6 @@
 import JsonTreeNode from './json-tree-node.gts';
 
+
 <template>
   <ul class="json-tree-view">
     {{#each @diff as |entry|}}
