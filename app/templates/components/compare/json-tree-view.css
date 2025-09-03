@@ -1,0 +1,158 @@
+.json-tree-view {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  background: #1e1e1e;
+  border-radius: 4px;
+  padding: 1rem;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.no-changes {
+  color: #888;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+}
+
+.tree-node {
+  margin: 2px 0;
+}
+
+.tree-line {
+  display: flex;
+  align-items: flex-start;
+  padding: 2px 0;
+  border-radius: 2px;
+}
+
+.tree-line:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.toggle {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  user-select: none;
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+}
+
+.toggle:hover {
+  color: #aaa;
+}
+
+.toggle.expandable {
+  color: #888;
+}
+
+.key {
+  color: #9cdcfe;
+  margin-right: 8px;
+  font-weight: 500;
+}
+
+.colon {
+  color: #d4d4d4;
+  margin-right: 8px;
+}
+
+.value {
+  flex: 1;
+  min-width: 0;
+}
+
+.value-same {
+  color: #d4d4d4;
+}
+
+.value-added {
+  color: #4ec9b0;
+  background: rgba(78, 201, 176, 0.1);
+  border-left: 3px solid #4ec9b0;
+  padding-left: 6px;
+}
+
+.value-removed {
+  color: #f48771;
+  background: rgba(244, 135, 113, 0.1);
+  border-left: 3px solid #f48771;
+  padding-left: 6px;
+  text-decoration: line-through;
+}
+
+.added-wrapper {
+  color: #4ec9b0;
+  background: rgba(78, 201, 176, 0.1);
+  border-left: 3px solid #4ec9b0;
+  padding-left: 6px;
+  position: relative;
+}
+
+.removed-wrapper {
+  color: #f48771;
+  background: rgba(244, 135, 113, 0.1);
+  border-left: 3px solid #f48771;
+  padding-left: 6px;
+  text-decoration: line-through;
+  position: relative;
+}
+
+.value-changed {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.value-changed .old-value {
+  color: #f48771;
+  background: rgba(244, 135, 113, 0.1);
+  border-left: 3px solid #f48771;
+  padding-left: 6px;
+  text-decoration: line-through;
+  position: relative;
+}
+
+.value-changed .new-value {
+  color: #4ec9b0;
+  background: rgba(78, 201, 176, 0.1);
+  border-left: 3px solid #4ec9b0;
+  padding-left: 6px;
+  position: relative;
+}
+
+.side-label {
+  position: absolute;
+  right: 8px;
+  top: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  opacity: 0.8;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 6px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.path-indicator {
+  color: #6a9955;
+  font-size: 12px;
+  opacity: 0.7;
+  margin-left: 8px;
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
