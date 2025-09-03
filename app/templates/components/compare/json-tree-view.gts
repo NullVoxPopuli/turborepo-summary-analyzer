@@ -1,133 +1,74 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { on } from '@ember/modifier';
+import { cached } from '@glimmer/tracking';
 import { fn } from '@ember/helper';
+import { TrackedMap } from 'tracked-built-ins';
 import {
   type DiffEntry,
   formatValue,
   formatPath,
 } from 'turborepo-summary-analyzer/templates/components/compare/diff-json';
-
+import { formatDiffEntries, type TreeNode } from './tree-utils.ts';
 import './json-tree-view.css';
+import type { TOC } from '@ember/component/template-only';
 
 interface Args {
   diff: DiffEntry[];
-}
-
-interface TreeNode {
-  path: string[];
-  key: string;
-  entry?: DiffEntry;
-  children: TreeNode[];
-  isExpanded: boolean;
-  hasChanges: boolean;
-  depth: number;
 }
 
 function eq(a, b) {
   return a === b;
 }
 
-function and(a, b) {
-  return a && b;
+// taskId, package, inputs, hashOfExternalDependencies, directory, 'dependencies, dependents
+const KEYS_TO_HIDE = new Set([
+  'execution',
+  'hash',
+  'expandedOutputs',
+  'cache',
+  'logFile',
+  'framework',
+]);
+
+function isHiddenKey(key: string) {
+  return KEYS_TO_HIDE.has(key);
+}
+
+function isNotHiddenKey(key: string) {
+  return !isHiddenKey(key);
 }
 
 export default class JsonTreeView extends Component<Args> {
-  @tracked expandedPaths = new Set<string>();
+  expandedPaths = new TrackedMap<string, boolean>();
 
+  @cached
   get treeData(): TreeNode {
-    const root: TreeNode = {
-      path: [],
-      key: 'root',
-      children: [],
-      isExpanded: true,
-      hasChanges: false,
-      depth: 0,
-    };
+    const data = formatDiffEntries(this.args.diff);
 
-    // Build tree structure from diff entries
-    for (const entry of this.args.diff) {
-      this.addEntryToTree(root, entry);
-    }
-
-    // Mark nodes that have changes
-    this.markNodesWithChanges(root);
-
-    return root;
-  }
-
-  private addEntryToTree(root: TreeNode, entry: DiffEntry) {
-    let currentNode = root;
-
-    for (let i = 0; i < entry.path.length; i++) {
-      const pathSegment = entry.path[i];
-      const currentPath = entry.path.slice(0, i + 1);
-      const pathKey = currentPath.join('.');
-
-      let childNode = currentNode.children.find(child => child.key === pathSegment);
-
-      if (!childNode) {
-        childNode = {
-          path: currentPath,
-          key: pathSegment,
-          children: [],
-          isExpanded: this.expandedPaths.has(pathKey) || currentPath.length <= 2,
-          hasChanges: false,
-          depth: i + 1,
-        };
-        currentNode.children.push(childNode);
-      }
-
-      currentNode = childNode;
-    }
-
-    // Set the entry for the leaf node
-    currentNode.entry = entry;
-  }
-
-  private markNodesWithChanges(node: TreeNode): boolean {
-    let hasChanges = false;
-
-    // Check if this node itself has changes
-    if (node.entry && node.entry.kind !== 'same') {
-      hasChanges = true;
-    }
-
-    // Check children recursively
-    for (const child of node.children) {
-      if (this.markNodesWithChanges(child)) {
-        hasChanges = true;
-      }
-    }
-
-    node.hasChanges = hasChanges;
-    return hasChanges;
+    return data;
   }
 
   toggleExpanded = (node: TreeNode) => {
-    const pathKey = node.path.join('.');
-
-    if (node.isExpanded) {
-      this.expandedPaths.delete(pathKey);
-    } else {
-      this.expandedPaths.add(pathKey);
-    }
-
-    node.isExpanded = !node.isExpanded;
+    const existing = this.isExpanded(node);
+    this.expandedPaths.set(node.pathKey, !existing);
   };
 
-  getIndentStyle(depth: number) {
-    return `margin-left: ${depth * 20}px;`;
-  }
-
-  getValueClass(kind: DiffEntry['kind']) {
-    return `value-${kind}`;
-  }
-
   shouldShowNode(node: TreeNode): boolean {
-    // Always show nodes with changes or their ancestors
-    return node.hasChanges || node.children.some(child => this.shouldShowNode(child));
+    const hasChanges =
+      node.hasChanges ||
+      node.children.some((child) => this.shouldShowNode(child));
+
+    return hasChanges;
   }
+
+  isExpanded = (node: TreeNode): boolean => {
+    const existing = this.expandedPaths.get(node.pathKey);
+
+    if (existing === undefined) {
+      return false;
+    }
+    return existing;
+  };
 
   <template>
     <div class="json-tree-view">
@@ -136,9 +77,8 @@ export default class JsonTreeView extends Component<Args> {
           <TreeNode
             @node={{child}}
             @toggleExpanded={{this.toggleExpanded}}
-            @getIndentStyle={{this.getIndentStyle}}
-            @getValueClass={{this.getValueClass}}
-            @shouldShow={{this.shouldShowNode}}
+            @isExpanded={{this.isExpanded}}
+            @hasChanges={{this.shouldShowNode}}
           />
         {{/each}}
       {{else}}
@@ -148,71 +88,85 @@ export default class JsonTreeView extends Component<Args> {
   </template>
 }
 
-const TreeNode = <template>
-  {{#if (@shouldShow @node)}}
-    <div class="tree-node" style={{@getIndentStyle @node.depth}}>
-      <div class="tree-line">
-        {{#if @node.children.length}}
-          <button
-            type="button"
-            class="toggle expandable"
-            {{on "click" (fn @toggleExpanded @node)}}
-            aria-label={{if @node.isExpanded "Collapse" "Expand"}}
-          >
-            {{if @node.isExpanded "▼" "▶"}}
-          </button>
-        {{else}}
-          <span class="toggle"></span>
-        {{/if}}
-
-        <span class="key">{{@node.key}}</span>
-
-        {{#if @node.entry}}
-          <span class="colon">:</span>
-          <div class="value {{@getValueClass @node.entry.kind}}">
-            {{#if (eq @node.entry.kind "changed")}}
-              <div class="old-value">
-                <span class="side-label">Left</span>
-                <pre>{{formatValue @node.entry.leftValue}}</pre>
-              </div>
-              <div class="new-value">
-                <span class="side-label">Right</span>
-                <pre>{{formatValue @node.entry.rightValue}}</pre>
-              </div>
-            {{else if (eq @node.entry.kind "removed")}}
-              <div class="removed-wrapper">
-                <span class="side-label">Left</span>
-                <pre>{{formatValue @node.entry.leftValue}}</pre>
-              </div>
-            {{else if (eq @node.entry.kind "added")}}
-              <div class="added-wrapper">
-                <span class="side-label">Right</span>
-                <pre>{{formatValue @node.entry.rightValue}}</pre>
-              </div>
+const TreeNode: TOC<{
+  Args: {
+    node: TreeNode;
+    toggleExpanded: (node: TreeNode) => void;
+    isExpanded: (node: TreeNode) => boolean;
+    hasChanges: (node: TreeNode) => boolean;
+  };
+}> = <template>
+  {{#if (@hasChanges @node)}}
+    {{#if (isNotHiddenKey @node.key)}}
+      <details class="tree-node" open={{@isExpanded @node}}>
+        <summary class="tree-line">
+          <span>
+            {{#if @node.children.length}}
+              <button
+                type="button"
+                class="toggle expandable"
+                {{on "click" (fn @toggleExpanded @node)}}
+                aria-label={{if (@isExpanded @node) "Collapse" "Expand"}}
+              >
+                {{if (@isExpanded @node) "▼" "▶"}}
+              </button>
             {{else}}
-              <pre>{{formatValue @node.entry.leftValue}}</pre>
+              <span class="toggle"></span>
             {{/if}}
-          </div>
-        {{/if}}
 
-        {{#if @node.path.length}}
-          <span class="path-indicator">{{formatPath @node.path}}</span>
-        {{/if}}
-      </div>
+            <span class="key">{{@node.key}}</span>
 
-      {{#if @node.isExpanded}}
-        {{#if @node.children.length}}
-          {{#each @node.children as |child|}}
-            <TreeNode
-              @node={{child}}
-              @toggleExpanded={{@toggleExpanded}}
-              @getIndentStyle={{@getIndentStyle}}
-              @getValueClass={{@getValueClass}}
-              @shouldShow={{@shouldShow}}
-            />
-          {{/each}}
+            {{#if @node.path.length}}
+              <span class="path-indicator">{{formatPath @node.path}}</span>
+            {{/if}}
+          </span>
+
+          {{#if @node.entry}}
+            <div class="value value-{{@node.entry.kind}}">
+              {{#if (eq @node.entry.kind "changed")}}
+                <div class="old-value">
+                  <span class="side-label">Left</span>
+                  <pre>{{formatValue @node.entry.leftValue}}</pre>
+                </div>
+                <div class="new-value">
+                  <span class="side-label">Right</span>
+                  <pre>{{formatValue @node.entry.rightValue}}</pre>
+                </div>
+              {{else if (eq @node.entry.kind "removed")}}
+                <del class="removed-wrapper">
+                  <span class="side-label">Left</span>
+                  <pre>{{formatValue @node.entry.leftValue}}</pre>
+                </del>
+              {{else if (eq @node.entry.kind "added")}}
+                <ins class="added-wrapper">
+                  <span class="side-label">Right</span>
+                  <pre>{{formatValue @node.entry.rightValue}}</pre>
+                </ins>
+              {{else}}
+                <pre>{{formatValue @node.entry.leftValue}}</pre>
+              {{/if}}
+            </div>
+          {{/if}}
+
+        </summary>
+
+        {{#if (@isExpanded @node)}}
+          {{#if @node.children}}
+            <ul>
+              {{#each @node.children as |child|}}
+                <li>
+                  <TreeNode
+                    @node={{child}}
+                    @toggleExpanded={{@toggleExpanded}}
+                    @isExpanded={{@isExpanded}}
+                    @hasChanges={{@hasChanges}}
+                  />
+                </li>
+              {{/each}}
+            </ul>
+          {{/if}}
         {{/if}}
-      {{/if}}
-    </div>
+      </details>
+    {{/if}}
   {{/if}}
-</template>
+</template>;
