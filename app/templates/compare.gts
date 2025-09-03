@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { pageTitle } from 'ember-page-title';
 import { tracked } from '@glimmer/tracking';
+import { fn } from '@ember/helper';
 import {
   diffJSON,
   type DiffEntry,
@@ -52,16 +53,8 @@ export default class JsonCompare extends Component {
     <h2>Compare Summary Files</h2>
     <div class="compare-container">
       <div class="panes">
-        <JsonDropZone
-          @title="Left JSON"
-          @side="left"
-          @onFileLoaded={{this.onFileLoaded}}
-        />
-        <JsonDropZone
-          @title="Right JSON"
-          @side="right"
-          @onFileLoaded={{this.onFileLoaded}}
-        />
+        <JsonDropZone @onFileLoaded={{fn this.onFileLoaded "left"}} />
+        <JsonDropZone @onFileLoaded={{fn this.onFileLoaded "right"}} />
       </div>
 
       {{#if this.hasBoth}}
@@ -88,7 +81,8 @@ export default class JsonCompare extends Component {
         gap: 1rem;
       }
       .panes {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 1rem;
       }
       .diff-controls {

@@ -95,16 +95,16 @@ export function diffJSON(
   // Handle arrays
   if (Array.isArray(left) && Array.isArray(right)) {
     const maxLength = Math.max(left.length, right.length);
-    
+
     for (let i = 0; i < maxLength; i++) {
       const leftItem = i < left.length ? left[i] as unknown : undefined;
       const rightItem = i < right.length ? right[i] as unknown : undefined;
-      
+
       results.push(
         ...diffJSON(leftItem, rightItem, options, [...path, i.toString()], depth + 1)
       );
     }
-    
+
     return results;
   }
 
@@ -123,7 +123,7 @@ export function diffJSON(
   // Handle objects
   const leftObj = left as Record<string, unknown>;
   const rightObj = right as Record<string, unknown>;
-  
+
   const allKeys = new Set([
     ...Object.keys(leftObj),
     ...Object.keys(rightObj),
@@ -132,7 +132,7 @@ export function diffJSON(
   for (const key of allKeys) {
     const leftValue = leftObj[key];
     const rightValue = rightObj[key];
-    
+
     results.push(
       ...diffJSON(leftValue, rightValue, options, [...path, key], depth + 1)
     );
@@ -162,7 +162,7 @@ export function formatValue(value: unknown): string {
   if (value === undefined) return 'undefined';
   if (typeof value === 'string') return `"${value}"`;
   if (typeof value === 'number' || typeof value === 'boolean') return String(value);
-  
+
   try {
     return JSON.stringify(value, null, 2);
   } catch {
@@ -187,18 +187,18 @@ export function formatValue(value: unknown): string {
  */
 export function formatPath(path: string[]): string {
   if (path.length === 0) return 'root';
-  
+
   return path.reduce((result, segment, index) => {
     // Check if segment is a number (array index)
     if (/^\d+$/.test(segment)) {
       return `${result}[${segment}]`;
     }
-    
+
     // Check if we need dot notation
     if (index === 0) {
       return segment;
     }
-    
+
     // Check if the key needs brackets (contains special characters)
     if (/^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(segment)) {
       return `${result}.${segment}`;

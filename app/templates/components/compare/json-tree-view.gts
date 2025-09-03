@@ -237,6 +237,23 @@ export default class JsonTreeView extends Component<Args> {
         text-decoration: line-through;
       }
 
+      .added-wrapper {
+        color: #4ec9b0;
+        background: rgba(78, 201, 176, 0.1);
+        border-left: 3px solid #4ec9b0;
+        padding-left: 6px;
+        position: relative;
+      }
+
+      .removed-wrapper {
+        color: #f48771;
+        background: rgba(244, 135, 113, 0.1);
+        border-left: 3px solid #f48771;
+        padding-left: 6px;
+        text-decoration: line-through;
+        position: relative;
+      }
+
       .value-changed {
         display: flex;
         flex-direction: column;
@@ -249,6 +266,7 @@ export default class JsonTreeView extends Component<Args> {
         border-left: 3px solid #f48771;
         padding-left: 6px;
         text-decoration: line-through;
+        position: relative;
       }
 
       .value-changed .new-value {
@@ -256,6 +274,21 @@ export default class JsonTreeView extends Component<Args> {
         background: rgba(78, 201, 176, 0.1);
         border-left: 3px solid #4ec9b0;
         padding-left: 6px;
+        position: relative;
+      }
+
+      .side-label {
+        position: absolute;
+        right: 8px;
+        top: 4px;
+        font-size: 10px;
+        font-weight: bold;
+        opacity: 0.8;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 2px 6px;
+        border-radius: 3px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
 
       .path-indicator {
@@ -298,15 +331,23 @@ const TreeNode = <template>
           <div class="value {{@getValueClass @node.entry.kind}}">
             {{#if (eq @node.entry.kind "changed")}}
               <div class="old-value">
+                <span class="side-label">Left</span>
                 <pre>{{formatValue @node.entry.leftValue}}</pre>
               </div>
               <div class="new-value">
+                <span class="side-label">Right</span>
                 <pre>{{formatValue @node.entry.rightValue}}</pre>
               </div>
             {{else if (eq @node.entry.kind "removed")}}
-              <pre>{{formatValue @node.entry.leftValue}}</pre>
+              <div class="removed-wrapper">
+                <span class="side-label">Left</span>
+                <pre>{{formatValue @node.entry.leftValue}}</pre>
+              </div>
             {{else if (eq @node.entry.kind "added")}}
-              <pre>{{formatValue @node.entry.rightValue}}</pre>
+              <div class="added-wrapper">
+                <span class="side-label">Right</span>
+                <pre>{{formatValue @node.entry.rightValue}}</pre>
+              </div>
             {{else}}
               <pre>{{formatValue @node.entry.leftValue}}</pre>
             {{/if}}
@@ -318,16 +359,18 @@ const TreeNode = <template>
         {{/if}}
       </div>
 
-      {{#if (and @node.isExpanded @node.children.length)}}
-        {{#each @node.children as |child|}}
-          <TreeNode
-            @node={{child}}
-            @toggleExpanded={{@toggleExpanded}}
-            @getIndentStyle={{@getIndentStyle}}
-            @getValueClass={{@getValueClass}}
-            @shouldShow={{@shouldShow}}
-          />
-        {{/each}}
+      {{#if @node.isExpanded}}
+        {{#if @node.children.length}}
+          {{#each @node.children as |child|}}
+            <TreeNode
+              @node={{child}}
+              @toggleExpanded={{@toggleExpanded}}
+              @getIndentStyle={{@getIndentStyle}}
+              @getValueClass={{@getValueClass}}
+              @shouldShow={{@shouldShow}}
+            />
+          {{/each}}
+        {{/if}}
       {{/if}}
     </div>
   {{/if}}

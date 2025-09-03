@@ -12,8 +12,7 @@ interface FileState<T> {
 }
 
 interface Args {
-  side: 'left' | 'right';
-  onFileLoaded?: (side: 'left' | 'right', fileState: FileState<unknown>) => void;
+  onFileLoaded?: (fileState: FileState<unknown>) => void;
 }
 
 export default class JsonDropZone extends Component<Args> {
@@ -27,10 +26,10 @@ export default class JsonDropZone extends Component<Args> {
     try {
       const result = await readFileToJSON(file);
       this.fileState = { ...this.fileState, name: result.name, data: result.json, error: undefined, dropping: false };
-      this.args.onFileLoaded?.(this.args.side, this.fileState);
+      this.args.onFileLoaded?.(this.fileState);
     } catch (e) {
       this.fileState = { ...this.fileState, error: 'Failed to parse JSON', dropping: false };
-      this.args.onFileLoaded?.(this.args.side, this.fileState);
+      this.args.onFileLoaded?.(this.fileState);
       console.error(e);
     }
   }
@@ -56,9 +55,7 @@ export default class JsonDropZone extends Component<Args> {
     if (file) await this.readFile(file);
   };
 
-  get isLeft() {
-    return this.args.side === 'left';
-  }
+
 <template>
   <div class="pane" ...attributes>
     {{#if @title}}
@@ -66,6 +63,8 @@ export default class JsonDropZone extends Component<Args> {
     {{/if}}
     {{#if this.name}}
       <p class="filename">{{this.name}}</p>
+      {{else}}
+      <p class="filename">No file chosen</p>
     {{/if}}
     {{#if this.error}}<p class="error">{{this.error}}</p>{{/if}}
     <div class="drop-zone {{if this.dropping 'dropping'}}"
