@@ -3,11 +3,7 @@ import { on } from '@ember/modifier';
 import { cached } from '@glimmer/tracking';
 import { fn } from '@ember/helper';
 import { TrackedMap } from 'tracked-built-ins';
-import {
-  type DiffEntry,
-  formatValue,
-  formatPath,
-} from 'turborepo-summary-analyzer/templates/components/compare/diff-json';
+import { type DiffEntry, formatValue, formatPath } from './diff-json';
 import { formatDiffEntries, type TreeNode } from './tree-utils.ts';
 import './json-tree-view.css';
 import type { TOC } from '@ember/component/template-only';
