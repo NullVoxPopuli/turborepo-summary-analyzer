@@ -15,9 +15,9 @@ export default class ApplicationRoute extends Route {
   async beforeModel() {
     if (checkFeatures(this)) return;
     await Promise.all([
-      // this.file.tryLoadFromStorage(),
+      this.file.tryLoadFromStorage(),
       this.left.tryLoadFromStorage(),
-      // this.right.tryLoadFromStorage(),
+      this.right.tryLoadFromStorage(),
     ]);
   }
 }

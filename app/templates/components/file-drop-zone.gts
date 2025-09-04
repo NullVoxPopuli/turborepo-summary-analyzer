@@ -6,12 +6,16 @@ import { on } from '@ember/modifier';
 import type { FileService } from 'turborepo-summary-analyzer/services/file';
 import type RouterService from '@ember/routing/router-service';
 import { handleDrop, handleFileChoose, preventDefaults } from './drop-utils';
+import { assert } from '@ember/debug';
 
 const isDropping = 'is-dropover';
 
 const dragLeave = modifier((element) => {
   element.addEventListener('dragleave', (event: Event) => {
-    console.log('left', event.target.parentElement?.classList);
+    assert(
+      `[BUG]: the event target is missing`,
+      event.target instanceof HTMLElement
+    );
     event.target.parentElement?.classList.remove(isDropping);
     Object.assign(event.target.style, { display: 'none' });
   });
@@ -19,19 +23,34 @@ const dragLeave = modifier((element) => {
 
 const dropArea = modifier((element, [handleDrop]: [(event: Event) => void]) => {
   function enter(event: Event) {
-    console.log('enter');
+    assert(
+      `[BUG]: the event currentTarget is missing`,
+      event.currentTarget instanceof HTMLElement
+    );
     preventDefaults(event);
     event.currentTarget?.classList?.add(isDropping);
+    assert(
+      `[BUG]: the element lost all its children`,
+      event.currentTarget.lastElementChild instanceof HTMLElement
+    );
+
     Object.assign(event.currentTarget.lastElementChild.style, {
       display: 'block',
     });
   }
 
   function drop(event: Event) {
-    console.log('drop');
+    assert(
+      `[BUG]: the event currentTarget is missing`,
+      event.currentTarget instanceof HTMLElement
+    );
     event.currentTarget?.classList?.remove(isDropping);
+    assert(
+      `[BUG]: the element lost all its children`,
+      event.currentTarget.lastElementChild instanceof HTMLElement
+    );
     Object.assign(event.currentTarget.lastElementChild.style, {
-      display: 'block',
+      display: 'none',
     });
 
     handleDrop(event);
@@ -91,6 +110,7 @@ export class FileDropZone extends Component<{
         hidden
         {{on "change" this.handleFileSelect}}
       />
+      {{log @file}}
       <div class="drop-zone" {{dropArea this.handleDrop}}>
         {{#if @file.hasFile}}
           <p>

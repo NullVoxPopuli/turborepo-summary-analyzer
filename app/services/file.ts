@@ -5,6 +5,7 @@ import { createStore } from 'ember-primitives/store';
 import { cell } from 'ember-resources';
 import { openDB, type IDBPDatabase } from 'idb';
 import { assert } from '@ember/debug';
+import { getOwner } from '@ember/owner';
 
 const DATA_KEY = `file-data`;
 const NAME_KEY = `file-name`;
@@ -23,14 +24,20 @@ const left = () => new FileService('left-file');
 const right = () => new FileService('right-file');
 
 export function getSummaryFile(context: object) {
-  return createStore(context, summaryFile);
+  const owner = getOwner(context);
+  assert(`Owner must exist on passed context`, owner);
+  return createStore(owner, summaryFile);
 }
 
 export function getLeftFile(context: object) {
-  return createStore(context, left);
+  const owner = getOwner(context);
+  assert(`Owner must exist on passed context`, owner);
+  return createStore(owner, left);
 }
 export function getRightFile(context: object) {
-  return createStore(context, right);
+  const owner = getOwner(context);
+  assert(`Owner must exist on passed context`, owner);
+  return createStore(owner, right);
 }
 
 export class FileService {
@@ -75,10 +82,15 @@ export class FileService {
     return Boolean(this.current);
   }
 
+  attemptedLoad = false;
+  attemptedLoad2 = false;
   async tryLoadFromStorage() {
+    console.log('wat');
+    this.attemptedLoad = true;
     await this.#ensureStore();
     await this.#tryLoadData();
     await this.#tryLoadName();
+    this.attemptedLoad2 = true;
   }
 
   get #storage() {
