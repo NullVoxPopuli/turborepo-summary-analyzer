@@ -98,6 +98,7 @@ const TreeNode: TOC<{
         <summary class="tree-line">
           <span>
             {{#if @node.children.length}}
+              {{! template-lint-disable no-nested-interactive }}
               <button
                 type="button"
                 class="toggle expandable"

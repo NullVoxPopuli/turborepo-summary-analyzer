@@ -110,7 +110,6 @@ export class FileDropZone extends Component<{
         hidden
         {{on "change" this.handleFileSelect}}
       />
-      {{log @file}}
       <div class="drop-zone" {{dropArea this.handleDrop}}>
         {{#if @file.hasFile}}
           <p>

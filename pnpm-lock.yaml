@@ -38,8 +38,8 @@ importers:
         specifier: ^7.0.7
         version: 7.0.7(a04480772aa757b6e15072c9e8dc4514)
       idb:
-        specifier: 8.0.1
-        version: 8.0.1
+        specifier: 8.0.3
+        version: 8.0.3
       vite-plugin-inspect:
         specifier: ^11.0.1
         version: 11.0.1(fbd9479a27535b3407e7339c1eec2770)
@@ -122,6 +122,9 @@ importers:
       ember-eslint:
         specifier: ^0.2.1
         version: 0.2.1(fb83e0f8495ef8539e2189d4c6235968)
+      ember-hbs-minifier:
+        specifier: ^1.3.0
+        version: 1.3.0
       ember-modifier:
         specifier: ^4.2.2
         version: 4.2.2(@babel/core@7.28.3)
@@ -3495,6 +3498,10 @@ packages:
   ember-eslint@0.2.1:
     resolution: {integrity: sha512-sxmh8dNJmWZH4Xx+4AC0XYbp3hKTSU8M3s886Ly9S6oL1dzVQ0A/GJp4lJUf5ex7wDbgZtMIhMQcw89329NIyw==}
 
+  ember-hbs-minifier@1.3.0:
+    resolution: {integrity: sha512-wp7IbG5PyMHhRj/3QVNdZN/04zTQc7rAAeaXiyKKHWIes5VdHVbfW4VjyfBonAEq6yaA+ex7GM3kTARzjxcL8w==}
+    engines: {node: 12.* || 14.* || >= 16.*}
+
   ember-modifier@4.2.2:
     resolution: {integrity: sha512-pPYBAGyczX0hedGWQFQOEiL9s45KS9efKxJxUQkMLjQyh+1Uef1mcmAGsdw2KmvNupITkE/nXxmVO1kZ9tt3ag==}
 
@@ -4288,6 +4295,10 @@ packages:
   hash-for-dep@1.5.1:
     resolution: {integrity: sha512-/dQ/A2cl7FBPI2pO0CANkvuuVi/IFS5oTyJ0PsOb6jW6WbVW1js5qJXMJTNbWHXBIPdFTWFbabjB+mE0d+gelw==}
 
+  hash-obj@3.0.0:
+    resolution: {integrity: sha512-mIORCoyREluZ2U0iSd4lnrQZ37V50gEKSHirRsCTTxsZvs1NtifSH/dMu07gB7897z/f1yEh/7KN6TeBT7ct7Q==}
+    engines: {node: '>=8'}
+
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
@@ -4373,8 +4384,8 @@ packages:
     peerDependencies:
       postcss: ^8.1.0
 
-  idb@8.0.1:
-    resolution: {integrity: sha512-EkBCzUZSdhJV8PxMSbeEV//xguVKZu9hZZulM+2gHXI0t2hGVU3eYE6/XnH77DS6FM2FY8wl17aDcu9vXpvLWQ==}
+  idb@8.0.3:
+    resolution: {integrity: sha512-LtwtVyVYO5BqRvcsKuB2iUMnHwPVByPCXFXOpuU96IZPPoPN6xjOGxZQ74pgSVVLQWtUOYgyeL4GE98BY5D3wg==}
 
   ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
@@ -4565,6 +4576,10 @@ packages:
 
   is-obj@2.0.0:
     resolution: {integrity: sha512-drqDG3cbczxxEJRoOXcOjtdp1J/lyp1mNn0xaznRs8+muBhgQcrnbspox5X5fOw0HnMnbfDzvnEMEtqDEJEo8w==}
+    engines: {node: '>=8'}
+
+  is-plain-obj@2.1.0:
+    resolution: {integrity: sha512-YWnfyRwxL/+SsrWYfOpUtz5b3YD+nyfkHvjbcanzk8zgyO4ASD67uVMRt8k5bM4lLMDnXfriRhOpemw+NfT1eA==}
     engines: {node: '>=8'}
 
   is-plain-obj@4.1.0:
@@ -6019,6 +6034,10 @@ packages:
     resolution: {integrity: sha512-oZ7iUCxph8WYRHHcjBEc9unw3adt5CmSNlppj/5Q4k2RIrhl8Z5yY2Xr4j9zj0+wzVZ0bxmYoGSzKJnRl6A4yg==}
     engines: {node: '>=10.2.0'}
 
+  sort-keys@4.2.0:
+    resolution: {integrity: sha512-aUYIEU/UviqPgc8mHR6IW1EGxkAXpeRETYcrzg8cLAvUPZcpAlleSXHV2mY7G12GphSH6Gzv+4MMVSSkbdteHg==}
+    engines: {node: '>=8'}
+
   sort-object-keys@1.1.3:
     resolution: {integrity: sha512-855pvK+VkU7PaKYPc+Jjnmt4EzejQHyhhF33q31qG8x7maDzkeFhAAThdCYay11CISO+qAMwjOBP+fPZe0IPyg==}
 
@@ -6347,6 +6366,10 @@ packages:
   type-fest@0.21.3:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}
     engines: {node: '>=10'}
+
+  type-fest@0.8.1:
+    resolution: {integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==}
+    engines: {node: '>=8'}
 
   type-fest@4.39.0:
     resolution: {integrity: sha512-w2IGJU1tIgcrepg9ZJ82d8UmItNQtOFJG0HCUE3SzMokKkTsruVDALl2fAdiEzJlfduoU+VyXJWIIUZ+6jV+nw==}
@@ -11053,6 +11076,10 @@ snapshots:
       - supports-color
       - typescript
 
+  ember-hbs-minifier@1.3.0:
+    dependencies:
+      hash-obj: 3.0.0
+
   ember-modifier@4.2.2(@babel/core@7.28.3):
     dependencies:
       '@embroider/addon-shim': 1.10.0
@@ -12209,6 +12236,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  hash-obj@3.0.0:
+    dependencies:
+      is-obj: 2.0.0
+      sort-keys: 4.2.0
+      type-fest: 0.8.1
+
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
@@ -12309,7 +12342,7 @@ snapshots:
     dependencies:
       postcss: 8.5.3
 
-  idb@8.0.1: {}
+  idb@8.0.3: {}
 
   ieee754@1.2.1: {}
 
@@ -12501,6 +12534,8 @@ snapshots:
   is-number@7.0.0: {}
 
   is-obj@2.0.0: {}
+
+  is-plain-obj@2.1.0: {}
 
   is-plain-obj@4.1.0: {}
 
@@ -14063,6 +14098,10 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  sort-keys@4.2.0:
+    dependencies:
+      is-plain-obj: 2.1.0
+
   sort-object-keys@1.1.3: {}
 
   sort-package-json@2.15.1:
@@ -14519,6 +14558,8 @@ snapshots:
   type-fest@0.11.0: {}
 
   type-fest@0.21.3: {}
+
+  type-fest@0.8.1: {}
 
   type-fest@4.39.0: {}
 
