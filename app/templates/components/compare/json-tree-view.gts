@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { on } from '@ember/modifier';
 import { cached } from '@glimmer/tracking';
 import { fn } from '@ember/helper';
-import { TrackedMap } from 'tracked-built-ins';
+import { TrackedMap, TrackedSet } from 'tracked-built-ins';
 import { type DiffEntry, formatValue, formatPath } from './diff-json';
 import { formatDiffEntries, type TreeNode } from './tree-utils.ts';
 import './json-tree-view.css';
@@ -12,12 +12,12 @@ interface Args {
   diff: DiffEntry[];
 }
 
-function eq(a, b) {
+function eq(a: unknown, b: unknown) {
   return a === b;
 }
 
 // taskId, package, inputs, hashOfExternalDependencies, directory, 'dependencies, dependents
-const KEYS_TO_HIDE = new Set([
+const KEYS_TO_HIDE = new TrackedSet([
   'execution',
   'hash',
   'expandedOutputs',
@@ -26,12 +26,36 @@ const KEYS_TO_HIDE = new Set([
   'framework',
 ]);
 
+const HIDEABLE_KEYS = [
+  'execution',
+  'hash',
+  'expandedOutputs',
+  'cache',
+  'logFile',
+  'framework',
+  'taskId',
+  'package',
+  'inputs',
+  'hashOfExternalDependencies',
+  'directory',
+  'dependencies',
+  'dependents',
+];
+
 function isHiddenKey(key: string) {
   return KEYS_TO_HIDE.has(key);
 }
 
 function isNotHiddenKey(key: string) {
   return !isHiddenKey(key);
+}
+
+function toggleHide(key: string) {
+  if (isHiddenKey(key)) {
+    KEYS_TO_HIDE.delete(key);
+    return;
+  }
+  KEYS_TO_HIDE.add(key);
 }
 
 export default class JsonTreeView extends Component<Args> {
@@ -67,6 +91,18 @@ export default class JsonTreeView extends Component<Args> {
   };
 
   <template>
+    <fieldset><legend>Keys to hide</legend>
+      {{#each HIDEABLE_KEYS as |key|}}
+        <label>
+          <input
+            type="checkbox"
+            checked={{isHiddenKey key}}
+            {{on "change" (fn toggleHide key)}}
+          />
+          {{key}}
+        </label>
+      {{/each}}
+    </fieldset>
     <div class="json-tree-view">
       {{#if this.treeData.children.length}}
         {{#each this.treeData.children as |child|}}
