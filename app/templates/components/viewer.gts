@@ -1,13 +1,12 @@
 import Component from '@glimmer/component';
-import { service } from '@ember/service';
-import type FileService from 'turborepo-summary-analyzer/services/file';
+import { getSummaryFile } from 'turborepo-summary-analyzer/services/file';
 import { assert } from '@ember/debug';
 import { Timeline } from './timeline';
 import { OverallSummary } from './overall-summary';
 import { Table } from './table';
 
 export class Viewer extends Component {
-  @service declare file: FileService;
+  file = getSummaryFile(this);
 
   get current() {
     assert(

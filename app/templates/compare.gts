@@ -1,43 +1,44 @@
 import Component from '@glimmer/component';
+import { cached } from '@glimmer/tracking';
 import { pageTitle } from 'ember-page-title';
-import { tracked } from '@glimmer/tracking';
-import { fn } from '@ember/helper';
+import { FileDropZone } from './components/file-drop-zone';
 import {
   diffJSON,
   type DiffEntry,
   summarizeDiff,
 } from 'turborepo-summary-analyzer/templates/components/compare/diff-json';
-import JsonTreeView from 'turborepo-summary-analyzer/templates/components/compare/json-tree-view';
-import JsonDropZone from 'turborepo-summary-analyzer/templates/components/compare/json-drop-zone';
-
-interface FileState<T> {
-  name?: string;
-  data?: T;
-  error?: string;
-  dropping: boolean;
-}
+import JsonTreeView from './components/compare/json-tree-view';
+import {
+  getLeftFile,
+  getRightFile,
+} from 'turborepo-summary-analyzer/services/file';
 
 export default class JsonCompare extends Component {
-  @tracked left: FileState<unknown> = { dropping: false };
-  @tracked right: FileState<unknown> = { dropping: false };
+  left = getLeftFile(this);
+  right = getRightFile(this);
 
   get hasBoth() {
-    return this.left.data && this.right.data;
+    return this.left.hasFile && this.right.hasFile;
+  }
+
+  @cached
+  get _diffJson() {
+    if (!this.hasBoth) return [];
+
+    return diffJSON(this.left.current, this.right.current, {
+      maxDepth: 10,
+    });
   }
 
   get diff(): DiffEntry[] {
     if (!this.hasBoth) return [];
-    const entries = diffJSON(this.left.data, this.right.data, { maxDepth: 6 });
-    return entries.filter((e) => e.kind !== 'same');
+
+    return this._diffJson.filter((e) => e.kind !== 'same');
   }
 
   get summary() {
-    return summarizeDiff(diffJSON(this.left.data, this.right.data));
+    return summarizeDiff(this._diffJson);
   }
-
-  onFileLoaded = (side: 'left' | 'right', fileState: FileState<unknown>) => {
-    this[side] = fileState;
-  };
 
   formatValue(v: unknown) {
     if (typeof v === 'string') return v;
@@ -53,8 +54,9 @@ export default class JsonCompare extends Component {
     <h2>Compare Summary Files</h2>
     <div class="compare-container">
       <div class="panes">
-        <JsonDropZone @onFileLoaded={{fn this.onFileLoaded "left"}} />
-        <JsonDropZone @onFileLoaded={{fn this.onFileLoaded "right"}} />
+
+        <FileDropZone @file={{this.left}} />
+        <FileDropZone @file={{this.right}} />
       </div>
 
       {{#if this.hasBoth}}

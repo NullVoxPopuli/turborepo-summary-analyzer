@@ -3,7 +3,7 @@ import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { modifier } from 'ember-modifier';
 import { on } from '@ember/modifier';
-import type FileService from 'turborepo-summary-analyzer/services/file';
+import type { FileService } from 'turborepo-summary-analyzer/services/file';
 import type RouterService from '@ember/routing/router-service';
 import { handleDrop, handleFileChoose, preventDefaults } from './drop-utils';
 
@@ -15,8 +15,12 @@ const dropArea = modifier((element, [handleDrop]: [(event: Event) => void]) => {
   element.addEventListener('drop', handleDrop);
 });
 
-export class FileDropZone extends Component {
-  @service declare file: FileService;
+export class FileDropZone extends Component<{
+  Args: {
+    file: FileService;
+    onSuccess?: () => void;
+  };
+}> {
   @service declare router: RouterService;
 
   @tracked error: string | undefined;
@@ -29,14 +33,12 @@ export class FileDropZone extends Component {
 
     if (!fileData) return;
 
-    await this.file.handleDroppedFile(fileData);
+    await this.args.file.handleDroppedFile(fileData);
 
-    this.router.transitionTo('view');
+    this.args.onSuccess?.();
   };
 
   handleFileSelect = async (changeEvent: Event) => {
-    console.log({ changeEvent });
-
     const fileData = handleFileChoose(
       { onError: (e) => (this.error = e) },
       changeEvent
@@ -44,9 +46,9 @@ export class FileDropZone extends Component {
 
     if (!fileData) return;
 
-    await this.file.handleDroppedFile(fileData);
+    await this.args.file.handleDroppedFile(fileData);
 
-    this.router.transitionTo('view');
+    this.args.onSuccess?.();
   };
 
   <template>

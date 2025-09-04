@@ -1,17 +1,44 @@
-import Service from '@ember/service';
 import type { SummaryFile } from 'turborepo-summary-analyzer/types';
 import { readFileToJSON } from 'turborepo-summary-analyzer/utils';
 
+import { createStore } from 'ember-primitives/store';
 import { cell } from 'ember-resources';
 import { openDB, type IDBPDatabase } from 'idb';
 import { assert } from '@ember/debug';
 
 const DATA_KEY = `file-data`;
 const NAME_KEY = `file-name`;
+const STORAGE_NAME = 'storage';
 
-const STORE_NAME = 'last-file';
+/**
+ * specifically for the summary view
+ * (this should be named summary-file, but for backwards compat, it's remained last-file)
+ */
+const summaryFile = () => new FileService('last-file');
 
-export default class FileService extends Service {
+/**
+ * for comparison view
+ */
+const left = () => new FileService('left-file');
+const right = () => new FileService('right-file');
+
+export function getSummaryFile(context: object) {
+  return createStore(context, summaryFile);
+}
+
+export function getLeftFile(context: object) {
+  return createStore(context, left);
+}
+export function getRightFile(context: object) {
+  return createStore(context, right);
+}
+
+export class FileService {
+  #storeName: string;
+  constructor(storeName: string) {
+    this.#storeName = storeName;
+  }
+
   #current = cell<SummaryFile | undefined>();
   get current() {
     return this.#current.current;
@@ -32,8 +59,12 @@ export default class FileService extends Service {
 
     await this.#ensureStore();
 
-    await this.#storage.put(STORE_NAME, JSON.stringify(result.json), DATA_KEY);
-    await this.#storage.put(STORE_NAME, this.fileName, NAME_KEY);
+    await this.#storage.put(
+      STORAGE_NAME,
+      JSON.stringify(result.json),
+      DATA_KEY
+    );
+    await this.#storage.put(STORAGE_NAME, this.fileName, NAME_KEY);
 
     console.debug(
       `Dropped file, ${this.fileName ?? `< filename missing >`}, stored in indexeddb so it doesn't need to be manually loaded every time the page loads. (There is no backend storage. All storage is local)`
@@ -58,10 +89,11 @@ export default class FileService extends Service {
 
   async #ensureStore() {
     if (this.#db) return;
+    const name = this.#storeName;
 
-    const db = await openDB(`turborepo-summary-analyzer`, 1, {
+    const db = await openDB(name, 3, {
       upgrade(db) {
-        db.createObjectStore(STORE_NAME);
+        db.createObjectStore(STORAGE_NAME);
       },
       blocked() {},
       blocking() {},
@@ -75,7 +107,7 @@ export default class FileService extends Service {
     // SAFETY: this could lead to problems in the future.
     // TODO: fix
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const existing: string = await this.#storage.get(STORE_NAME, NAME_KEY);
+    const existing: string = await this.#storage.get(STORAGE_NAME, NAME_KEY);
 
     if (!existing) return;
 
@@ -86,7 +118,7 @@ export default class FileService extends Service {
     // SAFETY: this could lead to problems in the future.
     // TODO: fix
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const existing: string = await this.#storage.get(STORE_NAME, DATA_KEY);
+    const existing: string = await this.#storage.get(STORAGE_NAME, DATA_KEY);
 
     if (!existing) return;
 
