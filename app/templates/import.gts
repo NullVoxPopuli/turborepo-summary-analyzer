@@ -4,9 +4,12 @@ import { service } from '@ember/service';
 import type RouterService from '@ember/routing/router-service';
 
 import { FileDropZone } from './components/file-drop-zone';
+import { getSummaryFile } from '../services/file.ts';
 
 export default class Import extends Component {
   @service declare router: RouterService;
+
+  file = getSummaryFile(this);
 
   handleSuccess = () => {
     this.router.transitionTo('view');
