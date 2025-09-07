@@ -73,13 +73,38 @@ export default class JsonTreeView extends Component<Args> {
     this.expandedPaths.set(node.pathKey, !existing);
   };
 
-  shouldShowNode(node: TreeNode): boolean {
-    const hasChanges =
-      node.hasChanges ||
-      node.children.some((child) => this.shouldShowNode(child));
+  shouldShowNode = (node?: TreeNode | TreeNode[]): boolean => {
+    if (!node) return false;
+
+    if (Array.isArray(node)) {
+      const collectionHasChanges = node.some((child) =>
+        this.shouldShowNode(child)
+      );
+
+      return collectionHasChanges;
+    }
+
+    const hasVisibleFields =
+      node.children.length > 0
+        ? node.children.some((child) => !KEYS_TO_HIDE.has(child.key))
+        : true;
+
+    if (!hasVisibleFields) {
+      return false;
+    }
+
+    const visibleChildren = node.children.filter((child) =>
+      this.shouldShowNode(child)
+    );
+
+    if (node.children.length > 0 && visibleChildren.length === 0) {
+      return false;
+    }
+
+    const hasChanges = node.hasChanges || visibleChildren.length > 0;
 
     return hasChanges;
-  }
+  };
 
   isExpanded = (node: TreeNode): boolean => {
     const existing = this.expandedPaths.get(node.pathKey);
@@ -125,7 +150,7 @@ const TreeNode: TOC<{
     node: TreeNode;
     toggleExpanded: (node: TreeNode) => void;
     isExpanded: (node: TreeNode) => boolean;
-    hasChanges: (node: TreeNode) => boolean;
+    hasChanges: (node?: TreeNode | TreeNode[]) => boolean;
   };
 }> = <template>
   {{#if (@hasChanges @node)}}
@@ -184,7 +209,7 @@ const TreeNode: TOC<{
         </summary>
 
         {{#if (@isExpanded @node)}}
-          {{#if @node.children}}
+          {{#if (@hasChanges @node.children)}}
             <ul>
               {{#each @node.children as |child|}}
                 <li>
