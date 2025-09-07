@@ -1,14 +1,23 @@
 import Route from '@ember/routing/route';
-import { service } from '@ember/service';
-import type FileService from 'turborepo-summary-analyzer/services/file';
 
 import { checkFeatures } from 'turborepo-summary-analyzer/feature-check';
+import {
+  getSummaryFile,
+  getLeftFile,
+  getRightFile,
+} from 'turborepo-summary-analyzer/services/file';
 
 export default class ApplicationRoute extends Route {
-  @service declare file: FileService;
+  file = getSummaryFile(this);
+  left = getLeftFile(this);
+  right = getRightFile(this);
 
   async beforeModel() {
     if (checkFeatures(this)) return;
-    await this.file.tryLoadFromStorage();
+    await Promise.all([
+      this.file.tryLoadFromStorage(),
+      this.left.tryLoadFromStorage(),
+      this.right.tryLoadFromStorage(),
+    ]);
   }
 }

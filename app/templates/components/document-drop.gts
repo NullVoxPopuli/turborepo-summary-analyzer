@@ -1,14 +1,13 @@
 import type Owner from '@ember/owner';
 import Component from '@glimmer/component';
-import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { registerDestructor } from '@ember/destroyable';
-import type FileService from 'turborepo-summary-analyzer/services/file';
 import { handleDrop, preventDefaults } from './drop-utils';
 import { assert } from '@ember/debug';
+import { getSummaryFile } from 'turborepo-summary-analyzer/services/file';
 
 export class DocumentDrop extends Component {
-  @service declare file: FileService;
+  file = getSummaryFile(this);
 
   @tracked isDropping = false;
 
