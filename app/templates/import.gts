@@ -17,5 +17,10 @@ export default class Import extends Component {
 
   <template>
     <FileDropZone @file={{this.file}} @onSuccess={{this.handleSuccess}} />
+
+    {{#if this.file.hasFile}}
+      <br />
+      <a href="/view">View this file</a>
+    {{/if}}
   </template>
 }
