@@ -85,7 +85,6 @@ export class FileService {
   attemptedLoad = false;
   attemptedLoad2 = false;
   async tryLoadFromStorage() {
-    console.log('wat');
     this.attemptedLoad = true;
     await this.#ensureStore();
     await this.#tryLoadData();

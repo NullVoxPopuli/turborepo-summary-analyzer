@@ -1,5 +1,5 @@
-import { ThemeToggle } from '@universal-ember/preem';
-import { ExternalLink } from 'ember-primitives';
+import { ThemeToggle } from 'nvp.ui';
+import { ExternalLink } from 'ember-primitives/components/external-link';
 
 import { Arrow } from './icons/fa/external-link';
 
@@ -48,12 +48,6 @@ export const Header = <template>
           &:hover {
             text-decoration: underline;
           }
-        }
-      }
-
-      .preem__site-theme-toggle {
-        label {
-          height: 30px;
         }
       }
     }

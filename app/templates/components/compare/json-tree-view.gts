@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { on } from '@ember/modifier';
 import { cached } from '@glimmer/tracking';
 import { fn } from '@ember/helper';
-import { TrackedMap, TrackedSet } from 'tracked-built-ins';
+import { trackedMap, trackedSet } from '@ember/reactive/collections';
 import { type DiffEntry, formatValue, formatPath } from './diff-json';
 import { formatDiffEntries, type TreeNode } from './tree-utils.ts';
 import './json-tree-view.css';
@@ -17,7 +17,7 @@ function eq(a: unknown, b: unknown) {
 }
 
 // taskId, package, inputs, hashOfExternalDependencies, directory, 'dependencies, dependents
-const KEYS_TO_HIDE = new TrackedSet([
+const KEYS_TO_HIDE = trackedSet([
   'execution',
   'hash',
   'expandedOutputs',
@@ -59,7 +59,7 @@ function toggleHide(key: string) {
 }
 
 export default class JsonTreeView extends Component<Args> {
-  expandedPaths = new TrackedMap<string, boolean>();
+  expandedPaths = trackedMap<string, boolean>();
 
   @cached
   get treeData(): TreeNode {

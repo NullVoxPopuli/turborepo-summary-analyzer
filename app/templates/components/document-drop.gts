@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { registerDestructor } from '@ember/destroyable';
 import { handleDrop, preventDefaults } from './drop-utils';
 import { assert } from '@ember/debug';
-import { getSummaryFile } from 'turborepo-summary-analyzer/services/file';
+import { getSummaryFile } from '#file';
 
 export class DocumentDrop extends Component {
   file = getSummaryFile(this);
