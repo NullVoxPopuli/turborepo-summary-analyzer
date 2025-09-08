@@ -1,4 +1,4 @@
-import { ExternalLink } from '@universal-ember/preem';
+import { ExternalLink } from 'nvp.ui';
 
 import { missingFeatures } from 'turborepo-summary-analyzer/feature-check';
 

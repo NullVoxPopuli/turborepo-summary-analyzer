@@ -8,10 +8,7 @@ import {
   summarizeDiff,
 } from 'turborepo-summary-analyzer/templates/components/compare/diff-json';
 import JsonTreeView from './components/compare/json-tree-view';
-import {
-  getLeftFile,
-  getRightFile,
-} from 'turborepo-summary-analyzer/services/file';
+import { getLeftFile, getRightFile } from '#file';
 
 export default class JsonCompare extends Component {
   left = getLeftFile(this);

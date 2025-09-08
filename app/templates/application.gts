@@ -1,7 +1,7 @@
 import { pageTitle } from 'ember-page-title';
 import { colorScheme } from 'ember-primitives/color-scheme';
 
-import { Header } from './components/header';
+import { Header } from './components/header.gts';
 
 function syncColorScheme() {
   if (colorScheme.current === 'dark') {

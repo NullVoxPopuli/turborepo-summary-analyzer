@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { getSummaryFile } from 'turborepo-summary-analyzer/services/file';
+import { getSummaryFile } from '#file';
 import { assert } from '@ember/debug';
 import { Timeline } from './timeline';
 import { OverallSummary } from './overall-summary';

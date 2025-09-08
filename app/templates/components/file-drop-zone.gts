@@ -3,7 +3,7 @@ import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { modifier } from 'ember-modifier';
 import { on } from '@ember/modifier';
-import type { FileService } from 'turborepo-summary-analyzer/services/file';
+import type { FileService } from '#file';
 import type RouterService from '@ember/routing/router-service';
 import { handleDrop, handleFileChoose, preventDefaults } from './drop-utils';
 import { assert } from '@ember/debug';

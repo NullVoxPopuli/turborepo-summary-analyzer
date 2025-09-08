@@ -1,13 +1,16 @@
-import Application from '@ember/application';
-import compatModules from '@embroider/virtual/compat-modules';
-import Resolver from 'ember-resolver';
-import config from './config.ts';
+import Application from 'ember-strict-application-resolver';
 import { isTesting, macroCondition } from '@embroider/macros';
 import { sync } from 'ember-primitives/color-scheme';
+import Router from './router.ts';
+import PageTitle from 'ember-page-title/services/page-title';
 
 export default class App extends Application {
-  modulePrefix = config.modulePrefix;
-  Resolver = Resolver.withModules(compatModules);
+  modules = {
+    './router': Router,
+    './services/page-title': PageTitle,
+    ...import.meta.glob('./routes/*.ts', { eager: true }),
+    ...import.meta.glob('./templates/*.gts', { eager: true }),
+  };
 }
 
 if (macroCondition(isTesting())) {
