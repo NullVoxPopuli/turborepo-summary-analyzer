@@ -1,10 +1,6 @@
-import { defineConfig, withFilter } from 'vite';
+import { defineConfig } from 'vite';
 import { extensions, ember } from '@embroider/vite';
 import { babel } from '@rollup/plugin-babel';
-
-import { buildMacros } from '@embroider/macros/babel';
-
-const macros = buildMacros();
 
 export default defineConfig({
   plugins: [
