@@ -20,7 +20,7 @@
     "lint:js:fix": "eslint . --fix",
     "lint:types": "glint",
     "start": "vite",
-    "test": "NODE_ENV=development vite build --mode development && testem ci"
+    "test": "NODE_ENV=development vite build --mode development && testem ci --port 0"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",

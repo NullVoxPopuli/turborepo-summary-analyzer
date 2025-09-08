@@ -1,3 +1,5 @@
+import 'ember-testing';
+
 import Application from 'turborepo-summary-analyzer/app';
 import config, { enterTestMode } from '../app/config.ts';
 import * as QUnit from 'qunit';
