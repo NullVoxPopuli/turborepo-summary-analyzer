@@ -3,6 +3,10 @@ import { extensions, ember } from '@embroider/vite';
 import { babel } from '@rollup/plugin-babel';
 
 export default defineConfig({
+  build: {
+    minify: false,
+    cssMinify: false,
+  },
   plugins: [
     ember(),
     babel({
@@ -11,13 +15,11 @@ export default defineConfig({
     }),
   ],
   optimizeDeps: {
-    exclude: [
-      'ember-primitives',
-      '@universal-ember/preem',
-      'ember-resources',
-      'ember-source',
-    ],
+    exclude: [],
     include: [
+      'ember-primitives',
+      'nvp.ui',
+      'ember-resources',
       'ember-page-title',
       'ember-modifier',
       'd3',

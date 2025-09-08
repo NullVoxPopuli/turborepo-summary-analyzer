@@ -20,7 +20,7 @@
     "lint:js:fix": "eslint . --fix",
     "lint:types": "glint",
     "start": "vite",
-    "test": "vite build --mode test && ember test --path dist"
+    "test": "NODE_ENV=development vite build --mode development && testem ci"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
@@ -56,6 +56,7 @@
     "prettier-plugin-ember-template-tag": "^2.1.0",
     "qunit": "^2.24.1",
     "qunit-dom": "^3.5.0",
+    "testem": "^3.16.0",
     "typescript": "~5.9.2",
     "vite": "npm:rolldown-vite@latest"
   },
@@ -80,12 +81,12 @@
   "dependencies": {
     "@ember/test-waiters": "^4.1.1",
     "@observablehq/plot": "^0.6.16",
-    "nvp.ui": "^0.4.0",
     "d3": "^7.9.0",
     "ember-element-helper": "^0.8.8",
     "ember-primitives": "^0.40.0",
     "ember-resources": "^7.0.7",
-    "idb": "8.0.3"
+    "idb": "8.0.3",
+    "nvp.ui": "^0.4.0"
   },
   "pnpm": {
     "overrides": {
