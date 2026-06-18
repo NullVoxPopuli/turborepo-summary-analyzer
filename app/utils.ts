@@ -75,6 +75,78 @@ export function durationOfTask(task: SummaryTask) {
   return duration(task.execution.startTime, task.execution.endTime);
 }
 
+/**
+ * Wall-clock time (in ms) spanned by a set of tasks: from the earliest task
+ * start to the latest task end. Because tasks run in parallel, this is the
+ * real elapsed time, not the sum of each task's duration (that's CPU time).
+ */
+export function wallClockMs(tasks: SummaryTask[]): number {
+  if (tasks.length === 0) return 0;
+
+  let start = Infinity;
+  let end = -Infinity;
+
+  for (const task of tasks) {
+    start = Math.min(start, task.execution.startTime);
+    end = Math.max(end, task.execution.endTime);
+  }
+
+  return end - start;
+}
+
+/**
+ * Sum of every task's individual duration (in ms) -- the total CPU time spent
+ * across all tasks, ignoring parallelism.
+ */
+export function cpuMs(tasks: SummaryTask[]): number {
+  return tasks.reduce((total, task) => total + durationOfTask(task), 0);
+}
+
+/** Format an arbitrary millisecond duration the same way task durations are shown. */
+export function formatMs(ms: number): string {
+  return formatDuration(msToDuration(ms));
+}
+
+export interface TaskNameSummary {
+  task: string;
+  count: number;
+  wallClockMs: number;
+  cpuMs: number;
+  tasks: SummaryTask[];
+}
+
+/**
+ * Group tasks by their task name (e.g. "lint:types", "build") and compute the
+ * wall-clock + CPU time for each group. Sorted by wall-clock time, descending.
+ */
+export function summarizeByTaskName(tasks: SummaryTask[]): TaskNameSummary[] {
+  const groups = new Map<string, SummaryTask[]>();
+
+  for (const task of tasks) {
+    const existing = groups.get(task.task);
+
+    if (existing) {
+      existing.push(task);
+    } else {
+      groups.set(task.task, [task]);
+    }
+  }
+
+  const summaries: TaskNameSummary[] = [];
+
+  for (const [task, grouped] of groups) {
+    summaries.push({
+      task,
+      count: grouped.length,
+      wallClockMs: wallClockMs(grouped),
+      cpuMs: cpuMs(grouped),
+      tasks: grouped,
+    });
+  }
+
+  return summaries.sort((a, b) => b.wallClockMs - a.wallClockMs);
+}
+
 function duration(startTime: number, endTime: number) {
   return endTime - startTime;
 }

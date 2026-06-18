@@ -18,10 +18,11 @@ function cacheStatus(task: SummaryTask) {
 }
 
 export const Table = <template>
-  <table ...attributes>
+  <table class="summary-table" ...attributes>
+    <caption>All tasks by duration</caption>
     <thead>
       <tr>
-        <th>Duration</th>
+        <th class="num">Duration</th>
         <th>Cache</th>
         <th>Package</th>
         <th>Task</th>
@@ -31,11 +32,11 @@ export const Table = <template>
     <tbody>
       {{#each (byDuration @tasks) as |task|}}
         <tr>
-          <td>{{taskDuration task}}</td>
+          <td class="num metric">{{taskDuration task}}</td>
           <td>{{cacheStatus task}}</td>
-          <td>{{task.package}}</td>
-          <td>{{task.task}}</td>
-          <td>{{task.command}}</td>
+          <td class="mono">{{task.package}}</td>
+          <td class="mono">{{task.task}}</td>
+          <td class="mono">{{task.command}}</td>
         </tr>
       {{/each}}
     </tbody>

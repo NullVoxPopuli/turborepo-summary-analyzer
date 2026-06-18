@@ -4,6 +4,7 @@ import { assert } from '@ember/debug';
 import { Timeline } from './timeline';
 import { OverallSummary } from './overall-summary';
 import { Table } from './table';
+import { TaskWallClock } from './task-wall-clock';
 
 export class Viewer extends Component {
   file = getSummaryFile(this);
@@ -29,6 +30,9 @@ export class Viewer extends Component {
 
     <OverallSummary @execution={{this.execution}} @tasks={{this.tasks}} />
     <Timeline @tasks={{this.tasks}} />
+    <br />
+
+    <TaskWallClock @tasks={{this.tasks}} />
     <br />
 
     <Table class="centered" @tasks={{this.tasks}} />

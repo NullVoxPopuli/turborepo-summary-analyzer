@@ -123,6 +123,62 @@ main {
   margin: 0 auto;
 }
 
+.summary-table {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.summary-table caption {
+  caption-side: top;
+  margin-bottom: 0.5rem;
+  font-size: 1.17em;
+  font-weight: bold;
+}
+
+.summary-table th,
+.summary-table td {
+  padding: 0.5rem 1rem;
+}
+
+.summary-table thead th {
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  border-bottom: 2px solid currentColor;
+}
+
+/* numeric columns: right-aligned, lined up */
+.summary-table th.num,
+.summary-table td.num {
+  text-align: right;
+}
+
+/* package / command identifiers */
+.summary-table td.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* the row's primary metric */
+.summary-table td.metric {
+  font-weight: bold;
+}
+
+.summary-table tbody tr {
+  border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+}
+
+/* zebra striping */
+.summary-table tbody tr:nth-child(even) {
+  background: color-mix(in srgb, currentColor 4%, transparent);
+}
+
+.summary-table tbody tr:hover {
+  background: color-mix(in srgb, currentColor 9%, transparent);
+}
+
 g[aria-label="tip"] {
   fill: var(--page-bg);
   color: var(--page-font);
