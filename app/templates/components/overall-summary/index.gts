@@ -1,7 +1,10 @@
 import type { TOC } from '@ember/component/template-only';
+import { fn } from '@ember/helper';
+import { on } from '@ember/modifier';
 import type {
   SummaryFile,
   SummaryTask,
+  TimelineSort,
 } from 'turborepo-summary-analyzer/types';
 import { Prompt } from './prompt';
 import {
@@ -34,6 +37,17 @@ function timeSaved(overall: SummaryFile['execution'], tasks: SummaryTask[]) {
   return formatDuration(msToDuration(diff));
 }
 
+function isSelected(a: TimelineSort, b: TimelineSort) {
+  return a === b;
+}
+
+function handleSortChange(
+  onSortChange: (sort: TimelineSort) => void,
+  event: Event
+) {
+  onSortChange((event.target as HTMLSelectElement).value as TimelineSort);
+}
+
 export const OverallSummary = <template>
   <div class="overall-summary">
     <Prompt @command={{@execution.command}} />
@@ -56,6 +70,20 @@ export const OverallSummary = <template>
         <dt>Cached Tasks</dt>
         <dd>{{@execution.cached}}</dd>
       </dl>
+      <label class="sort-control">
+        <span class="sort-label">Sort by</span>
+        <select {{on "change" (fn handleSortChange @onSortChange)}}>
+          <option value="started" selected={{isSelected @sort "started"}}>
+            Time started
+          </option>
+          <option value="name" selected={{isSelected @sort "name"}}>
+            Name
+          </option>
+          <option value="duration" selected={{isSelected @sort "duration"}}>
+            Duration
+          </option>
+        </select>
+      </label>
     </div>
   </div>
   <style>
@@ -83,6 +111,19 @@ export const OverallSummary = <template>
         dd {
           margin: 0;
         }
+        .sort-control {
+          margin-left: auto;
+          align-self: center;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+
+          .sort-label {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: bold;
+          }
+        }
       }
     }
   </style>
@@ -90,5 +131,7 @@ export const OverallSummary = <template>
   Args: {
     execution: SummaryFile['execution'];
     tasks: SummaryFile['tasks'];
+    sort: TimelineSort;
+    onSortChange: (sort: TimelineSort) => void;
   };
 }>;

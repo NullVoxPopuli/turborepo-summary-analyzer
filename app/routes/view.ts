@@ -6,6 +6,13 @@ import { getSummaryFile } from '#file';
 export default class ViewRoute extends Route {
   @service declare router: RouterService;
 
+  queryParams = {
+    sort: {
+      refreshModel: false,
+      replace: true,
+    },
+  };
+
   file = getSummaryFile(this);
 
   beforeModel() {

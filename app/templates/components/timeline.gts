@@ -1,10 +1,13 @@
 import Component from '@glimmer/component';
 import { cached } from '@glimmer/tracking';
-import type { SummaryTask } from 'turborepo-summary-analyzer/types';
+import type {
+  SummaryTask,
+  TimelineSort,
+} from 'turborepo-summary-analyzer/types';
 import * as Plot from '@observablehq/plot';
 import * as d3 from 'd3';
 import { modifier } from 'ember-modifier';
-import { taskDuration } from 'turborepo-summary-analyzer/utils';
+import { durationOfTask, taskDuration } from 'turborepo-summary-analyzer/utils';
 import { colorScheme } from 'ember-primitives/color-scheme';
 
 function isDark() {
@@ -17,6 +20,7 @@ function isDark() {
 export class Timeline extends Component<{
   Args: {
     tasks: SummaryTask[];
+    sort?: TimelineSort;
   };
 }> {
   @cached
@@ -34,6 +38,32 @@ export class Timeline extends Component<{
     return this.args.tasks.sort((a, b) =>
       d3.ascending(a.execution.startTime, b.execution.startTime)
     );
+  }
+
+  /**
+   * The y-axis domain: taskIds in the order requested via @sort.
+   * - started (default): earliest-starting task first
+   * - name: alphabetical (the taskId is "package#task")
+   * - duration: longest task first
+   */
+  @cached
+  get sortedTaskIds() {
+    const tasks = [...this.args.tasks];
+
+    switch (this.args.sort) {
+      case 'name':
+        tasks.sort((a, b) => a.taskId.localeCompare(b.taskId));
+        break;
+      case 'duration':
+        tasks.sort((a, b) => d3.descending(durationOfTask(a), durationOfTask(b)));
+        break;
+      default:
+        tasks.sort((a, b) =>
+          d3.ascending(a.execution.startTime, b.execution.startTime)
+        );
+    }
+
+    return tasks.map((task) => task.taskId);
   }
 
   /**
@@ -86,6 +116,7 @@ export class Timeline extends Component<{
       },
       y: {
         grid: false,
+        domain: this.sortedTaskIds,
         tickFormat: (taskId: string) => {
           const info = this.byId.get(taskId);
 
