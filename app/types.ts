@@ -1,3 +1,5 @@
+export type TimelineSort = 'name' | 'started' | 'duration';
+
 export interface SummaryFile {
   id: string;
   version: '1'; // so far
